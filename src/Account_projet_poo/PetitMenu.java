@@ -66,4 +66,33 @@ public class PetitMenu {
 
     }
 
+    public Array_user modificationContact(Array_user contacts) {
+        System.out.println("\nIndice du contact:");
+        int indice = scannerUser.nextInt();
+
+        System.out.println(Contact.texte[0]);
+        String nom = scannerUser.nextLine();
+
+        prenoms = addInfo(prenoms, Contact.texte[1]);
+
+        System.out.println(Contact.texte[2]);
+        String adresse = scannerUser.nextLine();
+
+        telephone = addInfo(telephone, Contact.texte[3]);
+
+        email = addInfo(email, Contact.texte[4]);
+
+        reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
+
+        System.out.println(Contact.texte[6]);
+        String profession = scannerUser.nextLine();
+
+        Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux,
+                profession);
+
+        contacts.remplaceContact(nouveauContact, indice);
+        return contacts;
+
+    }
+
 }

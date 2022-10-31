@@ -36,6 +36,7 @@ public class Main {
                     break;
                 case 4:// Modification d’un contact
                     System.out.println(textePetitMenu[3]);
+                    inputString = petitMenu.modificationContact(inputString);
                     break;
                 case 5:// Sortie de Gestionnaire
                     System.out.println(textePetitMenu[4]);

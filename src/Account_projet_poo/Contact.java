@@ -40,14 +40,14 @@ public class Contact {
         return profession;
     }
 
-    public Contact(String name, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
-            ArrayList<String> email, ArrayList<String> reseaux_sociaux, String profession) {
-        this.nom = name;
+    public Contact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
+            ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
+        this.nom = nom;
         this.prenoms = prenoms;
         this.adresse = adresse;
         this.telephone = telephone;
         this.email = email;
-        this.reseauxSociaux = reseaux_sociaux;
+        this.reseauxSociaux = reseauxSociaux;
         this.profession = profession;
     }
 
