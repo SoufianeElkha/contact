@@ -39,7 +39,6 @@ public class Array_user {
     }
 
     public Array_user append(Contact value) {
-        System.out.println(lungTableau());
         Contact[] nouveauContact = new Contact[lungTableau() + 1];
         nouveauContact[0] = value;
         for (int i = 0; i < lungTableau(); i++) {
@@ -79,4 +78,23 @@ public class Array_user {
         }
         return resultSupprimeContact;
     }
+
+    public Array_user modificationContact(int numeroIndice) {
+        Array_user resultModificationContact = this;
+        // Copie de tableauContact vers new tableauContact sans contact numeroIndice
+        Contact[] nouveauContact = new Contact[lungTableau() - 1];
+        if (numeroIndice >= 0) {
+            for (int i = 0; i < numeroIndice; i++) {
+                nouveauContact[i] = tableauContact[i];
+            }
+            for (int i = numeroIndice + 1; i < lungTableau(); i++) {
+                nouveauContact[i - 1] = tableauContact[i];
+            }
+            resultModificationContact = new Array_user(nouveauContact);
+        } else {
+            System.out.println("\nERROR INDICE");
+        }
+        return resultModificationContact;
+    }
+
 }
