@@ -20,11 +20,18 @@ public class PetitMenu {
     public static ArrayList<String> addInfo(ArrayList<String> Info, String texte) {
         Scanner nbInfo = new Scanner(System.in);
         System.out.println("Combien de " + texte + "?");
-        int a = nbInfo.nextInt();
-        Info = new ArrayList<String>(a);
-        for (int i = 0; i < a; i++) {
-            System.out.println(texte + " N° " + (i + 1));
-            Info.add(scannerUser.nextLine());
+        String a = nbInfo.nextLine();
+        // Controle si est numerique
+        boolean isNumeric = (a != null && a.matches("[0-9]+"));
+        if (isNumeric == true) {
+            int a1 = Integer.parseInt(a);
+            Info = new ArrayList<String>(a1);
+            for (int i = 0; i < a1; i++) {
+                System.out.println(texte + " N° " + (i + 1));
+                Info.add(scannerUser.nextLine());
+            }
+        } else {
+            addInfo(Info, texte);
         }
         return Info;
     }
@@ -67,6 +74,7 @@ public class PetitMenu {
     }
 
     public Array_user modificationContact(Array_user contacts) {
+
         System.out.println("\nIndice du contact:");
         int indice = scannerUser.nextInt();
 

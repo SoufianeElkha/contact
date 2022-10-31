@@ -1,17 +1,18 @@
 package Account_projet_poo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Array_user {
     public Contact[] tableauContact;
 
     public Array_user(Contact[] tableauContact) {
+        Arrays.sort(tableauContact);
         this.tableauContact = tableauContact;
     }
 
     public int lungTableau() {
         return tableauContact.length;
-
     }
 
     // Retourn le premier element de la liste
@@ -87,4 +88,5 @@ public class Array_user {
     public void remplaceContact(Contact modification, int numeroIndice) {
         tableauContact[numeroIndice] = modification;
     }
+
 }

@@ -74,4 +74,5 @@ public class Contact {
         System.out.println(texte[6] + profession + "\n");
 
     }
+
 }
