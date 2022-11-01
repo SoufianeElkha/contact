@@ -1,5 +1,5 @@
 # Ignora la cartella node_modules
-setting
+*.setting
 
 # Ignora tutti i file .txt
 *.txt
