@@ -51,6 +51,10 @@ public class Contact {
         this.profession = profession;
     }
 
+    public void setPrenom(ArrayList<String> prenoms) {
+        this.prenoms = prenoms;
+    }
+
     public static String[] texte = { "Nom:", "Prenom:", "Adresse:", "Telephone:", "E-mail:",
             "Reseau Sociaux:",
             "Profession:" };

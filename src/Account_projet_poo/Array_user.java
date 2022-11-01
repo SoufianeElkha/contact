@@ -53,8 +53,7 @@ public class Array_user {
         System.out.println("\tGESTIONNAIRE DE CONTACTS:\n");
         if (lung > 0) {
             for (int i = 0; i < lung; i++) {
-                int indice = i;
-                System.out.println("\tIndice Contact N°: " + indice + "\n");
+                System.out.println("\tIndice Contact N°: " + i + "\n");
                 tableauContact[i].printContact();
             }
         } else {
@@ -87,6 +86,11 @@ public class Array_user {
 
     public void remplaceContact(Contact modification, int numeroIndice) {
         tableauContact[numeroIndice] = modification;
+    }
+
+    public void modContacts(Contact mod, ArrayList<String> prenoms) {
+        mod.setPrenom(prenoms);
+
     }
 
 }
