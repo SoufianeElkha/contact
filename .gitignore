@@ -1,13 +1,1 @@
-# Ignora la cartella node_modules
-*.setting
-
-# Ignora tutti i file .txt
-*.txt
-
-# Ignora i file collegati alle chiavi API
-.env
-
-# Ignora i file SASS di configurazione
-.sass-cache
-.prefs
-.class
+*.setting/
