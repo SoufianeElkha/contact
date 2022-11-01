@@ -10,3 +10,4 @@
 # Ignora i file SASS di configurazione
 .sass-cache
 .prefs
+.class
