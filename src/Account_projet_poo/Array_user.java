@@ -90,13 +90,17 @@ public class Array_user {
 
 	}
 
-	public int findString(String stringInput) {
-		int indice = 0;
-		for (int i = 0; i < lungTableau(); i++)
-			if (tableauContact[i].getNom().equals(stringInput) == true)
-				indice = i;
-		return indice;
-
+	public int existeNom(String stringInput) {
+		int existe = -1;
+		for (int i = 0; i < lungTableau(); i++) {
+			if (tableauContact[i].getNom().equals(stringInput) == true) {
+				existe = i;
+			}
+		}
+		if (existe == -1) {
+			System.out.println("ERROR: Nom non trouvé");
+		}
+		return existe;
 	}
 
 }
