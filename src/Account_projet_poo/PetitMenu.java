@@ -63,9 +63,16 @@ public class PetitMenu {
 	}
 
 	public Array_user supprimeContact(Array_user contacts) {
-		System.out.println("\nIndice du contact à supprimer:");
-		int indice = scannerUser.nextInt();
-		return contacts.supprimeContact(indice);
+
+		System.out.println("\nNom à supprimer:");
+		String nomIndiceString = scannerUser.nextLine();
+		int indice = contacts.existeNom(nomIndiceString);
+		Array_user newArray = null;
+		if (indice >= 0)
+			newArray = contacts.supprimeContact(indice);
+		else
+			supprimeContact(contacts);
+		return newArray;
 	}
 
 	public void printContacts(Array_user contacts) {
