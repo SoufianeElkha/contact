@@ -25,35 +25,34 @@ public class Main {
 
 			String inputChoix = scanner.nextLine();
 
-			boolean isNumeric = (inputChoix != null && inputChoix.matches("[0-9]+"));
+			boolean isNombre = (inputChoix != null && inputChoix.matches("[0-9]+"));
 
-			int inputNbChoix = Integer.parseInt(inputChoix);
-
-			if (isNumeric == true && inputNbChoix > 0 && inputNbChoix < 6) {
-
+			if (isNombre == true) {
+				int inputNbChoix = Integer.parseInt(inputChoix);
 				switch (inputNbChoix) {
 
-				case 1:// Insertion d’un nouveau contact
+				// Insertion d’un nouveau contact
+				case 1:
 					System.out.println(textePetitMenu[0]);
 					inputString = petitMenu.putContact(inputString);
 					break;
-
-				case 2:// Affichage des contacts
+				// Affichage des contacts
+				case 2:
 					System.out.println(textePetitMenu[1]);
 					petitMenu.printContacts(inputString);
 					break;
-
-				case 3:// Suppression d’un contact
+				// Suppression d’un contact
+				case 3:
 					System.out.println(textePetitMenu[2]);
 					inputString = petitMenu.supprimeContact(inputString);
 					break;
-
-				case 4:// Modification d’un contact
+				// Modification d’un contact
+				case 4:
 					System.out.println(textePetitMenu[3]);
 					inputString = petitMenu.modificationContact(inputString);
 					break;
-
-				case 5:// Sortie de Gestionnaire
+				// Sortie de Gestionnaire
+				case 5:
 					System.out.println(textePetitMenu[4]);
 					scanner.close();
 					System.exit(0);
