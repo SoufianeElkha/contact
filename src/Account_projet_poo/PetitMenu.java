@@ -80,8 +80,7 @@ public class PetitMenu {
 		boolean a = false;
 		if (ouiOrNonString.equals("o") == true || ouiOrNonString.equals("O") == true)
 			a = true;
-		if (ouiOrNonString.equals("n") == true || ouiOrNonString.equals("N") == true)
-			a = false;
+
 		return a;
 
 	}
@@ -90,49 +89,44 @@ public class PetitMenu {
 		int indice;
 
 		System.out.println("Nom a modifier:");
+
 		String nomIndiceString = scannerUser.nextLine();
 		indice = contacts.findString(nomIndiceString);
+
+		prenoms = contacts.tableauContact[indice].getPrenom();
 		String adresse = contacts.tableauContact[indice].getAdresse();
+		telephone = contacts.tableauContact[indice].getTelephone();
+		email = contacts.tableauContact[indice].getEmail();
+		reseauxSociaux = contacts.tableauContact[indice].getReseauxSociaux();
 		String profession = contacts.tableauContact[indice].getProfession();
+
 		System.out.println("Modification contact " + Contact.texte[0] + contacts.tableauContact[indice].getNom());
 		String nom = contacts.tableauContact[indice].getNom();
 
 		if (ouiOrNon(1) == true) {
 			prenoms = addInfo(prenoms, Contact.texte[1]);
-		} else if (ouiOrNon(1) == false) {
-			prenoms = contacts.tableauContact[indice].getPrenom();
 		}
 
 		if (ouiOrNon(2) == true) {
+			System.out.println(Contact.texte[2]);
 			adresse = scannerUser.nextLine();
-		} else {
-
 		}
 
 		if (ouiOrNon(3) == true) {
 			telephone = addInfo(telephone, Contact.texte[3]);
-		} else if (ouiOrNon(3) == false) {
-			telephone = contacts.tableauContact[indice].getTelephone();
 		}
 
 		if (ouiOrNon(4) == true) {
 			email = addInfo(email, Contact.texte[4]);
-		} else if (ouiOrNon(4) == false) {
-			email = contacts.tableauContact[indice].getEmail();
-
 		}
 
 		if (ouiOrNon(5) == true) {
 			reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
-		} else if (ouiOrNon(5) == false) {
-			reseauxSociaux = contacts.tableauContact[indice].getReseauxSociaux();
 		}
 
 		if (ouiOrNon(6) == true) {
 			System.out.println(Contact.texte[6]);
 			profession = scannerUser.nextLine();
-		} else {
-
 		}
 
 		Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);

@@ -25,7 +25,7 @@ public class Array_user {
 		list = new ArrayList<String>(nb);
 	}
 
-	// Nwe Contacts vide
+	// New Contacts vide
 	public static Array_user newContactVide() {
 		int empty = 0;
 		Contact[] nouveauContact = new Contact[empty];
