@@ -33,7 +33,7 @@ public class PetitMenu {
 	private static ArrayList<String> email;
 	private static ArrayList<String> reseauxSociaux;
 
-	public static ArrayList<String> addInfo(ArrayList<String> Info, String texte) {
+	private static ArrayList<String> addInfo(ArrayList<String> Info, String texte) {
 		Scanner nbInfo = new Scanner(System.in);
 		System.out.println("Combien de " + texte + "?");
 		String a = nbInfo.nextLine();
@@ -79,22 +79,23 @@ public class PetitMenu {
 	}
 
 	public Array_user supprimeContact(Array_user contacts) {
+		Array_user newArray = null;
 
 		System.out.println("\nNom à supprimer:");
-
 		String nomIndiceString = scannerUser.nextLine();
 		int indice = contacts.existeNom(nomIndiceString);
 
-		Array_user newArray = null;
-
-		if (indice >= 0)
+		if (indice >= 0) {
 			newArray = contacts.supprimeContact(indice);
-		else
+		}
+
+		else {
 			supprimeContact(contacts);
+		}
 		return newArray;
 	}
 
-	public Boolean ouiOrNon(int nbTexte) {
+	private Boolean ouiOrNon(int nbTexte) {
 		Scanner ouiOrNon = new Scanner(System.in);
 		System.out.println("Vous voulez modifier le " + Contact.texte[nbTexte] + "? O/N");
 		String ouiOrNonString = ouiOrNon.nextLine();
