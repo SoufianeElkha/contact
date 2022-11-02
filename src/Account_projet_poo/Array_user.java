@@ -1,6 +1,7 @@
 package Account_projet_poo;
 
 public class Array_user {
+<<<<<<< HEAD
     public Contact[] tableauContact;
     Contact acces;
 
@@ -14,11 +15,18 @@ public class Array_user {
         // Arrays.sort(tableauContact);
         this.tableauContact = tableauContact;
     }
+=======
+	public Contact[] tableauContact;
+	Contact acces;
 
-    public int lungTableau() {
-        return tableauContact.length;
-    }
+	// Retourn le premier element de la liste
+	public Contact tete() {
+		return tableauContact[0];
+>>>>>>> 7c0e28fd9e082bc4209b4fc8d57f51e9c6616c8a
 
+	}
+
+<<<<<<< HEAD
     // Nom existe?
     public int existeNom(String stringInput) {
         int existe = -1;
@@ -39,15 +47,39 @@ public class Array_user {
         Contact[] nouveauContact = new Contact[empty];
         return new Array_user(nouveauContact);
     }
+=======
+	public Array_user(Contact[] tableauContact) {
+		// Arrays.sort(tableauContact);
+		this.tableauContact = tableauContact;
+	}
 
-    public Array_user pop() {
-        Contact[] nouveauContact = new Contact[lungTableau()];
-        for (int i = 0; i < lungTableau() - 1; i++) {
-            nouveauContact[i] = tableauContact[i + 1];
-        }
-        return new Array_user(nouveauContact);
-    }
+	public int lungTableau() {
+		return tableauContact.length;
+	}
 
+	// Nom existe?
+	public int existeNom(String stringInput) {
+		int existe = -1;
+		for (int i = 0; i < lungTableau(); i++) {
+			if (tableauContact[i].getNom().equals(stringInput) == true) {
+				existe = i;
+			}
+		}
+		if (existe == -1) {
+			System.out.println("ERREUR: Nom non trouvé");
+		}
+		return existe;
+	}
+>>>>>>> 7c0e28fd9e082bc4209b4fc8d57f51e9c6616c8a
+
+	// New Contacts vide
+	public static Array_user newContactVide() {
+		int empty = 0;
+		Contact[] nouveauContact = new Contact[empty];
+		return new Array_user(nouveauContact);
+	}
+
+<<<<<<< HEAD
     public Array_user append(Contact newContact) {
         Contact[] nouveauContact = new Contact[lungTableau() + 1];
         nouveauContact[0] = newContact;
@@ -83,10 +115,30 @@ public class Array_user {
             resultSupprimeContact = new Array_user(nouveauContact);
             System.out.println("Contact: " + tableauContact[numeroIndice].getNom() + " supprimé");
         }
+=======
+	public Array_user pop() {
+		Contact[] nouveauContact = new Contact[lungTableau()];
+		for (int i = 0; i < lungTableau() - 1; i++) {
+			nouveauContact[i] = tableauContact[i + 1];
+		}
+		return new Array_user(nouveauContact);
+	}
 
-        return resultSupprimeContact;
-    }
+	public Array_user append(Contact newContact) {
+		Contact[] nouveauContact = new Contact[lungTableau() + 1];
+		nouveauContact[0] = newContact;
+		for (int i = 0; i < lungTableau(); i++) {
+			nouveauContact[i + 1] = tableauContact[i];
 
+		}
+		return new Array_user(nouveauContact);
+	}
+>>>>>>> 7c0e28fd9e082bc4209b4fc8d57f51e9c6616c8a
+
+	public Array_user supprimeContact(int numeroIndice) {
+		Array_user resultSupprimeContact = this;
+
+<<<<<<< HEAD
     // Modification Contact
     public void remplaceContact(Contact modification, int numeroIndice) {
         tableauContact[numeroIndice] = modification;
@@ -105,7 +157,53 @@ public class Array_user {
             }
         } else
             System.out.println("\tGesionnaire de contacts est vide!\n");
+=======
+		// Copie de tableauContact vers new tableauContact sans contact numeroIndice
+		Contact[] nouveauContact = new Contact[lungTableau() - 1];
+		if (lungTableau() == 0) {
+			System.out.println("\nERREUR INDICE");
 
-    }
+		} else {
+			int i = 0;
+			while (i < numeroIndice) {
+				nouveauContact[i] = tableauContact[i];
+				i++;
+			}
+>>>>>>> 7c0e28fd9e082bc4209b4fc8d57f51e9c6616c8a
+
+			i = numeroIndice + 1;
+
+			while (i < lungTableau()) {
+				nouveauContact[i - 1] = tableauContact[i];
+				i++;
+			}
+
+			resultSupprimeContact = new Array_user(nouveauContact);
+			System.out.println("Contact: " + tableauContact[numeroIndice].getNom() + " supprimé");
+		}
+
+		return resultSupprimeContact;
+	}
+
+	// Modification Contact
+	public void remplaceContact(Contact modification, int numeroIndice) {
+		tableauContact[numeroIndice] = modification;
+
+	}
+
+	public void printContacts() {
+		int lung = lungTableau();
+		System.out.println("\tGESTIONNAIRE DE CONTACTS:\n");
+
+		if (lung > 0) {
+
+			for (int i = 0; i < lung; i++) {
+				System.out.println("\tIndice Contact N°: " + i + "\n");
+				tableauContact[i].printContact();
+			}
+		} else
+			System.out.println("\tGesionnaire de contacts est vide!\n");
+
+	}
 
 }
