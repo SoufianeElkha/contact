@@ -31,7 +31,7 @@ public class PetitMenu {
 				Info.add(scannerUser.nextLine());
 			}
 		} else {
-			System.out.println("Error: Entree number!");
+			System.out.println("ERREUR: Entree number!");
 			addInfo(Info, texte);
 		}
 		return Info;

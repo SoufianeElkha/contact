@@ -67,7 +67,7 @@ public class Array_user {
 		// Copie de tableauContact vers new tableauContact sans contact numeroIndice
 		Contact[] nouveauContact = new Contact[lungTableau() - 1];
 		if (lungTableau() == 0) {
-			System.out.println("\nERROR INDICE");
+			System.out.println("\nERREUR INDICE");
 		} else {
 			int i = 0;
 			while (i < numeroIndice) {
@@ -98,7 +98,7 @@ public class Array_user {
 			}
 		}
 		if (existe == -1) {
-			System.out.println("ERROR: Nom non trouvé");
+			System.out.println("ERREUR: Nom non trouvé");
 		}
 		return existe;
 	}
