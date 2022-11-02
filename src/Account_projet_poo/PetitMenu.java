@@ -66,9 +66,12 @@ public class PetitMenu {
 	public Array_user supprimeContact(Array_user contacts) {
 
 		System.out.println("\nNom à supprimer:");
+
 		String nomIndiceString = scannerUser.nextLine();
 		int indice = contacts.existeNom(nomIndiceString);
+
 		Array_user newArray = null;
+
 		if (indice >= 0)
 			newArray = contacts.supprimeContact(indice);
 		else
@@ -80,12 +83,12 @@ public class PetitMenu {
 		Scanner ouiOrNon = new Scanner(System.in);
 		System.out.println("Vous voulez modifier le " + Contact.texte[nbTexte] + "? O/N");
 		String ouiOrNonString = ouiOrNon.nextLine();
+
 		boolean a = false;
+
 		if (ouiOrNonString.equals("o") == true || ouiOrNonString.equals("O") == true)
 			a = true;
-
 		return a;
-
 	}
 
 	public Array_user modificationContact(Array_user contacts) {

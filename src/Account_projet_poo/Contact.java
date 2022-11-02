@@ -12,9 +12,7 @@ public class Contact {
 	private ArrayList<String> reseauxSociaux;
 	private String profession;
 
-	public Contact() {
-
-	}
+	// public Contact() {}
 
 	public Contact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
