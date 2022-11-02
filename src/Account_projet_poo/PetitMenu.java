@@ -74,12 +74,13 @@ public class PetitMenu {
 	}
 
 	public Array_user modificationContact(Array_user contacts) {
+		int indice;
+		System.out.println("Nom a modifier:");
+		String nomIndiceString = scannerUser.nextLine();
+		indice = contacts.findString(nomIndiceString);
 
-		System.out.println("\nIndice du contact:");
-		int indice = scannerUser.nextInt();
-
-		System.out.println(Contact.texte[0]);
-		String nom = scannerUser.nextLine();
+		System.out.println("Modification contact " + Contact.texte[0] + contacts.tableauContact[indice].getNom());
+		String nom = contacts.tableauContact[indice].getNom();
 
 		prenoms = addInfo(prenoms, Contact.texte[1]);
 

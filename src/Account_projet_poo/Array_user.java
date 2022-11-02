@@ -90,4 +90,13 @@ public class Array_user {
 
 	}
 
+	public int findString(String stringInput) {
+		int indice = 0;
+		for (int i = 0; i < lungTableau(); i++)
+			if (tableauContact[i].getNom().equals(stringInput) == true)
+				indice = i;
+		return indice;
+
+	}
+
 }
