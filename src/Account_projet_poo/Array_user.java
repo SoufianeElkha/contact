@@ -1,13 +1,17 @@
 package Account_projet_poo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Array_user {
     public Contact[] tableauContact;
+    Contact acces;
+
+    // Retourn le premier element de la liste
+    public Contact tete() {
+        return tableauContact[0];
+
+    }
 
     public Array_user(Contact[] tableauContact) {
-        Arrays.sort(tableauContact);
+        // Arrays.sort(tableauContact);
         this.tableauContact = tableauContact;
     }
 
@@ -15,16 +19,21 @@ public class Array_user {
         return tableauContact.length;
     }
 
-    // Retourn le premier element de la liste
-    public Contact tete() {
-        return tableauContact[0];
+    // Nom existe?
+    public int existeNom(String stringInput) {
+        int existe = -1;
+        for (int i = 0; i < lungTableau(); i++) {
+            if (tableauContact[i].getNom().equals(stringInput) == true) {
+                existe = i;
+            }
+        }
+        if (existe == -1) {
+            System.out.println("ERREUR: Nom non trouvé");
+        }
+        return existe;
     }
 
-    public static void tableauContactInfo(ArrayList<String> list, int nb) {
-        list = new ArrayList<String>(nb);
-    }
-
-    // Nwe Contacts vide
+    // New Contacts vide
     public static Array_user newContactVide() {
         int empty = 0;
         Contact[] nouveauContact = new Contact[empty];
@@ -39,57 +48,63 @@ public class Array_user {
         return new Array_user(nouveauContact);
     }
 
-    public Array_user append(Contact value) {
+    public Array_user append(Contact newContact) {
         Contact[] nouveauContact = new Contact[lungTableau() + 1];
-        nouveauContact[0] = value;
+        nouveauContact[0] = newContact;
         for (int i = 0; i < lungTableau(); i++) {
             nouveauContact[i + 1] = tableauContact[i];
+
         }
         return new Array_user(nouveauContact);
     }
 
-    public void printContacts() {
-        int lung = lungTableau();
-        System.out.println("\tGESTIONNAIRE DE CONTACTS:\n");
-        if (lung > 0) {
-            for (int i = 0; i < lung; i++) {
-                System.out.println("\tIndice Contact N°: " + i + "\n");
-                tableauContact[i].printContact();
-            }
-        } else {
-            System.out.println("\tGesionnaire de contacts est vide!\n");
-        }
-    }
-
     public Array_user supprimeContact(int numeroIndice) {
         Array_user resultSupprimeContact = this;
+
         // Copie de tableauContact vers new tableauContact sans contact numeroIndice
         Contact[] nouveauContact = new Contact[lungTableau() - 1];
         if (lungTableau() == 0) {
-            System.out.println("\nERROR INDICE");
+            System.out.println("\nERREUR INDICE");
+
         } else {
             int i = 0;
             while (i < numeroIndice) {
                 nouveauContact[i] = tableauContact[i];
                 i++;
             }
+
             i = numeroIndice + 1;
+
             while (i < lungTableau()) {
                 nouveauContact[i - 1] = tableauContact[i];
                 i++;
             }
+
             resultSupprimeContact = new Array_user(nouveauContact);
+            System.out.println("Contact: " + tableauContact[numeroIndice].getNom() + " supprimé");
         }
 
         return resultSupprimeContact;
     }
 
+    // Modification Contact
     public void remplaceContact(Contact modification, int numeroIndice) {
         tableauContact[numeroIndice] = modification;
+
     }
 
-    public void modContacts(Contact mod, ArrayList<String> prenoms) {
-        mod.setPrenom(prenoms);
+    public void printContacts() {
+        int lung = lungTableau();
+        System.out.println("\tGESTIONNAIRE DE CONTACTS:\n");
+
+        if (lung > 0) {
+
+            for (int i = 0; i < lung; i++) {
+                System.out.println("\tIndice Contact N°: " + i + "\n");
+                tableauContact[i].printContact();
+            }
+        } else
+            System.out.println("\tGesionnaire de contacts est vide!\n");
 
     }
 
