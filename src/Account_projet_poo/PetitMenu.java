@@ -5,160 +5,174 @@ import java.util.Scanner;
 
 public class PetitMenu {
 
-    // Scanner General pour buffer
-    public static Scanner scannerUser;
+	// Scanner General pour buffer
+	public static Scanner scannerUser;
 
-    public PetitMenu() {
-        scannerUser = new Scanner(System.in);
-    }
+	public PetitMenu() {
+		scannerUser = new Scanner(System.in);
+	}
 
-    // Creation de ArrayList de String pour stocker pluseur
-    private static ArrayList<String> prenoms;
-    private static ArrayList<String> telephone;
-    private static ArrayList<String> email;
-    private static ArrayList<String> reseauxSociaux;
+	public boolean isAlpha(String s) {
+		if (s == null) {
+			return false;
+		}
 
-    public static ArrayList<String> addInfo(ArrayList<String> Info, String texte) {
-        Scanner nbInfo = new Scanner(System.in);
-        System.out.println("Combien de " + texte + "?");
-        String a = nbInfo.nextLine();
-        // Controle si est numerique
-        boolean isNumeric = (a != null && a.matches("[0-9]+"));
-        if (isNumeric == true) {
-            int a1 = Integer.parseInt(a);
-            Info = new ArrayList<String>();
-            for (int i = 0; i < a1; i++) {
-                System.out.println(texte + " N° " + (i + 1));
-                Info.add(scannerUser.nextLine());
-            }
-        } else {
-            System.out.println("ERREUR: Entrez un nombre");
-            addInfo(Info, texte);
-        }
-        return Info;
-    }
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z')) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    public Array_user putContact(Array_user contacts) {
+	// Creation de ArrayList de String pour stocker pluseur
+	private static ArrayList<String> prenoms;
+	private static ArrayList<String> telephone;
+	private static ArrayList<String> email;
+	private static ArrayList<String> reseauxSociaux;
 
-        System.out.println(Contact.texte[0]);
-        String nom = scannerUser.nextLine();
+	public static ArrayList<String> addInfo(ArrayList<String> Info, String texte) {
+		Scanner nbInfo = new Scanner(System.in);
+		System.out.println("Combien de " + texte + "?");
+		String a = nbInfo.nextLine();
+		// Controle si est numerique
+		boolean isNumeric = (a != null && a.matches("[0-9]+"));
+		if (isNumeric == true) {
+			int a1 = Integer.parseInt(a);
+			Info = new ArrayList<String>();
+			for (int i = 0; i < a1; i++) {
+				System.out.println(texte + " N° " + (i + 1));
+				Info.add(scannerUser.nextLine());
+			}
+		} else {
+			System.out.println("ERREUR: Entrez un nombre");
+			addInfo(Info, texte);
+		}
+		return Info;
+	}
 
-        prenoms = addInfo(prenoms, Contact.texte[1]);
+	public Array_user putContact(Array_user contacts) {
 
-        System.out.println(Contact.texte[2]);
-        String adresse = scannerUser.nextLine();
+		System.out.println(Contact.texte[0]);
+		String nom = scannerUser.nextLine();
 
-        telephone = addInfo(telephone, Contact.texte[3]);
+		prenoms = addInfo(prenoms, Contact.texte[1]);
 
-        email = addInfo(email, Contact.texte[4]);
+		System.out.println(Contact.texte[2]);
+		String adresse = scannerUser.nextLine();
 
-        reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
+		telephone = addInfo(telephone, Contact.texte[3]);
 
-        System.out.println(Contact.texte[6]);
-        String profession = scannerUser.nextLine();
+		email = addInfo(email, Contact.texte[4]);
 
-        Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
+		reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
 
-        return contacts.append(nouveauContact);
+		System.out.println(Contact.texte[6]);
+		String profession = scannerUser.nextLine();
 
-    }
+		Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
 
-    public Array_user supprimeContact(Array_user contacts) {
+		return contacts.append(nouveauContact);
 
-        System.out.println("\nNom à supprimer:");
+	}
 
-        String nomIndiceString = scannerUser.nextLine();
-        int indice = contacts.existeNom(nomIndiceString);
+	public Array_user supprimeContact(Array_user contacts) {
 
-        Array_user newArray = null;
+		System.out.println("\nNom à supprimer:");
 
-        if (indice >= 0)
-            newArray = contacts.supprimeContact(indice);
-        else
-            supprimeContact(contacts);
-        return newArray;
-    }
+		String nomIndiceString = scannerUser.nextLine();
+		int indice = contacts.existeNom(nomIndiceString);
 
-    public Boolean ouiOrNon(int nbTexte) {
-        Scanner ouiOrNon = new Scanner(System.in);
-        System.out.println("Vous voulez modifier le " + Contact.texte[nbTexte] + "? O/N");
-        String ouiOrNonString = ouiOrNon.nextLine();
+		Array_user newArray = null;
 
-        boolean a = false;
+		if (indice >= 0)
+			newArray = contacts.supprimeContact(indice);
+		else
+			supprimeContact(contacts);
+		return newArray;
+	}
 
-        if (ouiOrNonString.equals("o") == true || ouiOrNonString.equals("O") == true)
-            a = true;
-        return a;
-    }
+	public Boolean ouiOrNon(int nbTexte) {
+		Scanner ouiOrNon = new Scanner(System.in);
+		System.out.println("Vous voulez modifier le " + Contact.texte[nbTexte] + "? O/N");
+		String ouiOrNonString = ouiOrNon.nextLine();
 
-    public Array_user modificationContact(Array_user contacts) {
+		boolean a = false;
 
-        if (contacts.lungTableau() != 0) {
+		if (ouiOrNonString.equals("o") == true || ouiOrNonString.equals("O") == true)
+			a = true;
+		return a;
+	}
 
-            int indice;
-            System.out.println("Nom a modifier: ");
+	public Array_user modificationContact(Array_user contacts) {
 
-            String nomIndiceString = scannerUser.nextLine();
-            indice = contacts.existeNom(nomIndiceString);
-            if (indice >= 0) {
-                // GETTER
-                prenoms = contacts.tableauContact[indice].getPrenom();
-                String adresse = contacts.tableauContact[indice].getAdresse();
-                telephone = contacts.tableauContact[indice].getTelephone();
-                email = contacts.tableauContact[indice].getEmail();
-                reseauxSociaux = contacts.tableauContact[indice].getReseauxSociaux();
-                String profession = contacts.tableauContact[indice].getProfession();
+		if (contacts.lungTableau() != 0) {
 
-                // NOM est la cle
-                System.out
-                        .println("Modification contact " + Contact.texte[0] + contacts.tableauContact[indice].getNom());
-                String nom = contacts.tableauContact[indice].getNom();
+			int indice;
+			System.out.println("Nom a modifier: ");
 
-                // if ok, setting new
-                if (ouiOrNon(1) == true) {
-                    prenoms = addInfo(prenoms, Contact.texte[1]);
-                }
+			String nomIndiceString = scannerUser.nextLine();
+			indice = contacts.existeNom(nomIndiceString);
+			if (indice >= 0) {
+				// GETTER
+				prenoms = contacts.tableauContact[indice].getPrenom();
+				String adresse = contacts.tableauContact[indice].getAdresse();
+				telephone = contacts.tableauContact[indice].getTelephone();
+				email = contacts.tableauContact[indice].getEmail();
+				reseauxSociaux = contacts.tableauContact[indice].getReseauxSociaux();
+				String profession = contacts.tableauContact[indice].getProfession();
 
-                if (ouiOrNon(2) == true) {
-                    System.out.println(Contact.texte[2]);
-                    adresse = scannerUser.nextLine();
-                }
+				// NOM est la cle
+				System.out
+						.println("Modification contact " + Contact.texte[0] + contacts.tableauContact[indice].getNom());
+				String nom = contacts.tableauContact[indice].getNom();
 
-                if (ouiOrNon(3) == true) {
-                    telephone = addInfo(telephone, Contact.texte[3]);
-                }
+				// if ok, setting new
+				if (ouiOrNon(1) == true) {
+					prenoms = addInfo(prenoms, Contact.texte[1]);
+				}
 
-                if (ouiOrNon(4) == true) {
-                    email = addInfo(email, Contact.texte[4]);
-                }
+				if (ouiOrNon(2) == true) {
+					System.out.println(Contact.texte[2]);
+					adresse = scannerUser.nextLine();
+				}
 
-                if (ouiOrNon(5) == true) {
-                    reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
-                }
+				if (ouiOrNon(3) == true) {
+					telephone = addInfo(telephone, Contact.texte[3]);
+				}
 
-                if (ouiOrNon(6) == true) {
-                    System.out.println(Contact.texte[6]);
-                    profession = scannerUser.nextLine();
-                }
+				if (ouiOrNon(4) == true) {
+					email = addInfo(email, Contact.texte[4]);
+				}
 
-                Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux,
-                        profession);
-                contacts.remplaceContact(nouveauContact, indice);
+				if (ouiOrNon(5) == true) {
+					reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
+				}
 
-            } else {
-                modificationContact(contacts);
-            }
+				if (ouiOrNon(6) == true) {
+					System.out.println(Contact.texte[6]);
+					profession = scannerUser.nextLine();
+				}
 
-        } else {
-            System.out.println("\tGesionnaire de contacts est vide!\n");
-        }
-        return contacts;
+				Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux,
+						profession);
+				contacts.remplaceContact(nouveauContact, indice);
 
-    }
+			} else {
+				modificationContact(contacts);
+			}
 
-    public void printContacts(Array_user contacts) {
-        contacts.printContacts();
+		} else {
+			System.out.println("\tGesionnaire de contacts est vide!\n");
+		}
+		return contacts;
 
-    }
+	}
+
+	public void printContacts(Array_user contacts) {
+		contacts.printContacts();
+
+	}
 
 }
