@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PetitMenu {
+
+	// Scanner General pour buffer
 	public static Scanner scannerUser;
 
 	public PetitMenu() {
 		scannerUser = new Scanner(System.in);
-
 	}
 
 	// Creation de ArrayList de String pour stocker pluseur
@@ -31,7 +32,7 @@ public class PetitMenu {
 				Info.add(scannerUser.nextLine());
 			}
 		} else {
-			System.out.println("ERREUR: Entree number!");
+			System.out.println("ERREUR: Entrez un nombre");
 			addInfo(Info, texte);
 		}
 		return Info;
@@ -102,6 +103,7 @@ public class PetitMenu {
 
 		if (indice >= 0) {
 
+			// GETTER
 			prenoms = contacts.tableauContact[indice].getPrenom();
 			String adresse = contacts.tableauContact[indice].getAdresse();
 			telephone = contacts.tableauContact[indice].getTelephone();
@@ -109,9 +111,11 @@ public class PetitMenu {
 			reseauxSociaux = contacts.tableauContact[indice].getReseauxSociaux();
 			String profession = contacts.tableauContact[indice].getProfession();
 
+			// NOM est la cle
 			System.out.println("Modification contact " + Contact.texte[0] + contacts.tableauContact[indice].getNom());
 			String nom = contacts.tableauContact[indice].getNom();
 
+			// if ok, setting new
 			if (ouiOrNon(1) == true) {
 				prenoms = addInfo(prenoms, Contact.texte[1]);
 			}
@@ -139,8 +143,8 @@ public class PetitMenu {
 			}
 
 			Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
-
 			contacts.remplaceContact(nouveauContact, indice);
+
 		} else {
 			modificationContact(contacts);
 		}

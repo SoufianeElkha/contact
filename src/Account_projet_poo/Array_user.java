@@ -1,13 +1,12 @@
 package Account_projet_poo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Array_user {
 	public Contact[] tableauContact;
 
 	public Array_user(Contact[] tableauContact) {
-		Arrays.sort(tableauContact);
+		// Arrays.sort(tableauContact);
 		this.tableauContact = tableauContact;
 	}
 
@@ -40,9 +39,9 @@ public class Array_user {
 		return new Array_user(nouveauContact);
 	}
 
-	public Array_user append(Contact value) {
+	public Array_user append(Contact indice) {
 		Contact[] nouveauContact = new Contact[lungTableau() + 1];
-		nouveauContact[0] = value;
+		nouveauContact[0] = indice;
 		for (int i = 0; i < lungTableau(); i++) {
 			nouveauContact[i + 1] = tableauContact[i];
 		}
@@ -85,11 +84,13 @@ public class Array_user {
 		return resultSupprimeContact;
 	}
 
+	// Modification Contact
 	public void remplaceContact(Contact modification, int numeroIndice) {
 		tableauContact[numeroIndice] = modification;
 
 	}
 
+	// Nom existe?
 	public int existeNom(String stringInput) {
 		int existe = -1;
 		for (int i = 0; i < lungTableau(); i++) {
