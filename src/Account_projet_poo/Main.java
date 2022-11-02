@@ -1,4 +1,5 @@
-/*Soufiane El kharmoudi*/
+/*Soufiane El kharmoudi
+Projet POO*/
 package Account_projet_poo;
 
 import java.util.Scanner;
