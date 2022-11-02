@@ -73,6 +73,19 @@ public class PetitMenu {
 
 	}
 
+	public Boolean ouiOrNon() {
+		Scanner ouiOrNon = new Scanner(System.in);
+		System.out.println("Vous voulez modifier le " + Contact.texte[1] + "? O/N");
+		String ouiOrNonString = ouiOrNon.nextLine();
+		boolean a = false;
+		if (ouiOrNonString.equals("o") == true || ouiOrNonString.equals("O") == true)
+			a = true;
+		if (ouiOrNonString.equals("n") == true || ouiOrNonString.equals("N") == true)
+			a = false;
+		return a;
+
+	}
+
 	public Array_user modificationContact(Array_user contacts) {
 		int indice;
 		System.out.println("Nom a modifier:");
@@ -82,14 +95,30 @@ public class PetitMenu {
 		System.out.println("Modification contact " + Contact.texte[0] + contacts.tableauContact[indice].getNom());
 		String nom = contacts.tableauContact[indice].getNom();
 
-		prenoms = addInfo(prenoms, Contact.texte[1]);
+		if (ouiOrNon() == true) {
+			prenoms = addInfo(prenoms, Contact.texte[1]);
+		} else if (ouiOrNon() == false) {
+			prenoms = contacts.tableauContact[indice].getPrenom();
+		}
 
-		System.out.println(Contact.texte[2]);
-		String adresse = scannerUser.nextLine();
+		if (ouiOrNon() == true) {
+			String adresse = scannerUser.nextLine();
+		} else if (ouiOrNon() == false) {
+			String adresse = contacts.tableauContact[indice].getAdresse();
+		}
+		if (ouiOrNon() == true) {
+			telephone = addInfo(telephone, Contact.texte[3]);
+		} else if (ouiOrNon() == false) {
+			telephone = contacts.tableauContact[indice].getTelephone();
+		}
 
-		telephone = addInfo(telephone, Contact.texte[3]);
+		if (ouiOrNon() == true) {
 
-		email = addInfo(email, Contact.texte[4]);
+			email = addInfo(email, Contact.texte[4]);
+		} else if (ouiOrNon() == false) {
+			email = contacts.tableauContact[indice].getEmail();
+
+		}
 
 		reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
 
