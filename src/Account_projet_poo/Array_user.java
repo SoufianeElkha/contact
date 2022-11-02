@@ -79,6 +79,7 @@ public class Array_user {
 				i++;
 			}
 			resultSupprimeContact = new Array_user(nouveauContact);
+			System.out.println("Contact: " + tableauContact[numeroIndice].getNom() + " supprimé");
 		}
 
 		return resultSupprimeContact;
