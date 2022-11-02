@@ -12,6 +12,7 @@ local.properties
 .settings
 /.settings/
 /.settings
+.classpath
 # External tool builders
 .externalToolBuilders/
 
