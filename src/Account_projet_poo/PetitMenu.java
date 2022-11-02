@@ -76,11 +76,6 @@ public class PetitMenu {
 		return newArray;
 	}
 
-	public void printContacts(Array_user contacts) {
-		contacts.printContacts();
-
-	}
-
 	public Boolean ouiOrNon(int nbTexte) {
 		Scanner ouiOrNon = new Scanner(System.in);
 		System.out.println("Vous voulez modifier le " + Contact.texte[nbTexte] + "? O/N");
@@ -149,6 +144,11 @@ public class PetitMenu {
 			modificationContact(contacts);
 		}
 		return contacts;
+
+	}
+
+	public void printContacts(Array_user contacts) {
+		contacts.printContacts();
 
 	}
 

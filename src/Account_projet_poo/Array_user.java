@@ -1,9 +1,13 @@
 package Account_projet_poo;
 
-import java.util.ArrayList;
-
 public class Array_user {
 	public Contact[] tableauContact;
+
+	// Retourn le premier element de la liste
+	public Contact tete() {
+		return tableauContact[0];
+
+	}
 
 	public Array_user(Contact[] tableauContact) {
 		// Arrays.sort(tableauContact);
@@ -14,14 +18,18 @@ public class Array_user {
 		return tableauContact.length;
 	}
 
-	// Retourn le premier element de la liste
-	public Contact tete() {
-		return tableauContact[0];
-
-	}
-
-	public static void tableauContactInfo(ArrayList<String> list, int nb) {
-		list = new ArrayList<String>(nb);
+	// Nom existe?
+	public int existeNom(String stringInput) {
+		int existe = -1;
+		for (int i = 0; i < lungTableau(); i++) {
+			if (tableauContact[i].getNom().equals(stringInput) == true) {
+				existe = i;
+			}
+		}
+		if (existe == -1) {
+			System.out.println("ERREUR: Nom non trouvé");
+		}
+		return existe;
 	}
 
 	// New Contacts vide
@@ -46,19 +54,6 @@ public class Array_user {
 			nouveauContact[i + 1] = tableauContact[i];
 		}
 		return new Array_user(nouveauContact);
-	}
-
-	public void printContacts() {
-		int lung = lungTableau();
-		System.out.println("\tGESTIONNAIRE DE CONTACTS:\n");
-		if (lung > 0) {
-			for (int i = 0; i < lung; i++) {
-				System.out.println("\tIndice Contact N°: " + i + "\n");
-				tableauContact[i].printContact();
-			}
-		} else {
-			System.out.println("\tGesionnaire de contacts est vide!\n");
-		}
 	}
 
 	public Array_user supprimeContact(int numeroIndice) {
@@ -91,18 +86,17 @@ public class Array_user {
 
 	}
 
-	// Nom existe?
-	public int existeNom(String stringInput) {
-		int existe = -1;
-		for (int i = 0; i < lungTableau(); i++) {
-			if (tableauContact[i].getNom().equals(stringInput) == true) {
-				existe = i;
+	public void printContacts() {
+		int lung = lungTableau();
+		System.out.println("\tGESTIONNAIRE DE CONTACTS:\n");
+		if (lung > 0) {
+			for (int i = 0; i < lung; i++) {
+				System.out.println("\tIndice Contact N°: " + i + "\n");
+				tableauContact[i].printContact();
 			}
+		} else {
+			System.out.println("\tGesionnaire de contacts est vide!\n");
 		}
-		if (existe == -1) {
-			System.out.println("ERREUR: Nom non trouvé");
-		}
-		return existe;
 	}
 
 }
