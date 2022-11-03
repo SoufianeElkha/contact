@@ -1,14 +1,11 @@
 package Account_projet_poo;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Array_user {
 	public Contact[] tableauContact;
 	Contact acces;
-
-	// Retourn le premier element de la liste
-	public Contact tete() {
-		return tableauContact[0];
-
-	}
 
 	public Array_user(Contact[] tableauContact) {
 		this.tableauContact = tableauContact;
@@ -91,6 +88,7 @@ public class Array_user {
 	}
 
 	public void printContacts() {
+		triContact(tableauContact);
 		System.out.println("\tGESTIONNAIRE DE CONTACTS:\n");
 
 		if (lungTableau() > 0) {
@@ -104,4 +102,14 @@ public class Array_user {
 
 	}
 
+	private static void triContact(Contact[] contacts) {
+		Arrays.sort(contacts, new Comparator<Contact>() {
+			@Override
+			public int compare(Contact new_, Contact old_) {
+				var tri = new_.getNom().compareTo(old_.getNom());
+				return tri;
+			}
+		});
+
+	}
 }
