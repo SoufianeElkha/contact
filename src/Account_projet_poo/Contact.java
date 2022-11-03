@@ -25,6 +25,7 @@ public class Contact {
 		this.profession = profession;
 	}
 
+	// Getter
 	public String getNom() {
 		return nom;
 	}
@@ -53,6 +54,7 @@ public class Contact {
 		return profession;
 	}
 
+	// Setter
 	public void setPrenom(ArrayList<String> prenoms) {
 		this.prenoms = prenoms;
 

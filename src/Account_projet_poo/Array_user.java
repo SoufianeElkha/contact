@@ -22,14 +22,13 @@ public class Array_user {
 	// Nom existe?
 	public int existeNom(String stringInput) {
 		int existe = -1;
-		for (int i = 0; i < lungTableau(); i++) {
-			if (tableauContact[i].getNom().equals(stringInput) == true) {
+		for (int i = 0; i < lungTableau(); i++)
+			if (tableauContact[i].getNom().equals(stringInput) == true)
 				existe = i;
-			}
-		}
-		if (existe == -1) {
+
+		if (existe == -1)
 			System.out.println("ERREUR: Nom non trouvé");
-		}
+
 		return existe;
 	}
 
@@ -42,22 +41,22 @@ public class Array_user {
 
 	public Array_user pop() {
 		Contact[] nouveauContact = new Contact[lungTableau()];
-		for (int i = 0; i < lungTableau() - 1; i++) {
+		for (int i = 0; i < lungTableau() - 1; i++)
 			nouveauContact[i] = tableauContact[i + 1];
-		}
+
 		return new Array_user(nouveauContact);
 	}
 
 	public Array_user append(Contact newContact) {
 		Contact[] nouveauContact = new Contact[lungTableau() + 1];
 		nouveauContact[0] = newContact;
-		for (int i = 0; i < lungTableau(); i++) {
+		for (int i = 0; i < lungTableau(); i++)
 			nouveauContact[i + 1] = tableauContact[i];
 
-		}
 		return new Array_user(nouveauContact);
 	}
 
+	// Elimine une contact
 	public Array_user supprimeContact(int numeroIndice) {
 		Array_user resultSupprimeContact = this;
 

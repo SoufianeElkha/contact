@@ -1,5 +1,20 @@
-/*Soufiane El kharmoudi
-Projet POO 2022*/
+//# Soufiane El kharmoudi
+//# Projet POO 2022
+
+/*
+ * Vous devez modéliser la notion de contact. Un contact à un nom, un ou
+ * plusieurs prénoms, une adresse, un ou plusieurs numéros de téléphone, une ou
+ * plusieurs adresses mail, un compte sur un ou plusieurs réseaux sociaux, et
+ * une profession. Vous devez stocker les contacts dans un tableau toujours
+ * triés. 
+ * Vous devez faire un petit menu permettant à l’utilisateur
+ * 
+ * d’avoir les fonctionnalités suivantes : 
+ * • Insertion d’un nouveau contact 
+ * •Modification et suppression d’un contact 
+ * • Affichage des contacts
+ */
+
 package Account_projet_poo;
 
 import java.util.Scanner;

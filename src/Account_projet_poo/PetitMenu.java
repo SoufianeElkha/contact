@@ -13,7 +13,8 @@ public class PetitMenu {
 		scannerUser = new Scanner(System.in);
 	}
 
-	public boolean isAlpha(String s) {
+	// Contrôle si est un caractère alphabétique
+	public boolean estChar(String s) {
 		if (s == null) {
 			return false;
 		}
