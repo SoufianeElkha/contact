@@ -41,7 +41,7 @@ public class Main {
 
 			String inputChoix = scanner.nextLine();
 
-			if (petitMenu.isAlpha(inputChoix) == false) {
+			if (petitMenu.estChar(inputChoix) == false) {
 
 				int inputNbChoix = Integer.parseInt(inputChoix);
 

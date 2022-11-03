@@ -18,7 +18,6 @@ public class PetitMenu {
 		if (s == null) {
 			return false;
 		}
-
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
 			if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z')) {
@@ -34,35 +33,36 @@ public class PetitMenu {
 	private static ArrayList<String> email;
 	private static ArrayList<String> reseauxSociaux;
 
-	private static ArrayList<String> addInfo(ArrayList<String> Info, String texte) {
-		Scanner nbInfo = new Scanner(System.in);
+	private static ArrayList<String> addInfo(ArrayList<String> info, String texte) {
+		Scanner infoScanner = new Scanner(System.in);
 		System.out.println("Combien de " + texte + "?");
-		String a = nbInfo.nextLine();
+		String nb = infoScanner.nextLine();
+
 		// Controle si est numerique
-		boolean isNumeric = (a != null && a.matches("[0-9]+"));
+		boolean isNumeric = (nb != null && nb.matches("[0-9]+"));
 		if (isNumeric == true) {
-			int a1 = Integer.parseInt(a);
-			Info = new ArrayList<String>();
+			int a1 = Integer.parseInt(nb);
+			info = new ArrayList<String>();
 			for (int i = 0; i < a1; i++) {
 				System.out.println(texte + " N° " + (i + 1));
-				Info.add(scannerUser.nextLine());
+				info.add(scannerUser.nextLine());
 			}
 		} else {
 			System.out.println("ERREUR: Entrez un nombre");
-			addInfo(Info, texte);
+			addInfo(info, texte);
 		}
-		return Info;
+		return info;
 	}
 
 	public Array_user putContact(Array_user contacts) {
-
+		Scanner putScanner = new Scanner(System.in);
 		System.out.println(Contact.texte[0]);
-		String nom = scannerUser.nextLine();
+		String nom = putScanner.nextLine();
 
 		prenoms = addInfo(prenoms, Contact.texte[1]);
 
 		System.out.println(Contact.texte[2]);
-		String adresse = scannerUser.nextLine();
+		String adresse = putScanner.nextLine();
 
 		telephone = addInfo(telephone, Contact.texte[3]);
 
@@ -71,7 +71,7 @@ public class PetitMenu {
 		reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
 
 		System.out.println(Contact.texte[6]);
-		String profession = scannerUser.nextLine();
+		String profession = putScanner.nextLine();
 
 		Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
 
