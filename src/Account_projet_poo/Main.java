@@ -22,7 +22,7 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+		Scanner mainScanner = new Scanner(System.in);
 
 		Array_user inputString = Array_user.newContactVide();
 		PetitMenu petitMenu = new PetitMenu();
@@ -39,7 +39,7 @@ public class Main {
 				i++;
 			}
 
-			String inputChoix = scanner.nextLine();
+			String inputChoix = mainScanner.nextLine();
 
 			if (petitMenu.estChar(inputChoix) == false) {
 
@@ -72,7 +72,7 @@ public class Main {
 					// Sortie de Gestionnaire
 					case 5:
 						System.out.println(textePetitMenu[4]);
-						scanner.close();
+						mainScanner.close();
 						System.exit(0);
 						break;
 					}

@@ -20,6 +20,18 @@ public class PetitMenu {
 		return true;
 	}
 
+	private Boolean ouiScanner(int nbTexte) {
+		Scanner ouiScanner = new Scanner(System.in);
+		System.out.println("Vous voulez modifier le " + Contact.texte[nbTexte] + "? O/N");
+		String oui = ouiScanner.nextLine();
+
+		boolean estOui = false;
+
+		if (oui.equals("o") == true || oui.equals("O") == true)
+			estOui = true;
+		return estOui;
+	}
+
 	// Creation de ArrayList de String pour stocker pluseur
 	private static ArrayList<String> prenoms;
 	private static ArrayList<String> telephone;
@@ -90,27 +102,18 @@ public class PetitMenu {
 		return newArray;
 	}
 
-	private Boolean ouiScanner(int nbTexte) {
-		Scanner ouiScanner = new Scanner(System.in);
-		System.out.println("Vous voulez modifier le " + Contact.texte[nbTexte] + "? O/N");
-		String ouiScannerString = ouiScanner.nextLine();
-
-		boolean a = false;
-
-		if (ouiScannerString.equals("o") == true || ouiScannerString.equals("O") == true)
-			a = true;
-		return a;
-	}
-
 	public Array_user modificationContact(Array_user contacts) {
+
 		Scanner modScanner = new Scanner(System.in);
+
 		if (contacts.lungTableau() != 0) {
 
 			int indice;
-			System.out.println("Nom a modifier: ");
+			System.out.println("Que nom voulez-vous modifier: ");
 
 			String nomIndiceString = modScanner.nextLine();
 			indice = contacts.existeNom(nomIndiceString);
+
 			if (indice >= 0) {
 				// GETTER
 				prenoms = contacts.tableauContact[indice].getPrenom();
@@ -120,7 +123,7 @@ public class PetitMenu {
 				reseauxSociaux = contacts.tableauContact[indice].getReseauxSociaux();
 				String profession = contacts.tableauContact[indice].getProfession();
 
-				// NOM est la cle
+				// Nom est la cle
 				System.out
 						.println("Modification contact " + Contact.texte[0] + contacts.tableauContact[indice].getNom());
 				String nom = contacts.tableauContact[indice].getNom();

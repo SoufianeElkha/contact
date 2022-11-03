@@ -11,7 +11,6 @@ public class Array_user {
 	}
 
 	public Array_user(Contact[] tableauContact) {
-		// Arrays.sort(tableauContact);
 		this.tableauContact = tableauContact;
 	}
 
@@ -89,16 +88,14 @@ public class Array_user {
 	// Modification Contact
 	public void remplaceContact(Contact modification, int numeroIndice) {
 		tableauContact[numeroIndice] = modification;
-
 	}
 
 	public void printContacts() {
-		int lung = lungTableau();
 		System.out.println("\tGESTIONNAIRE DE CONTACTS:\n");
 
-		if (lung > 0) {
+		if (lungTableau() > 0) {
 
-			for (int i = 0; i < lung; i++) {
+			for (int i = 0; i < lungTableau(); i++) {
 				System.out.println("\tIndice Contact N°: " + i + "\n");
 				tableauContact[i].printContact();
 			}
