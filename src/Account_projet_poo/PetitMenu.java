@@ -6,13 +6,6 @@ import java.util.Scanner;
 
 public class PetitMenu {
 
-	// Scanner General pour buffer
-	public static Scanner scannerUser;
-
-	public PetitMenu() {
-		scannerUser = new Scanner(System.in);
-	}
-
 	// Contrôle si est un caractère alphabétique
 	public boolean estChar(String s) {
 		if (s == null) {
@@ -45,7 +38,7 @@ public class PetitMenu {
 			info = new ArrayList<String>();
 			for (int i = 0; i < a1; i++) {
 				System.out.println(texte + " N° " + (i + 1));
-				info.add(scannerUser.nextLine());
+				info.add(infoScanner.nextLine());
 			}
 		} else {
 			System.out.println("ERREUR: Entrez un nombre");
@@ -80,10 +73,11 @@ public class PetitMenu {
 	}
 
 	public Array_user supprimeContact(Array_user contacts) {
+		Scanner supprimeScanner = new Scanner(System.in);
 		Array_user newArray = null;
 
 		System.out.println("\nNom à supprimer:");
-		String nomIndiceString = scannerUser.nextLine();
+		String nomIndiceString = supprimeScanner.nextLine();
 		int indice = contacts.existeNom(nomIndiceString);
 
 		if (indice >= 0) {
@@ -96,26 +90,26 @@ public class PetitMenu {
 		return newArray;
 	}
 
-	private Boolean ouiOrNon(int nbTexte) {
-		Scanner ouiOrNon = new Scanner(System.in);
+	private Boolean ouiScanner(int nbTexte) {
+		Scanner ouiScanner = new Scanner(System.in);
 		System.out.println("Vous voulez modifier le " + Contact.texte[nbTexte] + "? O/N");
-		String ouiOrNonString = ouiOrNon.nextLine();
+		String ouiScannerString = ouiScanner.nextLine();
 
 		boolean a = false;
 
-		if (ouiOrNonString.equals("o") == true || ouiOrNonString.equals("O") == true)
+		if (ouiScannerString.equals("o") == true || ouiScannerString.equals("O") == true)
 			a = true;
 		return a;
 	}
 
 	public Array_user modificationContact(Array_user contacts) {
-
+		Scanner modScanner = new Scanner(System.in);
 		if (contacts.lungTableau() != 0) {
 
 			int indice;
 			System.out.println("Nom a modifier: ");
 
-			String nomIndiceString = scannerUser.nextLine();
+			String nomIndiceString = modScanner.nextLine();
 			indice = contacts.existeNom(nomIndiceString);
 			if (indice >= 0) {
 				// GETTER
@@ -132,30 +126,30 @@ public class PetitMenu {
 				String nom = contacts.tableauContact[indice].getNom();
 
 				// if ok, setting new
-				if (ouiOrNon(1) == true) {
+				if (ouiScanner(1) == true) {
 					prenoms = addInfo(prenoms, Contact.texte[1]);
 				}
 
-				if (ouiOrNon(2) == true) {
+				if (ouiScanner(2) == true) {
 					System.out.println(Contact.texte[2]);
-					adresse = scannerUser.nextLine();
+					adresse = modScanner.nextLine();
 				}
 
-				if (ouiOrNon(3) == true) {
+				if (ouiScanner(3) == true) {
 					telephone = addInfo(telephone, Contact.texte[3]);
 				}
 
-				if (ouiOrNon(4) == true) {
+				if (ouiScanner(4) == true) {
 					email = addInfo(email, Contact.texte[4]);
 				}
 
-				if (ouiOrNon(5) == true) {
+				if (ouiScanner(5) == true) {
 					reseauxSociaux = addInfo(reseauxSociaux, Contact.texte[5]);
 				}
 
-				if (ouiOrNon(6) == true) {
+				if (ouiScanner(6) == true) {
 					System.out.println(Contact.texte[6]);
-					profession = scannerUser.nextLine();
+					profession = modScanner.nextLine();
 				}
 
 				Contact nouveauContact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux,
