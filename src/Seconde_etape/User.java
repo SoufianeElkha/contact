@@ -68,7 +68,7 @@ public class User {
 		System.out.println("Inserez votre numéro de téléphone. Combien ?");
 		int nbTelephone = scanner.nextInt();
 		for (int i = 0; i <= nbTelephone; i++) {
-			System.out.println("Téléphone : " + i);
+			System.out.println("Téléphone : " + (i + 1));
 			String telephone = scanner.nextLine();
 			if (!estChar(telephone)) {
 				listeTelephone.add(telephone);
@@ -82,7 +82,7 @@ public class User {
 		int nbMail = scanner.nextInt();
 
 		for (int i = 0; i <= nbMail; i++) {
-			System.out.println("Mail : " + i);
+			System.out.println("Mail : " + (i + 1));
 			String mail = scanner.nextLine();
 			listeMail.add(mail);
 		}
@@ -92,7 +92,7 @@ public class User {
 		int nbRS = scanner.nextInt();
 
 		for (int i = 0; i <= nbRS; i++) {
-			System.out.println("Réseau social : " + i);
+			System.out.println("Réseau social : " + (i + 1));
 			String rs = scanner.nextLine();
 			listeRS.add(rs);
 		}
