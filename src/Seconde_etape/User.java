@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 public class User {
 
-	public ArrayList<Contact> arrayContact = new ArrayList<>();
-	// public ArrayList<Amis> arrayAmis = new ArrayList<>();
+	public static ArrayList<Contact> arrayContact = new ArrayList<>();
 
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
@@ -36,6 +35,15 @@ public class User {
 		arrayContact.add(professionnel);
 	}
 
+	public static boolean existe(String nomExiste) {
+		for (Contact c : arrayContact) {
+			if (c.getNom().startsWith(nomExiste)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static Contact ajouterContact() {
 		// Initialisation variables insert contact
 
@@ -49,31 +57,44 @@ public class User {
 		// NOM
 		System.out.println("Inserez votre nom : ");
 		String nom = scanner.nextLine();
-
+		// Control
+		if (existe(nom)) {
+			System.out.println("Le nom existe");
+			return ajouterContact();
+		}
 		// PRENOM
 		System.out.println("Inserez votre prenom. Combien ?");
 		int nbPrenom = scanner.nextInt();
 
-		for (int i = 0; i <= nbPrenom; i++) {
+		for (int i = 0; i < nbPrenom; i++) {
+			Scanner scannerPrenom = new Scanner(System.in);
 			System.out.println("Prenom : " + (i + 1));
-			String prenom = scanner.nextLine();
+			String prenom = scannerPrenom.nextLine();
 			listePrenom.add(prenom);
 		}
 
 		// ADRESSE
+		Scanner scannerAdresse = new Scanner(System.in);
 		System.out.println("Inserez votre adresse : ");
-		String adresse = scanner.nextLine();
+		String adresse = scannerAdresse.nextLine();
 
 		// TELEPHONE
 		System.out.println("Inserez votre numéro de téléphone. Combien ?");
 		int nbTelephone = scanner.nextInt();
-		for (int i = 0; i <= nbTelephone; i++) {
+		for (int i = 0; i < nbTelephone; i++) {
+			Scanner scannerTelephone = new Scanner(System.in);
 			System.out.println("Téléphone : " + (i + 1));
-			String telephone = scanner.nextLine();
-			if (!estChar(telephone)) {
+			String telephone = scannerTelephone.nextLine();
+			boolean isNumeric = (telephone != null && telephone.matches("[0-9]+"));
+			if (isNumeric) {
 				listeTelephone.add(telephone);
+
 			} else {
 				System.out.println("Inserez de valeur numerique");
+				telephone = scannerTelephone.nextLine();
+				isNumeric = (telephone != null && telephone.matches("[0-9]+"));
+				if (isNumeric) {
+					listeTelephone.add(telephone);
 			}
 		}
 
@@ -81,9 +102,10 @@ public class User {
 		System.out.println("Inserez votre mail. Combien ?");
 		int nbMail = scanner.nextInt();
 
-		for (int i = 0; i <= nbMail; i++) {
-			System.out.println("Mail : " + (i + 1));
-			String mail = scanner.nextLine();
+		for (int i = 0; i < nbMail; i++) {
+			Scanner scannerEmail = new Scanner(System.in);
+			System.out.println("E-mail : " + (i + 1));
+			String mail = scannerEmail.nextLine();
 			listeMail.add(mail);
 		}
 
@@ -91,15 +113,17 @@ public class User {
 		System.out.println("Inserez votre réseau social. Combien ?");
 		int nbRS = scanner.nextInt();
 
-		for (int i = 0; i <= nbRS; i++) {
+		for (int i = 0; i < nbRS; i++) {
+			Scanner scannerRS = new Scanner(System.in);
 			System.out.println("Réseau social : " + (i + 1));
-			String rs = scanner.nextLine();
+			String rs = scannerRS.nextLine();
 			listeRS.add(rs);
 		}
 
 		// PROFESSION
+		Scanner scannerProfession = new Scanner(System.in);
 		System.out.println("Inserez votre profession : ");
-		String profession = scanner.nextLine();
+		String profession = scannerProfession.nextLine();
 
 		Contact c = new Contact(nom, listePrenom, adresse, listeTelephone, listeMail, listeRS, profession);
 		return c;
@@ -213,7 +237,6 @@ public class User {
 		int index = -1;
 		int ok = 0;
 		Contact contactUpdate = null;
-		Amis contactUpdateAmis = null;
 
 		for (Contact c : arrayContact) {
 			if (c.getNom().equalsIgnoreCase(nom)) {
@@ -224,18 +247,21 @@ public class User {
 			}
 		}
 
-		/*
-		 * for (Contact c : arrayContact) { if (c.getNom().equalsIgnoreCase(nom)) {
-		 * index = arrayContact.indexOf(c); ok = 1; contactUpdateAmis =
-		 * arrayAmis.get(index); break; } }
-		 */
-
 		if (ok == 0) {
 			System.out.println("Nom non trouvé\n");
 		} else {
 			Scanner scannerUpdatd = new Scanner(System.in);
-			System.out.println(
-					"Quel champ voulez-vous modifier ? \nPrenom \nAdresse \nTéléphone \nEmail \nReseaux Sociaux \nProfession \nSortie ");
+			System.out.print(
+					"Quel champ voulez-vous modifier ? \nPrenom \nAdresse \nTéléphone \nEmail \nReseaux Sociaux \nProfession");
+			if (contactUpdate instanceof Amis) {
+				System.out.print("\nSigne zodiaque");
+			} else if (contactUpdate instanceof Famille) {
+				System.out.print("\nLien parenté");
+			} else if (contactUpdate instanceof Professionnel) {
+				System.out.print("\nFonction");
+			}
+			System.out.print("\nSortie");
+			System.out.println();
 			String up = scannerUpdatd.nextLine();
 
 			// PRENOM
@@ -309,10 +335,39 @@ public class User {
 				contactUpdate.setProfession(profession);
 			}
 
-			// SORTIE MODIFICATION
-			if (up.equalsIgnoreCase("Sortie")) {
-				System.out.println("Sortie");
+			// SIGNE ZODIAC
+			if (contactUpdate instanceof Amis) {
+				if (up.equalsIgnoreCase("Signe zodiaque")) {
+					Amis a = (Amis) contactUpdate;
+					System.out.println("Signe zodiaque : ");
+					String signeZod = scannerUpdatdMod.nextLine();
+					a.setSingeZodiacal(signeZod);
+
+				}
 			}
+			// LIEN PARENTE
+			if (contactUpdate instanceof Famille) {
+				if (up.equalsIgnoreCase("Lien parenté")) {
+					Famille f = (Famille) contactUpdate;
+					System.out.println("Lien parenté : ");
+					String lienParent = scannerUpdatdMod.nextLine();
+					f.setLienParent(lienParent);
+				}
+			}
+			// FONCTION
+			if (contactUpdate instanceof Professionnel) {
+				if (up.equalsIgnoreCase("Fonction")) {
+					Professionnel p = (Professionnel) contactUpdate;
+					System.out.println("Fonction : ");
+					String fonction = scannerUpdatdMod.nextLine();
+					p.setFonction(fonction);
+				}
+			}
+			if (up.equalsIgnoreCase("Sortie")) {
+				System.out.println("Sortie Modification");
+				// break;
+			}
+
 		}
 		return contactUpdate;
 	}
