@@ -12,7 +12,17 @@ public class Famille extends Contact{
     }
 
 
-    @Override
+    public String getLienParent() {
+		return lienParent;
+	}
+
+
+	public void setLienParent(String lienParent) {
+		this.lienParent = lienParent;
+	}
+
+
+	@Override
     public String toString() {
         return super.toString() + "Famille{" +
                 "lienParent='" + lienParent + '\'' +

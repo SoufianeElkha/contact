@@ -11,14 +11,18 @@ public class MainUser {
 		while (true) {
 			System.out.println(
 					"Que voulez-vous faire : \n 1. Insertion d’un nouveau contact \n 2. Affichage des contacts \n 3. Suppression d’un contact"
-							+ "\n 4. Modification d’un contact \n 5. Sortie Gestionnaire");
+							+ "\n 4. Modification d’un contact \n 5. Recherche d’un contact  \n 6. Suppression touts les contacts \n 7. Sortie Gestionnaire");
 
 			int action = scannerMain.nextInt();
 
-			if (action == 1) {
+			switch (action) {
+
+//Insertion d’un nouveau contact
+			case 1:
+
 				Scanner scannerMain2 = new Scanner(System.in);
 				System.out.println(
-						"Quel type de contact voulez-vous ajouter ? \n\t- Amis \n\t- Famille \n\t- Professionnel");
+						"Quel type de contact voulez-vous ajouter ? \\n\\t- Standard \n\t- Amis \n\t- Famille \n\t- Professionnel");
 
 				String typeContact = scannerMain2.nextLine();
 
@@ -51,27 +55,69 @@ public class MainUser {
 					Contact c = User.ajouterContact();
 					u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 							c.getReseauxSociaux(), c.getProfession());
-
 				}
-			}
 
-			else if (action == 2) {
-				u.stampa();
+				break;
+//Affichage des contacts
+			case 2:
+				u.printContact();
 
-			} else if (action == 3) {
+				break;
+//Suppression d’un contact
+			case 3:
+
 				Scanner scannerSupprime = new Scanner(System.in);
 				System.out.println("Quel nom de contact voulez-vous supprime ? ");
 
 				String nomSupprime = scannerSupprime.nextLine();
-				u.remove(nomSupprime);
-			}
+				u.supprimeContact(nomSupprime);
 
-			else if (action == 4) {
+				break;
+//Modification d’un contact
+			case 4:
 
 				Scanner scannerUpdateC = new Scanner(System.in);
 				System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
 				String nomUpdate = scannerUpdateC.nextLine();
-				u.updateContact(nomUpdate);
+				u.modificationContact(nomUpdate);
+
+				break;
+//Recherche d’un contact
+			case 5:
+
+				Scanner scannerRecherche = new Scanner(System.in);
+				Scanner scannerRechercheType = new Scanner(System.in);
+
+				System.out.println("\nRecherche d'un contact\n");
+				System.out.println(
+						"\nVoulez-vous faire une recherche par?: \n Nom \n Prenom \n Adresse \n Telephone \n E-mail \n Reseau Sociaux \n Profession:");
+				String typeRecherche = scannerRecherche.nextLine();
+				System.out.println("Quel contact voulez-vous recherche ? ");
+				String nomFind = scannerRechercheType.nextLine();
+				u.rechercheContact(typeRecherche, nomFind);
+
+				break;
+//Suppression touts les contacts
+			case 6:
+
+				Scanner scannerSupprime1 = new Scanner(System.in);
+				System.out.println("Voulez-vous supprime touts la liste ? oui/non ");
+
+				String allSupprime = scannerSupprime1.nextLine();
+
+				if (allSupprime.equalsIgnoreCase("oui")) {
+					u.supprimeAllContact(allSupprime);
+				} else if (allSupprime.equalsIgnoreCase("non")) {
+					System.out.println("Commande annulé");
+					continue;
+				}
+
+				break;
+//Sortie Gestionnaire
+			case 7:
+				System.out.println("Sortie Gestionnaire");
+				System.exit(0);
+
 			}
 
 		}

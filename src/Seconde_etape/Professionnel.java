@@ -10,7 +10,15 @@ public class Professionnel extends Contact{
         this.fonction = fonction;
     }
 
-    @Override
+    public String getFonction() {
+		return fonction;
+	}
+
+	public void setFonction(String fonction) {
+		this.fonction = fonction;
+	}
+
+	@Override
     public String toString() {
         return super.toString() + "Professionnel{" +
                 "fonction='" + fonction + '\'' +
