@@ -22,7 +22,7 @@ public class MainUser {
 
 				Scanner scannerMain2 = new Scanner(System.in);
 				System.out.println(
-						"Quel type de contact voulez-vous ajouter ? \\n\\t- Standard \n\t- Amis \n\t- Famille \n\t- Professionnel");
+						"Quel type de contact voulez-vous ajouter ? \n\t- Standard \n\t- Amis \n\t- Famille \n\t- Professionnel");
 
 				String typeContact = scannerMain2.nextLine();
 
@@ -51,10 +51,12 @@ public class MainUser {
 
 					u.appendProfessionnel(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 							c.getReseauxSociaux(), c.getProfession(), fonction);
-				} else {
+				} else if (typeContact.equalsIgnoreCase("standard")) {
 					Contact c = User.ajouterContact();
 					u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 							c.getReseauxSociaux(), c.getProfession());
+				} else {
+					System.out.println("Inserez le type correct!\n");
 				}
 
 				break;

@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class User {
 
 	public ArrayList<Contact> arrayContact = new ArrayList<>();
+	// public ArrayList<Amis> arrayAmis = new ArrayList<>();
 
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
@@ -54,7 +55,7 @@ public class User {
 		int nbPrenom = scanner.nextInt();
 
 		for (int i = 0; i <= nbPrenom; i++) {
-			System.out.println("Prenom : " + i);
+			System.out.println("Prenom : " + (i + 1));
 			String prenom = scanner.nextLine();
 			listePrenom.add(prenom);
 		}
@@ -209,97 +210,110 @@ public class User {
 		Scanner scannerUpdatdMod = new Scanner(System.in);
 
 		// GET INDICE CONTACT A MODIFIER
-		int index = 0;
+		int index = -1;
+		int ok = 0;
 		Contact contactUpdate = null;
 		Amis contactUpdateAmis = null;
 
 		for (Contact c : arrayContact) {
-			if (c.getNom().equals(nom)) {
+			if (c.getNom().equalsIgnoreCase(nom)) {
 				index = arrayContact.indexOf(c);
+				ok = 1;
 				contactUpdate = arrayContact.get(index);
 				break;
 			}
 		}
-		Scanner scannerUpdatd = new Scanner(System.in);
-		System.out.println(
-				"Quel champ voulez-vous modifier ? \nPrenom \nAdresse \nTéléphone \nEmail \nReseaux Sociaux \nProfession \nSortie ");
-		String up = scannerUpdatd.nextLine();
 
-		// PRENOM
-		if (up.equalsIgnoreCase("Prenom")) {
+		/*
+		 * for (Contact c : arrayContact) { if (c.getNom().equalsIgnoreCase(nom)) {
+		 * index = arrayContact.indexOf(c); ok = 1; contactUpdateAmis =
+		 * arrayAmis.get(index); break; } }
+		 */
 
-			System.out.println("Combien de prenom ? ");
-			int nbPrenom = scannerUpdatdNb.nextInt();
+		if (ok == 0) {
+			System.out.println("Nom non trouvé\n");
+		} else {
+			Scanner scannerUpdatd = new Scanner(System.in);
+			System.out.println(
+					"Quel champ voulez-vous modifier ? \nPrenom \nAdresse \nTéléphone \nEmail \nReseaux Sociaux \nProfession \nSortie ");
+			String up = scannerUpdatd.nextLine();
 
-			for (int i = 0; i <= nbPrenom; i++) {
-				System.out.println("Prenom : " + i);
-				String prenom = scannerUpdatdMod.nextLine();
-				listePrenom.add(prenom);
+			// PRENOM
+			if (up.equalsIgnoreCase("Prenom")) {
+
+				System.out.println("Combien de prenom ? ");
+				int nbPrenom = scannerUpdatdNb.nextInt();
+
+				for (int i = 0; i <= nbPrenom; i++) {
+					System.out.println("Prenom : " + i);
+					String prenom = scannerUpdatdMod.nextLine();
+					listePrenom.add(prenom);
+				}
+				contactUpdate.setPrenom(listePrenom);
 			}
-			contactUpdate.setPrenom(listePrenom);
-		}
 
-		// ADRESSE
-		if (up.equalsIgnoreCase("Adresse")) {
-			System.out.println("Adresse : ");
-			String adresse = scannerUpdatdMod.nextLine();
-			contactUpdate.setAdresse(adresse);
-		}
-
-		// TELEPHONE
-		if (up.equalsIgnoreCase("Telephone")) {
-
-			System.out.println("Combien de email ? ");
-			int nbEmail = scannerUpdatdNb.nextInt();
-
-			for (int i = 0; i <= nbEmail; i++) {
-				System.out.println("Email : " + i);
-				String telephone = scannerUpdatdMod.nextLine();
-				listeTelephone.add(telephone);
+			// ADRESSE
+			if (up.equalsIgnoreCase("Adresse")) {
+				System.out.println("Adresse : ");
+				String adresse = scannerUpdatdMod.nextLine();
+				contactUpdate.setAdresse(adresse);
 			}
-			contactUpdate.setTelephone(listeTelephone);
-		}
 
-		// EMAIL
-		if (up.equalsIgnoreCase("Email") || up.equalsIgnoreCase("E-mail")) {
+			// TELEPHONE
+			if (up.equalsIgnoreCase("Telephone")) {
 
-			System.out.println("Combien de email ? ");
-			int nbEmail = scannerUpdatdNb.nextInt();
+				System.out.println("Combien de email ? ");
+				int nbEmail = scannerUpdatdNb.nextInt();
 
-			for (int i = 0; i <= nbEmail; i++) {
-				System.out.println("Email : " + i);
-				String email = scannerUpdatdMod.nextLine();
-				listeEmail.add(email);
+				for (int i = 0; i <= nbEmail; i++) {
+					System.out.println("Email : " + i);
+					String telephone = scannerUpdatdMod.nextLine();
+					listeTelephone.add(telephone);
+				}
+				contactUpdate.setTelephone(listeTelephone);
 			}
-			contactUpdate.setEmail(listeEmail);
-		}
 
-		// RESEAUX SOCIAUX
-		if (up.equalsIgnoreCase("Reseaux Sociaux")) {
+			// EMAIL
+			if (up.equalsIgnoreCase("Email") || up.equalsIgnoreCase("E-mail")) {
 
-			System.out.println("Combien de reseaux Sociaux ? ");
-			int nbRS = scannerUpdatdNb.nextInt();
+				System.out.println("Combien de email ? ");
+				int nbEmail = scannerUpdatdNb.nextInt();
 
-			for (int i = 0; i <= nbRS; i++) {
-				System.out.println("Email : " + i);
-				String reseauxSociaux = scannerUpdatdMod.nextLine();
-				listeRS.add(reseauxSociaux);
+				for (int i = 0; i <= nbEmail; i++) {
+					System.out.println("Email : " + i);
+					String email = scannerUpdatdMod.nextLine();
+					listeEmail.add(email);
+				}
+				contactUpdate.setEmail(listeEmail);
 			}
-			contactUpdate.setReseauxSociaux(listeRS);
-		}
 
-		// PROFESSION
-		if (up.equalsIgnoreCase("Profession")) {
-			System.out.println("Profession : ");
-			String profession = scannerUpdatdMod.nextLine();
-			contactUpdate.setProfession(profession);
-		}
+			// RESEAUX SOCIAUX
+			if (up.equalsIgnoreCase("Reseaux Sociaux")) {
 
-		// SORTIE MODIFICATION
-		if (up.equalsIgnoreCase("Sortie")) {
-			System.out.println("Sortie");
-		}
+				System.out.println("Combien de reseaux Sociaux ? ");
+				int nbRS = scannerUpdatdNb.nextInt();
+				for (int i = 0; i <= nbRS; i++) {
+					System.out.println("Email : " + i);
+					String reseauxSociaux = scannerUpdatdMod.nextLine();
+					if (estChar(reseauxSociaux)) {
+						listeRS.add(reseauxSociaux);
+					}
+				}
+				contactUpdate.setReseauxSociaux(listeRS);
+			}
 
+			// PROFESSION
+			if (up.equalsIgnoreCase("Profession")) {
+				System.out.println("Profession : ");
+				String profession = scannerUpdatdMod.nextLine();
+				contactUpdate.setProfession(profession);
+			}
+
+			// SORTIE MODIFICATION
+			if (up.equalsIgnoreCase("Sortie")) {
+				System.out.println("Sortie");
+			}
+		}
 		return contactUpdate;
 	}
 
