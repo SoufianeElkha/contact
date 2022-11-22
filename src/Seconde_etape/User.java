@@ -271,9 +271,10 @@ public class User {
 				System.out.println("Combien de prenom ? ");
 				int nbPrenom = scannerUpdatdNb.nextInt();
 
-				for (int i = 0; i <= nbPrenom; i++) {
-					System.out.println("Prenom : " + i);
-					String prenom = scannerUpdatdMod.nextLine();
+				for (int i = 0; i < nbPrenom; i++) {
+					Scanner scannerPrenom = new Scanner(System.in);
+					System.out.println("Prenom : " + (i + 1));
+					String prenom = scannerPrenom.nextLine();
 					listePrenom.add(prenom);
 				}
 				contactUpdate.setPrenom(listePrenom);
@@ -289,12 +290,13 @@ public class User {
 			// TELEPHONE
 			if (up.equalsIgnoreCase("Telephone")) {
 
-				System.out.println("Combien de email ? ");
+				System.out.println("Combien de numero telephone ? ");
 				int nbEmail = scannerUpdatdNb.nextInt();
 
-				for (int i = 0; i <= nbEmail; i++) {
-					System.out.println("Email : " + i);
-					String telephone = scannerUpdatdMod.nextLine();
+				for (int i = 0; i < nbEmail; i++) {
+					Scanner scannerTelephone = new Scanner(System.in);
+					System.out.println("Telephone : " + (i + 1));
+					String telephone = scannerTelephone.nextLine();
 					listeTelephone.add(telephone);
 				}
 				contactUpdate.setTelephone(listeTelephone);
@@ -306,9 +308,10 @@ public class User {
 				System.out.println("Combien de email ? ");
 				int nbEmail = scannerUpdatdNb.nextInt();
 
-				for (int i = 0; i <= nbEmail; i++) {
-					System.out.println("Email : " + i);
-					String email = scannerUpdatdMod.nextLine();
+				for (int i = 0; i < nbEmail; i++) {
+					Scanner scannerEmail = new Scanner(System.in);
+					System.out.println("Email : " + (i + 1));
+					String email = scannerEmail.nextLine();
 					listeEmail.add(email);
 				}
 				contactUpdate.setEmail(listeEmail);
@@ -320,8 +323,9 @@ public class User {
 				System.out.println("Combien de reseaux Sociaux ? ");
 				int nbRS = scannerUpdatdNb.nextInt();
 				for (int i = 0; i <= nbRS; i++) {
+					Scanner scannerRS = new Scanner(System.in);
 					System.out.println("Email : " + i);
-					String reseauxSociaux = scannerUpdatdMod.nextLine();
+					String reseauxSociaux = scannerRS.nextLine();
 					if (estChar(reseauxSociaux)) {
 						listeRS.add(reseauxSociaux);
 					}
