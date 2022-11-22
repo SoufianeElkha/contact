@@ -113,11 +113,6 @@ public class User {
 			Scanner scannerEmail = new Scanner(System.in);
 			System.out.println("E-mail : " + (i + 1));
 			String mail = scannerEmail.nextLine();
-			while (mail.contains("@") == false) {
-				System.out.println("ERREUR: Type email, manque @\n");
-				System.out.println("E-mail : " + (i + 1));
-				mail = scannerEmail.nextLine();
-			}
 			listeMail.add(mail);
 		}
 
