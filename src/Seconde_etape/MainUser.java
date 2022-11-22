@@ -10,8 +10,8 @@ public class MainUser {
 
 		while (true) {
 			System.out.println(
-					"Que voulez-vous faire : \n 1. Insertion d’un nouveau contact \n 2. Affichage des contacts \n 3. Suppression d’un contact"
-							+ "\n 4. Modification d’un contact \n 5. Recherche d’un contact  \n 6. Suppression touts les contacts \n 7. Sortie Gestionnaire");
+					"\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
+							+ "\n [4] Modification d’un contact \n [5] Recherche d’un contact  \n [6] Suppression touts les contacts \n [7] Sortie Gestionnaire");
 
 			String actionString = scannerMain.nextLine();
 
@@ -48,6 +48,7 @@ public class MainUser {
 
 						u.appendFamille(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 								c.getReseauxSociaux(), c.getProfession(), lienParent);
+
 					} else if (typeContact.equalsIgnoreCase("professionnel")) {
 						Contact c = User.ajouterContact();
 						// FONCTION
@@ -56,10 +57,12 @@ public class MainUser {
 
 						u.appendProfessionnel(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 								c.getReseauxSociaux(), c.getProfession(), fonction);
+
 					} else if (typeContact.equalsIgnoreCase("standard")) {
 						Contact c = User.ajouterContact();
 						u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 								c.getReseauxSociaux(), c.getProfession());
+
 					} else {
 						System.out.println("Inserez le type correct!\n");
 					}

@@ -37,13 +37,14 @@ public class User {
 
 	public static boolean existe(String nomExiste) {
 		for (Contact c : arrayContact) {
-			if (c.getNom().startsWith(nomExiste)) {
+			if (c.getNom().equals(nomExiste)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
+// AJOUTER CONTACT
 	public static Contact ajouterContact() {
 		// Initialisation variables insert contact
 
@@ -57,7 +58,12 @@ public class User {
 		// NOM
 		System.out.println("Inserez votre nom : ");
 		String nom = scanner.nextLine();
-		// Control
+		if (estChar(nom) == false) {
+			System.out.println("ERREUR: Inserez des character\n");
+			return ajouterContact();
+		}
+
+		// CONTROLE
 		if (existe(nom)) {
 			System.out.println("Le nom existe");
 			return ajouterContact();
@@ -70,6 +76,12 @@ public class User {
 			Scanner scannerPrenom = new Scanner(System.in);
 			System.out.println("Prenom : " + (i + 1));
 			String prenom = scannerPrenom.nextLine();
+			while (estChar(prenom) == false) {
+				System.out.println("ERREUR: Inserez des character\n");
+				System.out.println("Prenom : " + (i + 1));
+				prenom = scannerPrenom.nextLine();
+			}
+
 			listePrenom.add(prenom);
 		}
 
@@ -85,18 +97,12 @@ public class User {
 			Scanner scannerTelephone = new Scanner(System.in);
 			System.out.println("Téléphone : " + (i + 1));
 			String telephone = scannerTelephone.nextLine();
-			boolean isNumeric = (telephone != null && telephone.matches("[0-9]+"));
-			if (isNumeric) {
-				listeTelephone.add(telephone);
-
-			} else {
-				System.out.println("Inserez de valeur numerique");
+			while (estNb(telephone) == false) {
+				System.out.println("ERREUR: Inserez des nombres\n");
+				System.out.println("Téléphone : " + (i + 1));
 				telephone = scannerTelephone.nextLine();
-				isNumeric = (telephone != null && telephone.matches("[0-9]+"));
-				if (isNumeric) {
-					listeTelephone.add(telephone);
-				}
 			}
+			listeTelephone.add(telephone);
 		}
 
 		// MAIL
@@ -107,11 +113,17 @@ public class User {
 			Scanner scannerEmail = new Scanner(System.in);
 			System.out.println("E-mail : " + (i + 1));
 			String mail = scannerEmail.nextLine();
+			while (mail.contains("@") == false) {
+				System.out.println("ERREUR: Type email, manque @\n");
+				System.out.println("E-mail : " + (i + 1));
+				mail = scannerEmail.nextLine();
+			}
 			listeMail.add(mail);
 		}
 
 		// RESEAUX SOCIAUX
 		System.out.println("Inserez votre réseau social. Combien ?");
+
 		int nbRS = scanner.nextInt();
 
 		for (int i = 0; i < nbRS; i++) {
@@ -130,7 +142,7 @@ public class User {
 		return c;
 	}
 
-	// AFFICHAGE
+// AFFICHAGE
 	public void printContact() {
 
 		System.out.println("Affichage contacts");
@@ -139,24 +151,35 @@ public class User {
 		}
 	}
 
-	// CLEAN CONTACT
+// CLEAN CONTACT
 	public void supprimeContact(String nom) {
-
-		int indice = 0;
-		for (Contact c : arrayContact) {
-			if (c.getNom().equals(nom)) {
-				indice = arrayContact.indexOf(c);
+		if (arrayContact.isEmpty()) {
+			System.out.println("ERROR: Gestionnaire Vide");
+		} else if (existe(nom)) {
+			int indice = 0;
+			for (Contact c : arrayContact) {
+				if (c.getNom().equals(nom)) {
+					indice = arrayContact.indexOf(c);
+				}
 			}
+			arrayContact.remove(indice);
+		} else {
+			System.out.println("ERROR: Contact non trouvé");
+
 		}
-		arrayContact.remove(indice);
 	}
 
-	// CLEAN ALL CONTACT
+// CLEAN ALL CONTACT
 	public void supprimeAllContact(String nom) {
-		arrayContact.removeAll(arrayContact);
+		if (arrayContact.isEmpty()) {
+			System.out.println("ERROR: Gestionnaire Vide");
+		} else {
+			arrayContact.removeAll(arrayContact);
+		}
+
 	}
 
-	// RECHERCHE
+// RECHERCHE
 	public void rechercheContact(String typeRecherche, String stringRecherche) {
 
 		ArrayList<Integer> index = new ArrayList<>();
@@ -214,16 +237,21 @@ public class User {
 			break;
 
 		default:
-			System.out.println("Erreur choix");
+			System.out.println("ERROR: erreur choix");
 			;
 		}
 
 		for (int j = 0; j <= index.size() - 1; j++) {
+			System.out.println();
 			System.out.println(arrayContact.get(index.get(j)));
+			System.out.println();
+		}
+		if (index.isEmpty()) {
+			System.out.println("ERROR: Contact non trouvé ");
 		}
 	}
 
-	// MODIFICATION CONTACT
+// MODIFICATION CONTACT
 	public Contact modificationContact(String nom) {
 
 		ArrayList<String> listePrenom = new ArrayList<>();
@@ -249,7 +277,7 @@ public class User {
 		}
 
 		if (ok == 0) {
-			System.out.println("Nom non trouvé\n");
+			System.out.println("ERROR: Nom non trouvé\n");
 		} else {
 			Scanner scannerUpdatd = new Scanner(System.in);
 			System.out.print(
@@ -326,9 +354,7 @@ public class User {
 					Scanner scannerRS = new Scanner(System.in);
 					System.out.println("Email : " + i);
 					String reseauxSociaux = scannerRS.nextLine();
-					if (estChar(reseauxSociaux)) {
-						listeRS.add(reseauxSociaux);
-					}
+					listeRS.add(reseauxSociaux);
 				}
 				contactUpdate.setReseauxSociaux(listeRS);
 			}
@@ -369,15 +395,20 @@ public class User {
 				}
 			}
 			if (up.equalsIgnoreCase("Sortie")) {
+				System.out.println();
 				System.out.println("Sortie Modification");
-				// break;
 			}
 
 		}
 		return contactUpdate;
 	}
 
-	// Contrôle si est un caractère alphabétique
+	public static boolean estNb(String nb) {
+		boolean controle = (nb != null && nb.matches("(\\+)?[0-9]+$"));
+		return controle;
+	}
+
+// Contrôle si est un caractère alphabétique
 	public static boolean estChar(String s) {
 		if (s == null) {
 			return false;

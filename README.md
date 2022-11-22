@@ -1,9 +1,9 @@
 1 Première étape : les bases du gestionnaire de contacts
-
+2 Seconde étape : 
 Rappresentation de Menu:
 
 
-MENU: 1-2-3-4-5
+Que voulez-vous faire : 
 
 [1]Insertion d'un nouveau contact
 
@@ -13,6 +13,9 @@ MENU: 1-2-3-4-5
 
 [4]Modification d'un contact
 
-[5]Sortie Gestionnaire
+[5]Recherche d'un contact 
 
+[6]Sortie Gestionnaire
+
+[7]Suppression touts les contacts 
 
