@@ -134,6 +134,7 @@ public class User {
 		String profession = scannerProfession.nextLine();
 
 		Contact c = new Contact(nom, listePrenom, adresse, listeTelephone, listeMail, listeRS, profession);
+		ordre();
 		return c;
 	}
 
@@ -395,7 +396,25 @@ public class User {
 			}
 
 		}
+		ordre();
 		return contactUpdate;
+	}
+
+// ORDRE GESTIONNAIRE
+	public static void ordre() {
+		Contact sort;
+		for (int i = 0; i < arrayContact.size() - 1; i++) {
+			for (int j = i + 1; j < arrayContact.size(); j++) {
+				// COMPARE ELEMENT
+				if (arrayContact.get(i).getNom().toUpperCase()
+						.compareTo(arrayContact.get(j).getNom().toUpperCase()) >= 0) {
+					// ORDRE
+					sort = arrayContact.get(i);
+					arrayContact.set(i, arrayContact.get(j));
+					arrayContact.set(j, sort);
+				}
+			}
+		}
 	}
 
 	public static boolean estNb(String nb) {
