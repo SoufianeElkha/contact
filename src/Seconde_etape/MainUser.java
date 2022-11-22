@@ -14,7 +14,6 @@ public class MainUser {
 							+ "\n 4. Modification d’un contact \n 5. Recherche d’un contact  \n 6. Suppression touts les contacts \n 7. Sortie Gestionnaire");
 
 			int action = scannerMain.nextInt();
-
 			switch (action) {
 
 //Insertion d’un nouveau contact

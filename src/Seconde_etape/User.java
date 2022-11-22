@@ -95,6 +95,7 @@ public class User {
 				isNumeric = (telephone != null && telephone.matches("[0-9]+"));
 				if (isNumeric) {
 					listeTelephone.add(telephone);
+				}
 			}
 		}
 
