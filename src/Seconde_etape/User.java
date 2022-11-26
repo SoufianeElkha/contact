@@ -7,7 +7,11 @@ public class User {
 
 	public static ArrayList<Contact> arrayContact = new ArrayList<>();
 
-	String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession" };
+	String a = "ciao";
+
+	// Texte generale
+	String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession",
+			"signe zodiaque", "lien parenté", "fonction" };
 
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
@@ -161,6 +165,7 @@ public class User {
 				}
 			}
 			arrayContact.remove(indice);
+			System.out.println("\nContact supprimé");
 		} else {
 			System.out.println("ERROR: Contact non trouvé");
 
@@ -173,11 +178,12 @@ public class User {
 			System.out.println("ERROR: Gestionnaire Vide");
 		} else {
 			arrayContact.removeAll(arrayContact);
+			System.out.println("\nGestionnaire vidé");
 		}
 
 	}
 
-	// MODIFICATION
+// MODIFICATION
 	public ArrayList<String> modification(Contact contactUpdate, ArrayList<String> listeType, String up, int texteNb) {
 
 		Scanner scannerUpdatdNb = new Scanner(System.in);
@@ -289,7 +295,7 @@ public class User {
 	}
 
 // MODIFICATION CONTACT
-// @Return nouveau contact modifié
+// Return nouveau contact modifié
 	public Contact modificationContact(String nom) {
 
 		ArrayList<String> listePrenom = new ArrayList<>();
@@ -335,7 +341,6 @@ public class User {
 			String up = scannerUpdatd.nextLine();
 
 			// MODIFICATION PRENOM
-
 			if (up.equalsIgnoreCase(texte[1])) {
 				contactUpdate.setPrenom(modification(contactUpdate, listePrenom, up, 1));
 			}
@@ -371,35 +376,34 @@ public class User {
 
 			// MODIFICATION SIGNE ZODIAC
 			if (contactUpdate instanceof Amis) {
-				if (up.equalsIgnoreCase("Signe zodiaque")) {
+				if (up.equalsIgnoreCase(texte[7])) {
 					Amis a = (Amis) contactUpdate;
-					System.out.println("Signe zodiaque : ");
+					System.out.println(texte[7] + " : ");
 					String signeZod = scannerUpdatdMod.nextLine();
 					a.setSingeZodiacal(signeZod);
-
 				}
 			}
+
 			// MODIFICATION LIEN PARENTE
 			if (contactUpdate instanceof Famille) {
-				if (up.equalsIgnoreCase("Lien parenté")) {
+				if (up.equalsIgnoreCase(texte[8])) {
 					Famille f = (Famille) contactUpdate;
-					System.out.println("Lien parenté : ");
+					System.out.println(texte[8] + " : ");
 					String lienParent = scannerUpdatdMod.nextLine();
 					f.setLienParent(lienParent);
 				}
 			}
 			// MODIFICATION FONCTION
 			if (contactUpdate instanceof Professionnel) {
-				if (up.equalsIgnoreCase("Fonction")) {
+				if (up.equalsIgnoreCase(texte[9])) {
 					Professionnel p = (Professionnel) contactUpdate;
-					System.out.println("Fonction : ");
+					System.out.println(texte[9] + " : ");
 					String fonction = scannerUpdatdMod.nextLine();
 					p.setFonction(fonction);
 				}
 			}
 			if (up.equalsIgnoreCase("Sortie")) {
-				System.out.println();
-				System.out.println("Sortie Modification");
+				System.out.println("\nSortie Modification");
 			}
 		}
 

@@ -9,6 +9,7 @@ public class MainUser {
 		Scanner scannerMain = new Scanner(System.in);
 
 		while (true) {
+			// TEXTE MENU
 			System.out.println(
 					"\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
 							+ "\n [4] Modification d’un contact \n [5] Recherche d’un contact  \n [6] Suppression touts les contacts \n [7] Sortie Gestionnaire");
@@ -30,8 +31,14 @@ public class MainUser {
 							"Quel type de contact voulez-vous ajouter ? \n\t- Standard \n\t- Amis \n\t- Famille \n\t- Professionnel");
 
 					String typeContact = scannerMain2.nextLine();
-
-					if (typeContact.equalsIgnoreCase("amis")) {
+					// TYPE STANDARD
+					if (typeContact.equalsIgnoreCase("standard")) {
+						Contact c = User.ajouterContact();
+						u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
+								c.getReseauxSociaux(), c.getProfession());
+					}
+					// TYPE AMIS
+					else if (typeContact.equalsIgnoreCase("amis")) {
 						Contact c = User.ajouterContact();
 						// SIGNE ZODIAC
 						System.out.println("Inserez votre signe zodiaque : ");
@@ -40,7 +47,9 @@ public class MainUser {
 						u.appendAmis(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 								c.getReseauxSociaux(), c.getProfession(), signeZodiac);
 
-					} else if (typeContact.equalsIgnoreCase("famille")) {
+					}
+					// TYPE FAMILLE
+					else if (typeContact.equalsIgnoreCase("famille")) {
 						Contact c = User.ajouterContact();
 						// LIEN PARENT
 						System.out.println("Inserez votre lien de parentée : ");
@@ -49,7 +58,9 @@ public class MainUser {
 						u.appendFamille(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 								c.getReseauxSociaux(), c.getProfession(), lienParent);
 
-					} else if (typeContact.equalsIgnoreCase("professionnel")) {
+					}
+					// TYPE PROFESSIONNEL
+					else if (typeContact.equalsIgnoreCase("professionnel")) {
 						Contact c = User.ajouterContact();
 						// FONCTION
 						System.out.println("Inserez votre fonction : ");
@@ -57,11 +68,6 @@ public class MainUser {
 
 						u.appendProfessionnel(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 								c.getReseauxSociaux(), c.getProfession(), fonction);
-
-					} else if (typeContact.equalsIgnoreCase("standard")) {
-						Contact c = User.ajouterContact();
-						u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
-								c.getReseauxSociaux(), c.getProfession());
 
 					} else {
 						System.out.println("Inserez le type correct!\n");
