@@ -7,6 +7,8 @@ public class User {
 
 	public static ArrayList<Contact> arrayContact = new ArrayList<>();
 
+	String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession" };
+
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
 		Contact contact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
@@ -175,12 +177,38 @@ public class User {
 
 	}
 
+	// MODIFICATION
+	public ArrayList<String> modification(Contact contactUpdate, ArrayList<String> listeType, String up, int texteNb) {
+
+		Scanner scannerUpdatdNb = new Scanner(System.in);
+
+		System.out.println("Combien de " + texte[texteNb] + " ? ");
+		int nbType = scannerUpdatdNb.nextInt();
+
+		for (int i = 0; i < nbType; i++) {
+			Scanner scannerUpdatdMod = new Scanner(System.in);
+			System.out.println(texte[texteNb] + ": " + (i + 1));
+			String type = scannerUpdatdMod.nextLine();
+
+			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")) {
+				while (estChar(texte[texteNb]) == false) {
+					System.out.println("ERREUR: Inserez des character\n");
+					System.out.println("Prenom : " + (i + 1));
+					type = scannerUpdatdMod.nextLine();
+				}
+			}
+			listeType.add(type);
+		}
+		return listeType;
+	}
+
 // RECHERCHE
 	public void rechercheContact(String typeRecherche, String stringRecherche) {
 
 		ArrayList<Integer> index = new ArrayList<>();
 
 		switch (typeRecherche.toLowerCase()) {
+
 		case "nom":
 			for (Contact c : arrayContact) {
 				if (c.getNom().startsWith(stringRecherche)) {
@@ -188,6 +216,7 @@ public class User {
 				}
 			}
 			break;
+
 		case "prenom":
 			for (Contact c : arrayContact) {
 				if (c.getNom().startsWith(stringRecherche)) {
@@ -195,6 +224,7 @@ public class User {
 				}
 			}
 			break;
+
 		case "adresse":
 			for (Contact c : arrayContact) {
 				if (c.getNom().startsWith(stringRecherche)) {
@@ -202,6 +232,7 @@ public class User {
 				}
 			}
 			break;
+
 		case "telephone":
 			for (Contact c : arrayContact) {
 				if (c.getNom().startsWith(stringRecherche)) {
@@ -209,6 +240,7 @@ public class User {
 				}
 			}
 			break;
+
 		case "reseau sociaux ":
 			for (Contact c : arrayContact) {
 				if (c.getNom().startsWith(stringRecherche)) {
@@ -216,7 +248,16 @@ public class User {
 				}
 			}
 			break;
+
 		case "email":
+			for (Contact c : arrayContact) {
+				if (c.getNom().startsWith(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "e-mail":
 			for (Contact c : arrayContact) {
 				if (c.getNom().startsWith(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
@@ -248,6 +289,7 @@ public class User {
 	}
 
 // MODIFICATION CONTACT
+// @Return nouveau contact modifié
 	public Contact modificationContact(String nom) {
 
 		ArrayList<String> listePrenom = new ArrayList<>();
@@ -260,21 +302,24 @@ public class User {
 
 		// GET INDICE CONTACT A MODIFIER
 		int index = -1;
-		int ok = 0;
+		int trouve = -1;
 		Contact contactUpdate = null;
 
 		for (Contact c : arrayContact) {
 			if (c.getNom().equalsIgnoreCase(nom)) {
 				index = arrayContact.indexOf(c);
-				ok = 1;
+				trouve = 0;
 				contactUpdate = arrayContact.get(index);
 				break;
 			}
 		}
 
-		if (ok == 0) {
+		// Vérification recherche Nom
+		if (trouve == -1) {
 			System.out.println("ERROR: Nom non trouvé\n");
+
 		} else {
+
 			Scanner scannerUpdatd = new Scanner(System.in);
 			System.out.print(
 					"Quel champ voulez-vous modifier ? \nPrenom \nAdresse \nTéléphone \nEmail \nReseaux Sociaux \nProfession");
@@ -289,80 +334,42 @@ public class User {
 			System.out.println();
 			String up = scannerUpdatd.nextLine();
 
-			// PRENOM
-			if (up.equalsIgnoreCase("Prenom")) {
+			// MODIFICATION PRENOM
 
-				System.out.println("Combien de prenom ? ");
-				int nbPrenom = scannerUpdatdNb.nextInt();
-
-				for (int i = 0; i < nbPrenom; i++) {
-					Scanner scannerPrenom = new Scanner(System.in);
-					System.out.println("Prenom : " + (i + 1));
-					String prenom = scannerPrenom.nextLine();
-					listePrenom.add(prenom);
-				}
-				contactUpdate.setPrenom(listePrenom);
+			if (up.equalsIgnoreCase(texte[1])) {
+				contactUpdate.setPrenom(modification(contactUpdate, listePrenom, up, 1));
 			}
 
-			// ADRESSE
-			if (up.equalsIgnoreCase("Adresse")) {
-				System.out.println("Adresse : ");
+			// MODIFICATION ADRESSE
+			if (up.equalsIgnoreCase(texte[2])) {
+				System.out.println(texte[2] + " : ");
 				String adresse = scannerUpdatdMod.nextLine();
 				contactUpdate.setAdresse(adresse);
 			}
 
-			// TELEPHONE
-			if (up.equalsIgnoreCase("Telephone")) {
-
-				System.out.println("Combien de numero telephone ? ");
-				int nbEmail = scannerUpdatdNb.nextInt();
-
-				for (int i = 0; i < nbEmail; i++) {
-					Scanner scannerTelephone = new Scanner(System.in);
-					System.out.println("Telephone : " + (i + 1));
-					String telephone = scannerTelephone.nextLine();
-					listeTelephone.add(telephone);
-				}
-				contactUpdate.setTelephone(listeTelephone);
+			// MODIFICATION TELEPHONE
+			if (up.equalsIgnoreCase(texte[3])) {
+				contactUpdate.setTelephone(modification(contactUpdate, listeTelephone, up, 3));
 			}
 
-			// EMAIL
-			if (up.equalsIgnoreCase("Email") || up.equalsIgnoreCase("E-mail")) {
-
-				System.out.println("Combien de email ? ");
-				int nbEmail = scannerUpdatdNb.nextInt();
-
-				for (int i = 0; i < nbEmail; i++) {
-					Scanner scannerEmail = new Scanner(System.in);
-					System.out.println("Email : " + (i + 1));
-					String email = scannerEmail.nextLine();
-					listeEmail.add(email);
-				}
-				contactUpdate.setEmail(listeEmail);
+			// MODIFICATION EMAIL
+			if (up.equalsIgnoreCase("E-mail") || up.equalsIgnoreCase(texte[4])) {
+				contactUpdate.setEmail(modification(contactUpdate, listeEmail, up, 4));
 			}
 
-			// RESEAUX SOCIAUX
-			if (up.equalsIgnoreCase("Reseaux Sociaux")) {
-
-				System.out.println("Combien de reseaux Sociaux ? ");
-				int nbRS = scannerUpdatdNb.nextInt();
-				for (int i = 0; i <= nbRS; i++) {
-					Scanner scannerRS = new Scanner(System.in);
-					System.out.println("Email : " + i);
-					String reseauxSociaux = scannerRS.nextLine();
-					listeRS.add(reseauxSociaux);
-				}
-				contactUpdate.setReseauxSociaux(listeRS);
+			// MODIFICATION RESEAUX SOCIAUX
+			if (up.equalsIgnoreCase(texte[5])) {
+				contactUpdate.setReseauxSociaux(modification(contactUpdate, listeRS, up, 5));
 			}
 
-			// PROFESSION
-			if (up.equalsIgnoreCase("Profession")) {
-				System.out.println("Profession : ");
+			// MODIFICATION PROFESSION
+			if (up.equalsIgnoreCase(texte[6])) {
+				System.out.println(texte[6] + " : ");
 				String profession = scannerUpdatdMod.nextLine();
 				contactUpdate.setProfession(profession);
 			}
 
-			// SIGNE ZODIAC
+			// MODIFICATION SIGNE ZODIAC
 			if (contactUpdate instanceof Amis) {
 				if (up.equalsIgnoreCase("Signe zodiaque")) {
 					Amis a = (Amis) contactUpdate;
@@ -372,7 +379,7 @@ public class User {
 
 				}
 			}
-			// LIEN PARENTE
+			// MODIFICATION LIEN PARENTE
 			if (contactUpdate instanceof Famille) {
 				if (up.equalsIgnoreCase("Lien parenté")) {
 					Famille f = (Famille) contactUpdate;
@@ -381,7 +388,7 @@ public class User {
 					f.setLienParent(lienParent);
 				}
 			}
-			// FONCTION
+			// MODIFICATION FONCTION
 			if (contactUpdate instanceof Professionnel) {
 				if (up.equalsIgnoreCase("Fonction")) {
 					Professionnel p = (Professionnel) contactUpdate;
@@ -394,10 +401,11 @@ public class User {
 				System.out.println();
 				System.out.println("Sortie Modification");
 			}
-
 		}
+
 		ordre();
 		return contactUpdate;
+
 	}
 
 // ORDRE GESTIONNAIRE
@@ -422,7 +430,8 @@ public class User {
 		return controle;
 	}
 
-// Contrôle si est un caractère alphabétique
+// CONTROLE SI EST UNE CARACTERE ALPHABETIQUE
+// Return True or FALSE
 	public static boolean estChar(String s) {
 		if (s == null) {
 			return false;
