@@ -13,7 +13,7 @@ Que voulez-vous faire :
 [3]Suppression d'un contact
 [4]Modification d'un contact
 [5]Recherche d'un contact 
-[6]Sortie Gestionnaire
-[7]Suppression touts les contacts 
+[6]Suppression touts les contacts 
+[7]Sortie Gestionnaire
 
 ```
