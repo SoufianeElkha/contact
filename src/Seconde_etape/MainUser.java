@@ -10,8 +10,9 @@ public class MainUser {
 
 		while (true) {
 			// TEXTE MENU
+			System.out.print("----------------------------------------------");
 			System.out.println(
-					"---------------------------------------------------\n\t MENU: 1-2-3-4-5-6-7\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
+					"\n\t MENU: 1-2-3-4-5-6-7\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
 							+ "\n [4] Modification d’un contact \n [5] Recherche d’un contact  \n [6] Suppression touts les contacts \n [7] Sortie Gestionnaire");
 
 			String actionString = scannerMain.nextLine();
@@ -130,17 +131,20 @@ public class MainUser {
 					break;
 //Suppression touts les contacts
 				case 6:
+					if (u.arrayContact.isEmpty()) {
+						System.out.println("ERROR: Gestionnaire Vide");
+					} else {
+						Scanner scannerSupprime1 = new Scanner(System.in);
+						System.out.println("Voulez-vous supprime touts la liste ? [oui/non] ");
 
-					Scanner scannerSupprime1 = new Scanner(System.in);
-					System.out.println("Voulez-vous supprime touts la liste ? [oui/non] ");
+						String allSupprime = scannerSupprime1.nextLine();
 
-					String allSupprime = scannerSupprime1.nextLine();
-
-					if (allSupprime.equalsIgnoreCase("oui".trim()) || allSupprime.equalsIgnoreCase("o")) {
-						u.supprimeAllContact(allSupprime);
-					} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
-						System.out.println("Suppression annulée");
-						continue;
+						if (allSupprime.equalsIgnoreCase("oui".trim()) || allSupprime.equalsIgnoreCase("o")) {
+							u.supprimeAllContact(allSupprime);
+						} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
+							System.out.println("Suppression annulée");
+							continue;
+						}
 					}
 
 					break;

@@ -68,7 +68,7 @@ public class User {
 					|| up.equalsIgnoreCase("signe zodiaque") || up.equalsIgnoreCase("lien parente")
 					|| up.equalsIgnoreCase("fonction")) {
 				type = premierCharMajuscule(type);
-				while (estChar(texte[texteNb]) == false) {
+				while (estChar(type) == false) {
 					System.out.println("ERREUR: Inserez des character\n");
 					System.out.println(texte[texteNb] + " : " + (i + 1));
 					type = scannerUpdatdMod.nextLine();
@@ -103,7 +103,7 @@ public class User {
 		}
 		// CONTROLE
 		if (existe(nom)) {
-			System.out.println("ERROR: Le nom existe");
+			System.out.println("ERROR: Le nom '" + nom + "' existe déjà dans la liste.");
 			return ajouterContact();
 		}
 		// PRENOM
@@ -130,8 +130,8 @@ public class User {
 		// PROFESSION
 		Scanner scannerProfession = new Scanner(System.in);
 		System.out.println("Inserez votre " + texte[6] + ":");
-
 		String profession = scannerProfession.nextLine();
+
 		// Premier caractère Majuscule
 		profession = premierCharMajuscule(profession);
 
@@ -404,12 +404,10 @@ public class User {
 
 // CLEAN ALL CONTACT
 	public void supprimeAllContact(String nom) {
-		if (arrayContact.isEmpty()) {
-			System.out.println("ERROR: Gestionnaire Vide");
-		} else {
-			arrayContact.removeAll(arrayContact);
-			System.out.println("\nGestionnaire vidé");
-		}
+
+		arrayContact.removeAll(arrayContact);
+		System.out.println("\nGestionnaire vidé");
+
 	}
 
 // PREMIER CARACTERE MAJUSCULE
