@@ -11,7 +11,7 @@ public class Amis extends Contact {
 		this.signeZodiacal = singeZodiacal;
 	}
 
-	public String getSingeZodiacal() {
+	public String getSigneZodiacal() {
 		return signeZodiacal;
 	}
 

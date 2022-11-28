@@ -99,7 +99,7 @@ public class Contact {
 	@Override
 	public String toString() {
 
-		return "\n Contact:" + "\n" + "\n nom: " + "\t" + nom + "\n prenom: " + "\t" + prenom + "\n adresse: " + "\t"
+		return "\n Contact:" + "\n" + "\n nom: " + "\t\t" + nom + "\n prenom: " + "\t" + prenom + "\n adresse: " + "\t"
 				+ adresse + "\n telephone: " + "\t" + telephone + "\n email: " + "\t" + email + "\n reseaux sociaux: "
 				+ reseauxSociaux + "\n profession: " + "\t" + profession;
 	}

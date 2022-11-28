@@ -64,14 +64,16 @@ public class User {
 			System.out.println(texte[texteNb] + ": " + (i + 1));
 			String type = scannerUpdatdMod.nextLine();
 
-			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")) {
+			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")
+					|| up.equalsIgnoreCase("signe zodiaque") || up.equalsIgnoreCase("lien parente")
+					|| up.equalsIgnoreCase("fonction")) {
 				while (estChar(texte[texteNb]) == false) {
 					System.out.println("ERREUR: Inserez des character\n");
 					System.out.println(texte[texteNb] + " : " + (i + 1));
 					type = scannerUpdatdMod.nextLine();
 				}
 			}
-			listeType.add(type);
+			listeType.add(type.trim());
 		}
 		return listeType;
 	}
@@ -124,7 +126,8 @@ public class User {
 		System.out.println("Inserez votre " + texte[6] + ":");
 		String profession = scannerProfession.nextLine();
 
-		Contact c = new Contact(nom, listePrenom, adresse, listeTelephone, listeMail, listeRS, profession);
+		Contact c = new Contact(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,
+				profession.trim());
 		ordre();
 		return c;
 	}
@@ -134,11 +137,11 @@ public class User {
 
 		ArrayList<Integer> index = new ArrayList<>();
 
-		switch (typeRecherche.toLowerCase()) {
+		switch (typeRecherche.toLowerCase().trim()) {
 
 		case "nom":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche)) {
+				if (c.getNom().startsWith(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -146,7 +149,7 @@ public class User {
 
 		case "prenom":
 			for (Contact c : arrayContact) {
-				if (c.getPrenom().equals(stringRecherche)) {
+				if (c.getPrenom().equals(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -155,7 +158,7 @@ public class User {
 
 		case "adresse":
 			for (Contact c : arrayContact) {
-				if (c.getAdresse().startsWith(stringRecherche)) {
+				if (c.getAdresse().startsWith(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -163,7 +166,7 @@ public class User {
 
 		case "telephone":
 			for (Contact c : arrayContact) {
-				if (c.getTelephone().equals(stringRecherche)) {
+				if (c.getTelephone().equals(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -171,7 +174,7 @@ public class User {
 
 		case "reseau sociaux ":
 			for (Contact c : arrayContact) {
-				if (c.getReseauxSociaux().equals(stringRecherche)) {
+				if (c.getReseauxSociaux().equals(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -179,7 +182,7 @@ public class User {
 
 		case "email":
 			for (Contact c : arrayContact) {
-				if (c.getEmail().equals(stringRecherche)) {
+				if (c.getEmail().equals(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -187,14 +190,15 @@ public class User {
 
 		case "e-mail":
 			for (Contact c : arrayContact) {
-				if (c.getEmail().equals(stringRecherche)) {
+				if (c.getEmail().equals(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
 			break;
+
 		case "profession":
 			for (Contact c : arrayContact) {
-				if (c.getProfession().startsWith(stringRecherche)) {
+				if (c.getProfession().startsWith(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -203,16 +207,15 @@ public class User {
 		case "signe zodiacal":
 			for (Contact c : arrayContact) {
 				Amis a = (Amis) c;
-				if (a.getSingeZodiacal().startsWith(stringRecherche)) {
+				if (a.getSigneZodiacal().startsWith(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
 			break;
 		case "lien parental":
-
 			for (Contact c : arrayContact) {
 				Famille f = (Famille) c;
-				if (f.getLienParent().startsWith(stringRecherche)) {
+				if (f.getLienParent().startsWith(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -221,7 +224,7 @@ public class User {
 		case "fonction":
 			for (Contact c : arrayContact) {
 				Professionnel p = (Professionnel) c;
-				if (p.getFonction().startsWith(stringRecherche)) {
+				if (p.getFonction().startsWith(stringRecherche.trim())) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -260,10 +263,11 @@ public class User {
 		Contact contactUpdate = null;
 
 		for (Contact c : arrayContact) {
-			if (c.getNom().equalsIgnoreCase(nom)) {
+			if (c.getNom().equalsIgnoreCase(nom.trim())) {
 				index = arrayContact.indexOf(c);
 				trouve = 0;
 				contactUpdate = arrayContact.get(index);
+				System.out.println("Affichage du contact à modifier\n" + contactUpdate);
 				break;
 			}
 		}
@@ -276,7 +280,7 @@ public class User {
 
 			Scanner scannerUpdatd = new Scanner(System.in);
 			System.out.print(
-					"Quel champ voulez-vous modifier ? \nPrenom \nAdresse \nTéléphone \nEmail \nReseaux Sociaux \nProfession");
+					"\nQuel champ voulez-vous modifier ? \nPrenom \nAdresse \nTéléphone \nEmail \nReseaux Sociaux \nProfession");
 			if (contactUpdate instanceof Amis) {
 				System.out.print("\nSigne zodiaque");
 			} else if (contactUpdate instanceof Famille) {
