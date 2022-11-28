@@ -67,10 +67,12 @@ public class User {
 			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")
 					|| up.equalsIgnoreCase("signe zodiaque") || up.equalsIgnoreCase("lien parente")
 					|| up.equalsIgnoreCase("fonction")) {
+				type = premierCharMajuscule(type);
 				while (estChar(texte[texteNb]) == false) {
 					System.out.println("ERREUR: Inserez des character\n");
 					System.out.println(texte[texteNb] + " : " + (i + 1));
 					type = scannerUpdatdMod.nextLine();
+					type = premierCharMajuscule(type);
 				}
 			}
 			listeType.add(type.trim());
@@ -89,8 +91,12 @@ public class User {
 		ArrayList<String> listeRS = new ArrayList<>();
 
 		// NOM
-		System.out.println("Inserez votre " + texte[0] + ".");
+		System.out.println("Inserez votre " + texte[0] + ":");
 		String nom = scanner.nextLine();
+		// Premier caractère Majuscule
+		nom = premierCharMajuscule(nom);
+
+		// CONTROLE SI STRING
 		if (estChar(nom) == false) {
 			System.out.println("ERREUR: Inserez des character\n");
 			return ajouterContact();
@@ -124,8 +130,12 @@ public class User {
 		// PROFESSION
 		Scanner scannerProfession = new Scanner(System.in);
 		System.out.println("Inserez votre " + texte[6] + ":");
-		String profession = scannerProfession.nextLine();
 
+		String profession = scannerProfession.nextLine();
+		// Premier caractère Majuscule
+		profession = premierCharMajuscule(profession);
+
+		// NOUVELLE CONTACT
 		Contact c = new Contact(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,
 				profession.trim());
 		ordre();
@@ -137,11 +147,11 @@ public class User {
 
 		ArrayList<Integer> index = new ArrayList<>();
 
-		switch (typeRecherche.toLowerCase().trim()) {
+		switch (typeRecherche) {
 
 		case "nom":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche.trim())) {
+				if (c.getNom().startsWith(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -149,7 +159,7 @@ public class User {
 
 		case "prenom":
 			for (Contact c : arrayContact) {
-				if (c.getPrenom().equals(stringRecherche.trim())) {
+				if (c.getPrenom().contains(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -158,7 +168,7 @@ public class User {
 
 		case "adresse":
 			for (Contact c : arrayContact) {
-				if (c.getAdresse().startsWith(stringRecherche.trim())) {
+				if (c.getAdresse().startsWith(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -166,7 +176,7 @@ public class User {
 
 		case "telephone":
 			for (Contact c : arrayContact) {
-				if (c.getTelephone().equals(stringRecherche.trim())) {
+				if (c.getTelephone().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -174,7 +184,7 @@ public class User {
 
 		case "reseau sociaux ":
 			for (Contact c : arrayContact) {
-				if (c.getReseauxSociaux().equals(stringRecherche.trim())) {
+				if (c.getReseauxSociaux().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -182,7 +192,7 @@ public class User {
 
 		case "email":
 			for (Contact c : arrayContact) {
-				if (c.getEmail().equals(stringRecherche.trim())) {
+				if (c.getEmail().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -190,7 +200,7 @@ public class User {
 
 		case "e-mail":
 			for (Contact c : arrayContact) {
-				if (c.getEmail().equals(stringRecherche.trim())) {
+				if (c.getEmail().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -198,7 +208,7 @@ public class User {
 
 		case "profession":
 			for (Contact c : arrayContact) {
-				if (c.getProfession().startsWith(stringRecherche.trim())) {
+				if (c.getProfession().startsWith(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -207,7 +217,7 @@ public class User {
 		case "signe zodiacal":
 			for (Contact c : arrayContact) {
 				Amis a = (Amis) c;
-				if (a.getSigneZodiacal().startsWith(stringRecherche.trim())) {
+				if (a.getSigneZodiacal().startsWith(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -215,7 +225,7 @@ public class User {
 		case "lien parental":
 			for (Contact c : arrayContact) {
 				Famille f = (Famille) c;
-				if (f.getLienParent().startsWith(stringRecherche.trim())) {
+				if (f.getLienParent().contains(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -224,7 +234,7 @@ public class User {
 		case "fonction":
 			for (Contact c : arrayContact) {
 				Professionnel p = (Professionnel) c;
-				if (p.getFonction().startsWith(stringRecherche.trim())) {
+				if (p.getFonction().contains(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -280,15 +290,15 @@ public class User {
 
 			Scanner scannerUpdatd = new Scanner(System.in);
 			System.out.print(
-					"\nQuel champ voulez-vous modifier ? \nPrenom \nAdresse \nTéléphone \nEmail \nReseaux Sociaux \nProfession");
+					"\nQuel champ voulez-vous modifier ? \n- Prenom \n- Adresse \n- Téléphone \n- E-mail \n- Reseaux Sociaux \n- Profession");
 			if (contactUpdate instanceof Amis) {
-				System.out.print("\nSigne zodiaque");
+				System.out.print("\n- Signe zodiaque");
 			} else if (contactUpdate instanceof Famille) {
-				System.out.print("\nLien parenté");
+				System.out.print("\n- Lien parenté");
 			} else if (contactUpdate instanceof Professionnel) {
-				System.out.print("\nFonction");
+				System.out.print("\n- Fonction");
 			}
-			System.out.print("\nSortie");
+			System.out.print("\n\n- SORTIE");
 			System.out.println();
 			String up = scannerUpdatd.nextLine();
 
@@ -400,6 +410,13 @@ public class User {
 			arrayContact.removeAll(arrayContact);
 			System.out.println("\nGestionnaire vidé");
 		}
+	}
+
+// PREMIER CARACTERE MAJUSCULE
+	public static String premierCharMajuscule(String string) {
+
+		string = string.substring(0, 1).toUpperCase() + string.substring(1);
+		return string;
 	}
 
 // ORDRE GESTIONNAIRE

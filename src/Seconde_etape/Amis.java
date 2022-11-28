@@ -21,6 +21,7 @@ public class Amis extends Contact {
 
 	@Override
 	public String toString() {
-		return super.toString() + "\n signe zodiacal: " + signeZodiacal + '\n';
+		return super.toString() + "\n Signe zodiacal: " + signeZodiacal
+				+ "\n----------------------------------------\n";
 	}
 }

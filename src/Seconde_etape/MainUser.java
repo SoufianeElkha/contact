@@ -11,7 +11,7 @@ public class MainUser {
 		while (true) {
 			// TEXTE MENU
 			System.out.println(
-					"\n\t MENU: 1-2-3-4-5-6-7\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
+					"---------------------------------------------------\n\t MENU: 1-2-3-4-5-6-7\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
 							+ "\n [4] Modification d’un contact \n [5] Recherche d’un contact  \n [6] Suppression touts les contacts \n [7] Sortie Gestionnaire");
 
 			String actionString = scannerMain.nextLine();
@@ -45,7 +45,7 @@ public class MainUser {
 						String signeZodiac = scannerMain2.nextLine();
 
 						u.appendAmis(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
-								c.getReseauxSociaux(), c.getProfession(), signeZodiac);
+								c.getReseauxSociaux(), c.getProfession(), signeZodiac.trim());
 
 					}
 					// TYPE FAMILLE
@@ -56,7 +56,7 @@ public class MainUser {
 						String lienParent = scannerMain2.nextLine();
 
 						u.appendFamille(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
-								c.getReseauxSociaux(), c.getProfession(), lienParent);
+								c.getReseauxSociaux(), c.getProfession(), lienParent.trim());
 
 					}
 					// TYPE PROFESSIONNEL
@@ -67,7 +67,7 @@ public class MainUser {
 						String fonction = scannerMain2.nextLine();
 
 						u.appendProfessionnel(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
-								c.getReseauxSociaux(), c.getProfession(), fonction);
+								c.getReseauxSociaux(), c.getProfession(), fonction.trim());
 
 					}
 					// ERROR TYPE
@@ -94,7 +94,7 @@ public class MainUser {
 						System.out.println("Quel nom de contact voulez-vous supprime ? ");
 
 						String nomSupprime = scannerSupprime.nextLine();
-						u.supprimeContact(nomSupprime);
+						u.supprimeContact(nomSupprime.trim());
 					}
 					break;
 //Modification d’un contact
@@ -105,7 +105,7 @@ public class MainUser {
 						Scanner scannerUpdateC = new Scanner(System.in);
 						System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
 						String nomUpdate = scannerUpdateC.nextLine();
-						u.modificationContact(nomUpdate);
+						u.modificationContact(nomUpdate.trim());
 					}
 					break;
 //Recherche d’un contact
@@ -123,8 +123,8 @@ public class MainUser {
 						String typeRecherche = scannerRecherche.nextLine();
 
 						System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
-						String nomFind = scannerRechercheType.nextLine();
-						u.rechercheContact(typeRecherche, nomFind);
+						String stringRecherche = scannerRechercheType.nextLine();
+						u.rechercheContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
 					}
 
 					break;
@@ -136,9 +136,9 @@ public class MainUser {
 
 					String allSupprime = scannerSupprime1.nextLine();
 
-					if (allSupprime.equalsIgnoreCase("oui") || allSupprime.equalsIgnoreCase("o")) {
+					if (allSupprime.equalsIgnoreCase("oui".trim()) || allSupprime.equalsIgnoreCase("o")) {
 						u.supprimeAllContact(allSupprime);
-					} else if (allSupprime.equalsIgnoreCase("non") || allSupprime.equalsIgnoreCase("n")) {
+					} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
 						System.out.println("Suppression annulée");
 						continue;
 					}
