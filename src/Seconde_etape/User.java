@@ -9,7 +9,7 @@ public class User {
 
 	// Texte generale
 	String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession",
-			"signe zodiaque", "lien parenté", "fonction" };
+			"signe zodiaque", "lien parente", "fonction", "sortie" };
 
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
@@ -39,6 +39,9 @@ public class User {
 		arrayContact.add(professionnel);
 	}
 
+// RECHERCHE NOM SI EXISTE
+// @ param: String nom a cherche
+// @ return true si trove
 	public static boolean existe(String nomExiste) {
 		for (Contact c : arrayContact) {
 			if (c.getNom().equals(nomExiste)) {
@@ -109,8 +112,8 @@ public class User {
 			listeTelephone.add(telephone);
 		}
 
-		// MAIL
-		System.out.println("Inserez votre mail. Combien ?");
+		// E-MAIL
+		System.out.println("Inserez votre e-mail. Combien ?");
 		int nbMail = scanner.nextInt();
 
 		for (int i = 0; i < nbMail; i++) {
@@ -145,16 +148,16 @@ public class User {
 // AFFICHAGE
 	public void printContact() {
 
-		System.out.println("Affichage contacts");
-		for (Contact c : arrayContact) {
-			System.out.println("\n" + c + "\n");
-		}
+		System.out.println("\nAffichage contacts");
+		for (Contact c : arrayContact)
+			System.out.println(c);
 	}
 
 // CLEAN CONTACT
 	public void supprimeContact(String nom) {
 		if (arrayContact.isEmpty()) {
 			System.out.println("ERROR: Gestionnaire Vide");
+			// RECHERCHE CONTACT SI EXISTE
 		} else if (existe(nom)) {
 			int indice = 0;
 			for (Contact c : arrayContact) {
@@ -163,9 +166,9 @@ public class User {
 				}
 			}
 			arrayContact.remove(indice);
-			System.out.println("\nContact supprimé");
+			System.out.println("\nContact " + nom + " supprimé");
 		} else {
-			System.out.println("ERROR: Contact non trouvé");
+			System.out.println("ERROR: Contact " + nom + " non trouvé");
 
 		}
 	}
@@ -197,7 +200,7 @@ public class User {
 			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")) {
 				while (estChar(texte[texteNb]) == false) {
 					System.out.println("ERREUR: Inserez des character\n");
-					System.out.println("Prenom : " + (i + 1));
+					System.out.println(texte[texteNb] + " : " + (i + 1));
 					type = scannerUpdatdMod.nextLine();
 				}
 			}
@@ -279,7 +282,7 @@ public class User {
 
 		default:
 			System.out.println("ERROR: erreur choix");
-			;
+
 		}
 
 		for (int j = 0; j <= index.size() - 1; j++) {
@@ -293,7 +296,7 @@ public class User {
 	}
 
 // MODIFICATION CONTACT
-// Return nouveau contact modifié
+// @ return nouveau contact modifié
 	public Contact modificationContact(String nom) {
 
 		ArrayList<String> listePrenom = new ArrayList<>();
@@ -400,11 +403,12 @@ public class User {
 					p.setFonction(fonction);
 				}
 			}
-			if (up.equalsIgnoreCase("Sortie")) {
+			// SORTIE
+			if (up.equalsIgnoreCase(texte[10])) {
 				System.out.println("\nSortie Modification");
 			}
 		}
-
+		// ORDRE GESTIONNALE
 		ordre();
 		return contactUpdate;
 
@@ -433,7 +437,7 @@ public class User {
 	}
 
 // CONTROLE SI EST UNE CARACTERE ALPHABETIQUE
-// Return True or FALSE
+// @ Rreturn True or FALSE
 	public static boolean estChar(String s) {
 		if (s == null) {
 			return false;

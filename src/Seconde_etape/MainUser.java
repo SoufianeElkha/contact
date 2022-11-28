@@ -11,7 +11,7 @@ public class MainUser {
 		while (true) {
 			// TEXTE MENU
 			System.out.println(
-					"\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
+					"\t MENU: 1-2-3-4-5-6-7\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
 							+ "\n [4] Modification d’un contact \n [5] Recherche d’un contact  \n [6] Suppression touts les contacts \n [7] Sortie Gestionnaire");
 
 			String actionString = scannerMain.nextLine();
@@ -70,7 +70,7 @@ public class MainUser {
 								c.getReseauxSociaux(), c.getProfession(), fonction);
 
 					} else {
-						System.out.println("Inserez le type correct!\n");
+						System.out.println("ERROR: Inserez le type correct!\n");
 					}
 
 					break;
