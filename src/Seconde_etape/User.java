@@ -39,47 +39,6 @@ public class User {
 		arrayContact.add(professionnel);
 	}
 
-// RECHERCHE NOM SI EXISTE
-// @ param: String nom a cherche
-// @ return true si trove
-	public static boolean existe(String nomExiste) {
-		for (Contact c : arrayContact) {
-			if (c.getNom().equals(nomExiste)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-// SET & MODIFICATION
-	public static ArrayList<String> setTypeContact(ArrayList<String> listeType, String up, int texteNb) {
-
-		Scanner scannerUpdatdNb = new Scanner(System.in);
-
-		System.out.println("Combien de " + texte[texteNb] + " ? ");
-		int nbType = scannerUpdatdNb.nextInt();
-
-		for (int i = 0; i < nbType; i++) {
-			Scanner scannerUpdatdMod = new Scanner(System.in);
-			System.out.println(texte[texteNb] + ": " + (i + 1));
-			String type = scannerUpdatdMod.nextLine();
-
-			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")
-					|| up.equalsIgnoreCase("signe zodiaque") || up.equalsIgnoreCase("lien parente")
-					|| up.equalsIgnoreCase("fonction")) {
-				type = premierCharMajuscule(type);
-				while (estChar(type) == false) {
-					System.out.println("ERREUR: Inserez des character\n");
-					System.out.println(texte[texteNb] + " : " + (i + 1));
-					type = scannerUpdatdMod.nextLine();
-					type = premierCharMajuscule(type);
-				}
-			}
-			listeType.add(type.trim());
-		}
-		return listeType;
-	}
-
 // AJOUTER CONTACT
 	public static Contact ajouterContact() {
 		// Initialisation variables insert contact
@@ -375,14 +334,6 @@ public class User {
 
 	}
 
-// AFFICHAGE
-	public void printContact() {
-
-		System.out.println("\nAffichage contacts");
-		for (Contact c : arrayContact)
-			System.out.println(c);
-	}
-
 // CLEAN CONTACT
 	public void supprimeContact(String nom) {
 
@@ -434,13 +385,33 @@ public class User {
 		}
 	}
 
+// AFFICHAGE
+	public void printContact() {
+
+		System.out.println("\nAffichage contacts");
+		for (Contact c : arrayContact)
+			System.out.println(c);
+	}
+
+// RECHERCHE NOM SI EXISTE
+// @ param: String nom a cherche
+// @ return true si trove
+	public static boolean existe(String nomExiste) {
+		for (Contact c : arrayContact) {
+			if (c.getNom().equals(nomExiste)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+// CONTROLE SI EST UNE NOMBRE
 	public static boolean estNb(String nb) {
 		boolean controle = (nb != null && nb.matches("(\\+)?[0-9]+$"));
 		return controle;
 	}
 
 // CONTROLE SI EST UNE CARACTERE ALPHABETIQUE
-// @ return true si est une char/string
 	public static boolean estChar(String s) {
 		if (s == null) {
 			return false;
@@ -454,4 +425,32 @@ public class User {
 		return true;
 	}
 
+//SET & MODIFICATION
+	public static ArrayList<String> setTypeContact(ArrayList<String> listeType, String up, int texteNb) {
+
+		Scanner scannerUpdatdNb = new Scanner(System.in);
+
+		System.out.println("Combien de " + texte[texteNb] + " ? ");
+		int nbType = scannerUpdatdNb.nextInt();
+
+		for (int i = 0; i < nbType; i++) {
+			Scanner scannerUpdatdMod = new Scanner(System.in);
+			System.out.println(texte[texteNb] + ": " + (i + 1));
+			String type = scannerUpdatdMod.nextLine();
+
+			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")
+					|| up.equalsIgnoreCase("signe zodiaque") || up.equalsIgnoreCase("lien parente")
+					|| up.equalsIgnoreCase("fonction")) {
+				type = premierCharMajuscule(type);
+				while (estChar(type) == false) {
+					System.out.println("ERREUR: Inserez des character\n");
+					System.out.println(texte[texteNb] + " : " + (i + 1));
+					type = scannerUpdatdMod.nextLine();
+					type = premierCharMajuscule(type);
+				}
+			}
+			listeType.add(type.trim());
+		}
+		return listeType;
+	}
 }
