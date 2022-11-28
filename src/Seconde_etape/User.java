@@ -8,7 +8,7 @@ public class User {
 	public static ArrayList<Contact> arrayContact = new ArrayList<>();
 
 	// Texte generale
-	String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession",
+	static String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession",
 			"signe zodiaque", "lien parente", "fonction", "sortie" };
 
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
@@ -51,19 +51,43 @@ public class User {
 		return false;
 	}
 
+	// MODIFICATION
+	public static ArrayList<String> setTypeContact(ArrayList<String> listeType, String up, int texteNb) {
+
+		Scanner scannerUpdatdNb = new Scanner(System.in);
+
+		System.out.println("Combien de " + texte[texteNb] + " ? ");
+		int nbType = scannerUpdatdNb.nextInt();
+
+		for (int i = 0; i < nbType; i++) {
+			Scanner scannerUpdatdMod = new Scanner(System.in);
+			System.out.println(texte[texteNb] + ": " + (i + 1));
+			String type = scannerUpdatdMod.nextLine();
+
+			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")) {
+				while (estChar(texte[texteNb]) == false) {
+					System.out.println("ERREUR: Inserez des character\n");
+					System.out.println(texte[texteNb] + " : " + (i + 1));
+					type = scannerUpdatdMod.nextLine();
+				}
+			}
+			listeType.add(type);
+		}
+		return listeType;
+	}
+
 // AJOUTER CONTACT
 	public static Contact ajouterContact() {
 		// Initialisation variables insert contact
 
 		Scanner scanner = new Scanner(System.in);
-
 		ArrayList<String> listePrenom = new ArrayList<>();
 		ArrayList<String> listeTelephone = new ArrayList<>();
 		ArrayList<String> listeMail = new ArrayList<>();
 		ArrayList<String> listeRS = new ArrayList<>();
 
 		// NOM
-		System.out.println("Inserez votre nom : ");
+		System.out.println("Inserez votre " + texte[0] + ".");
 		String nom = scanner.nextLine();
 		if (estChar(nom) == false) {
 			System.out.println("ERREUR: Inserez des character\n");
@@ -76,68 +100,29 @@ public class User {
 			return ajouterContact();
 		}
 		// PRENOM
-		System.out.println("Inserez votre prenom. Combien ?");
-		int nbPrenom = scanner.nextInt();
-
-		for (int i = 0; i < nbPrenom; i++) {
-			Scanner scannerPrenom = new Scanner(System.in);
-			System.out.println("Prenom : " + (i + 1));
-			String prenom = scannerPrenom.nextLine();
-			while (estChar(prenom) == false) {
-				System.out.println("ERREUR: Inserez des character\n");
-				System.out.println("Prenom : " + (i + 1));
-				prenom = scannerPrenom.nextLine();
-			}
-
-			listePrenom.add(prenom);
-		}
+		System.out.println("Inserez votre " + texte[1] + ":");
+		setTypeContact(listePrenom, "prenom", 1);
 
 		// ADRESSE
 		Scanner scannerAdresse = new Scanner(System.in);
-		System.out.println("Inserez votre adresse : ");
+		System.out.println("Inserez votre " + texte[2] + ":");
 		String adresse = scannerAdresse.nextLine();
 
 		// TELEPHONE
-		System.out.println("Inserez votre numéro de téléphone. Combien ?");
-		int nbTelephone = scanner.nextInt();
-		for (int i = 0; i < nbTelephone; i++) {
-			Scanner scannerTelephone = new Scanner(System.in);
-			System.out.println("Téléphone : " + (i + 1));
-			String telephone = scannerTelephone.nextLine();
-			while (estNb(telephone) == false) {
-				System.out.println("ERREUR: Inserez des nombres\n");
-				System.out.println("Téléphone : " + (i + 1));
-				telephone = scannerTelephone.nextLine();
-			}
-			listeTelephone.add(telephone);
-		}
+		System.out.println("Inserez votre numero de " + texte[3] + ":");
+		setTypeContact(listeTelephone, "telephone", 3);
 
 		// E-MAIL
-		System.out.println("Inserez votre e-mail. Combien ?");
-		int nbMail = scanner.nextInt();
-
-		for (int i = 0; i < nbMail; i++) {
-			Scanner scannerEmail = new Scanner(System.in);
-			System.out.println("E-mail : " + (i + 1));
-			String mail = scannerEmail.nextLine();
-			listeMail.add(mail);
-		}
+		System.out.println("Inserez votre " + texte[4] + ":");
+		setTypeContact(listeMail, texte[4], 4);
 
 		// RESEAUX SOCIAUX
-		System.out.println("Inserez votre réseau social. Combien ?");
-
-		int nbRS = scanner.nextInt();
-
-		for (int i = 0; i < nbRS; i++) {
-			Scanner scannerRS = new Scanner(System.in);
-			System.out.println("Réseau social : " + (i + 1));
-			String rs = scannerRS.nextLine();
-			listeRS.add(rs);
-		}
+		System.out.println("Inserez votre " + texte[5] + ":");
+		setTypeContact(listeRS, texte[5], 5);
 
 		// PROFESSION
 		Scanner scannerProfession = new Scanner(System.in);
-		System.out.println("Inserez votre profession : ");
+		System.out.println("Inserez votre " + texte[6] + ":");
 		String profession = scannerProfession.nextLine();
 
 		Contact c = new Contact(nom, listePrenom, adresse, listeTelephone, listeMail, listeRS, profession);
@@ -182,31 +167,6 @@ public class User {
 			System.out.println("\nGestionnaire vidé");
 		}
 
-	}
-
-// MODIFICATION
-	public ArrayList<String> modification(Contact contactUpdate, ArrayList<String> listeType, String up, int texteNb) {
-
-		Scanner scannerUpdatdNb = new Scanner(System.in);
-
-		System.out.println("Combien de " + texte[texteNb] + " ? ");
-		int nbType = scannerUpdatdNb.nextInt();
-
-		for (int i = 0; i < nbType; i++) {
-			Scanner scannerUpdatdMod = new Scanner(System.in);
-			System.out.println(texte[texteNb] + ": " + (i + 1));
-			String type = scannerUpdatdMod.nextLine();
-
-			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")) {
-				while (estChar(texte[texteNb]) == false) {
-					System.out.println("ERREUR: Inserez des character\n");
-					System.out.println(texte[texteNb] + " : " + (i + 1));
-					type = scannerUpdatdMod.nextLine();
-				}
-			}
-			listeType.add(type);
-		}
-		return listeType;
 	}
 
 // RECHERCHE
@@ -343,7 +303,7 @@ public class User {
 
 			// MODIFICATION PRENOM
 			if (up.equalsIgnoreCase(texte[1])) {
-				contactUpdate.setPrenom(modification(contactUpdate, listePrenom, up, 1));
+				contactUpdate.setPrenom(setTypeContact(listePrenom, up, 1));
 			}
 
 			// MODIFICATION ADRESSE
@@ -355,17 +315,17 @@ public class User {
 
 			// MODIFICATION TELEPHONE
 			if (up.equalsIgnoreCase(texte[3])) {
-				contactUpdate.setTelephone(modification(contactUpdate, listeTelephone, up, 3));
+				contactUpdate.setTelephone(setTypeContact(listeTelephone, up, 3));
 			}
 
 			// MODIFICATION EMAIL
 			if (up.equalsIgnoreCase("E-mail") || up.equalsIgnoreCase(texte[4])) {
-				contactUpdate.setEmail(modification(contactUpdate, listeEmail, up, 4));
+				contactUpdate.setEmail(setTypeContact(listeEmail, up, 4));
 			}
 
 			// MODIFICATION RESEAUX SOCIAUX
 			if (up.equalsIgnoreCase(texte[5])) {
-				contactUpdate.setReseauxSociaux(modification(contactUpdate, listeRS, up, 5));
+				contactUpdate.setReseauxSociaux(setTypeContact(listeRS, up, 5));
 			}
 
 			// MODIFICATION PROFESSION
