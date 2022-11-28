@@ -1,8 +1,10 @@
-1 Première étape : les bases du gestionnaire de contacts
-2 Seconde étape : 
-Rappresentation de Menu:
+##Projet POO
+1. Première étape :  Les bases du gestionnaire de contacts
 
+2. Seconde étape :   Héritage et polymorphisme
 
+```java
+    MENU: 1-2-3-4-5-6-7
 Que voulez-vous faire : 
 
 [1]Insertion d'un nouveau contact
@@ -19,3 +21,4 @@ Que voulez-vous faire :
 
 [7]Suppression touts les contacts 
 
+```
