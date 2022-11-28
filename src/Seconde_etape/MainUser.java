@@ -11,7 +11,7 @@ public class MainUser {
 		while (true) {
 			// TEXTE MENU
 			System.out.println(
-					"\t MENU: 1-2-3-4-5-6-7\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
+					"\n\t MENU: 1-2-3-4-5-6-7\nQue voulez-vous faire : \n [1] Insertion d’un nouveau contact \n [2] Affichage des contacts \n [3] Suppression d’un contact"
 							+ "\n [4] Modification d’un contact \n [5] Recherche d’un contact  \n [6] Suppression touts les contacts \n [7] Sortie Gestionnaire");
 
 			String actionString = scannerMain.nextLine();
@@ -28,17 +28,17 @@ public class MainUser {
 
 					Scanner scannerMain2 = new Scanner(System.in);
 					System.out.println(
-							"Quel type de contact voulez-vous ajouter ? \n\t- Standard \n\t- Amis \n\t- Famille \n\t- Professionnel");
+							"Quel type de contact voulez-vous ajouter ? \n\t- Standard [S]\n\t- Amis [A]\n\t- Famille [F]\n\t- Professionnel [P]");
 
 					String typeContact = scannerMain2.nextLine();
 					// TYPE STANDARD
-					if (typeContact.equalsIgnoreCase("standard")) {
+					if (typeContact.equalsIgnoreCase("standard") || typeContact.equalsIgnoreCase("s")) {
 						Contact c = User.ajouterContact();
 						u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 								c.getReseauxSociaux(), c.getProfession());
 					}
 					// TYPE AMIS
-					else if (typeContact.equalsIgnoreCase("amis")) {
+					else if (typeContact.equalsIgnoreCase("amis") || typeContact.equalsIgnoreCase("a")) {
 						Contact c = User.ajouterContact();
 						// SIGNE ZODIAC
 						System.out.println("Inserez votre signe zodiaque : ");
@@ -49,7 +49,7 @@ public class MainUser {
 
 					}
 					// TYPE FAMILLE
-					else if (typeContact.equalsIgnoreCase("famille")) {
+					else if (typeContact.equalsIgnoreCase("famille") || typeContact.equalsIgnoreCase("f")) {
 						Contact c = User.ajouterContact();
 						// LIEN PARENT
 						System.out.println("Inserez votre lien de parentée : ");
@@ -60,7 +60,7 @@ public class MainUser {
 
 					}
 					// TYPE PROFESSIONNEL
-					else if (typeContact.equalsIgnoreCase("professionnel")) {
+					else if (typeContact.equalsIgnoreCase("professionnel") || typeContact.equalsIgnoreCase("p")) {
 						Contact c = User.ajouterContact();
 						// FONCTION
 						System.out.println("Inserez votre fonction : ");
@@ -69,7 +69,9 @@ public class MainUser {
 						u.appendProfessionnel(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 								c.getReseauxSociaux(), c.getProfession(), fonction);
 
-					} else {
+					}
+					// ERROR TYPE
+					else {
 						System.out.println("ERROR: Inserez le type correct!\n");
 					}
 
@@ -108,6 +110,7 @@ public class MainUser {
 					System.out.println(
 							"\nVoulez-vous faire une recherche par?: \n Nom \n Prenom \n Adresse \n Telephone \n E-mail \n Reseau Sociaux \n Profession:");
 					String typeRecherche = scannerRecherche.nextLine();
+
 					System.out.println("Quel contact voulez-vous recherche ? ");
 					String nomFind = scannerRechercheType.nextLine();
 					u.rechercheContact(typeRecherche, nomFind);
@@ -117,14 +120,14 @@ public class MainUser {
 				case 6:
 
 					Scanner scannerSupprime1 = new Scanner(System.in);
-					System.out.println("Voulez-vous supprime touts la liste ? oui/non ");
+					System.out.println("Voulez-vous supprime touts la liste ? [oui/non] ");
 
 					String allSupprime = scannerSupprime1.nextLine();
 
-					if (allSupprime.equalsIgnoreCase("oui")) {
+					if (allSupprime.equalsIgnoreCase("oui") || allSupprime.equalsIgnoreCase("o")) {
 						u.supprimeAllContact(allSupprime);
-					} else if (allSupprime.equalsIgnoreCase("non")) {
-						System.out.println("Commande annulé");
+					} else if (allSupprime.equalsIgnoreCase("non") || allSupprime.equalsIgnoreCase("n")) {
+						System.out.println("Suppression annulée");
 						continue;
 					}
 

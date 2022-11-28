@@ -98,7 +98,8 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return "Contact [nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", telephone=" + telephone
-				+ ", email=" + email + ", reseauxSociaux=" + reseauxSociaux + ", profession=" + profession + "]";
+		return "Contact:" + "\n" + "nom: " + nom + ", prenom: " + prenom + ", adresse: " + adresse + ", telephone: "
+				+ telephone + ", email: " + email + ", reseaux sociaux: " + reseauxSociaux + ", profession: "
+				+ profession;
 	}
 }

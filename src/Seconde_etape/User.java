@@ -18,9 +18,9 @@ public class User {
 	}
 
 	public void appendAmis(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
-			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String singeZodiac) {
+			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String signeZodiac) {
 
-		Contact amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, singeZodiac);
+		Contact amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, signeZodiac);
 		arrayContact.add(amis);
 	}
 
@@ -95,7 +95,7 @@ public class User {
 		}
 		// CONTROLE
 		if (existe(nom)) {
-			System.out.println("Le nom existe");
+			System.out.println("ERROR: Le nom existe");
 			return ajouterContact();
 		}
 		// PRENOM
