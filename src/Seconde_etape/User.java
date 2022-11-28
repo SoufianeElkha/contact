@@ -444,7 +444,7 @@ public class User {
 	 * CONTROLE SI EST UNE NOMBRE
 	 * 
 	 * @param nb
-	 * @return
+	 * @return true si est une nombre
 	 */
 	public static boolean estNb(String nb) {
 		boolean controle = (nb != null && nb.matches("(\\+)?[0-9]+$"));
