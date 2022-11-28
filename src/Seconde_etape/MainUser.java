@@ -28,7 +28,7 @@ public class MainUser {
 
 					Scanner scannerMain2 = new Scanner(System.in);
 					System.out.println(
-							"Quel type de contact voulez-vous ajouter ? \n\t- Standard [S]\n\t- Amis [A]\n\t- Famille [F]\n\t- Professionnel [P]");
+							"Quel type de contact voulez-vous ajouter ? \n\t- [S] Standard \n\t- [A] Amis \n\t- [F] Famille \n\t- [P] Professionnel");
 
 					String typeContact = scannerMain2.nextLine();
 					// TYPE STANDARD
@@ -78,42 +78,54 @@ public class MainUser {
 					break;
 //Affichage des contacts
 				case 2:
-					u.printContact();
+					if (u.arrayContact.isEmpty()) {
+						System.out.println("ERROR: Gestionnaire Vide");
+					} else {
+						u.printContact();
+					}
 
 					break;
 //Suppression d’un contact
 				case 3:
+					if (u.arrayContact.isEmpty()) {
+						System.out.println("ERROR: Gestionnaire Vide");
+					} else {
+						Scanner scannerSupprime = new Scanner(System.in);
+						System.out.println("Quel nom de contact voulez-vous supprime ? ");
 
-					Scanner scannerSupprime = new Scanner(System.in);
-					System.out.println("Quel nom de contact voulez-vous supprime ? ");
-
-					String nomSupprime = scannerSupprime.nextLine();
-					u.supprimeContact(nomSupprime);
-
+						String nomSupprime = scannerSupprime.nextLine();
+						u.supprimeContact(nomSupprime);
+					}
 					break;
 //Modification d’un contact
 				case 4:
-
-					Scanner scannerUpdateC = new Scanner(System.in);
-					System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
-					String nomUpdate = scannerUpdateC.nextLine();
-					u.modificationContact(nomUpdate);
-
+					if (u.arrayContact.isEmpty()) {
+						System.out.println("ERROR: Gestionnaire Vide");
+					} else {
+						Scanner scannerUpdateC = new Scanner(System.in);
+						System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
+						String nomUpdate = scannerUpdateC.nextLine();
+						u.modificationContact(nomUpdate);
+					}
 					break;
 //Recherche d’un contact
 				case 5:
+					if (u.arrayContact.isEmpty()) {
+						System.out.println("ERROR: Gestionnaire Vide");
+					} else {
 
-					Scanner scannerRecherche = new Scanner(System.in);
-					Scanner scannerRechercheType = new Scanner(System.in);
+						Scanner scannerRecherche = new Scanner(System.in);
+						Scanner scannerRechercheType = new Scanner(System.in);
 
-					System.out.println("\nRecherche d'un contact\n");
-					System.out.println(
-							"\nVoulez-vous faire une recherche par?: \n Nom \n Prenom \n Adresse \n Telephone \n E-mail \n Reseau Sociaux \n Profession:");
-					String typeRecherche = scannerRecherche.nextLine();
+						System.out.println("Recherche d'un contact");
+						System.out.println(
+								"\nVoulez-vous faire une recherche par?: \n Nom \n Prenom \n Adresse \n Telephone \n E-mail \n Reseau Sociaux \n Profession:");
+						String typeRecherche = scannerRecherche.nextLine();
 
-					System.out.println("Quel contact voulez-vous recherche ? ");
-					String nomFind = scannerRechercheType.nextLine();
-					u.rechercheContact(typeRecherche, nomFind);
+						System.out.println("Quel contact voulez-vous recherche ? ");
+						String nomFind = scannerRechercheType.nextLine();
+						u.rechercheContact(typeRecherche, nomFind);
+					}
 
 					break;
 //Suppression touts les contacts

@@ -21,6 +21,6 @@ public class Famille extends Contact {
 
 	@Override
 	public String toString() {
-		return super.toString() + " , lienParent: " + lienParent + '\n';
+		return super.toString() + "\n lienParent: " + "\t" + lienParent + '\n';
 	}
 }

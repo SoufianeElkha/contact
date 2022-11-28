@@ -21,6 +21,6 @@ public class Professionnel extends Contact {
 
 	@Override
 	public String toString() {
-		return super.toString() + " , fonction: " + fonction + '\n';
+		return super.toString() + "\n fonction: " + "\t" + fonction + '\n';
 	}
 }

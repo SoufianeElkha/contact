@@ -129,45 +129,6 @@ public class User {
 		return c;
 	}
 
-// AFFICHAGE
-	public void printContact() {
-
-		System.out.println("\nAffichage contacts");
-		for (Contact c : arrayContact)
-			System.out.println(c);
-	}
-
-// CLEAN CONTACT
-	public void supprimeContact(String nom) {
-		if (arrayContact.isEmpty()) {
-			System.out.println("ERROR: Gestionnaire Vide");
-			// RECHERCHE CONTACT SI EXISTE
-		} else if (existe(nom)) {
-			int indice = 0;
-			for (Contact c : arrayContact) {
-				if (c.getNom().equals(nom)) {
-					indice = arrayContact.indexOf(c);
-				}
-			}
-			arrayContact.remove(indice);
-			System.out.println("\nContact " + nom + " supprimé");
-		} else {
-			System.out.println("ERROR: Contact " + nom + " non trouvé");
-
-		}
-	}
-
-// CLEAN ALL CONTACT
-	public void supprimeAllContact(String nom) {
-		if (arrayContact.isEmpty()) {
-			System.out.println("ERROR: Gestionnaire Vide");
-		} else {
-			arrayContact.removeAll(arrayContact);
-			System.out.println("\nGestionnaire vidé");
-		}
-
-	}
-
 // RECHERCHE
 	public void rechercheContact(String typeRecherche, String stringRecherche) {
 
@@ -185,7 +146,7 @@ public class User {
 
 		case "prenom":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche)) {
+				if (c.getPrenom().equals(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -193,7 +154,7 @@ public class User {
 
 		case "adresse":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche)) {
+				if (c.getAdresse().startsWith(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -201,7 +162,7 @@ public class User {
 
 		case "telephone":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche)) {
+				if (c.getTelephone().equals(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -209,7 +170,7 @@ public class User {
 
 		case "reseau sociaux ":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche)) {
+				if (c.getReseauxSociaux().equals(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -217,7 +178,7 @@ public class User {
 
 		case "email":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche)) {
+				if (c.getEmail().equals(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -225,7 +186,7 @@ public class User {
 
 		case "e-mail":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche)) {
+				if (c.getEmail().equals(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -233,7 +194,7 @@ public class User {
 
 		case "profession":
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(stringRecherche)) {
+				if (c.getProfession().startsWith(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -371,6 +332,43 @@ public class User {
 		ordre();
 		return contactUpdate;
 
+	}
+
+// AFFICHAGE
+	public void printContact() {
+
+		System.out.println("\nAffichage contacts");
+		for (Contact c : arrayContact)
+			System.out.println(c);
+	}
+
+// CLEAN CONTACT
+	public void supprimeContact(String nom) {
+
+		// RECHERCHE CONTACT SI EXISTE
+		if (existe(nom)) {
+			int indice = 0;
+			for (Contact c : arrayContact) {
+				if (c.getNom().equals(nom)) {
+					indice = arrayContact.indexOf(c);
+				}
+			}
+			arrayContact.remove(indice);
+			System.out.println("\nContact " + nom + " supprimé");
+		} else {
+			System.out.println("ERROR: Contact " + nom + " non trouvé");
+
+		}
+	}
+
+// CLEAN ALL CONTACT
+	public void supprimeAllContact(String nom) {
+		if (arrayContact.isEmpty()) {
+			System.out.println("ERROR: Gestionnaire Vide");
+		} else {
+			arrayContact.removeAll(arrayContact);
+			System.out.println("\nGestionnaire vidé");
+		}
 	}
 
 // ORDRE GESTIONNAIRE
