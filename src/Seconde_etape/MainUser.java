@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 public class MainUser {
 
+	/**
+	 * MAIN
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		User u = new User();
 		Scanner scannerMain = new Scanner(System.in);

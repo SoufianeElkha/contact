@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class PetitMenu {
 
+	/**
+	 * @param action
+	 * @param u
+	 */
 	public static void menu(int action, User u) {
 
 		switch (action) {
@@ -129,7 +133,6 @@ public class PetitMenu {
 					// continue;
 				}
 			}
-
 			break;
 		// Sortie Gestionnaire
 		case 7:

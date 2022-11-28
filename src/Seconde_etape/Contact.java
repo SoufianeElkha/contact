@@ -15,6 +15,15 @@ public class Contact {
 
 	// public Contact() {}
 
+	/**
+	 * @param nom
+	 * @param prenoms
+	 * @param adresse
+	 * @param telephone
+	 * @param email
+	 * @param reseauxSociaux
+	 * @param profession
+	 */
 	public Contact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
 		this.nom = nom;
@@ -26,6 +35,10 @@ public class Contact {
 		this.profession = profession;
 	}
 
+	/**
+	 * @param nom
+	 * @param prenoms
+	 */
 	public Contact(String nom, ArrayList<String> prenoms) {
 		this.nom = nom;
 		this.prenom = prenoms;
@@ -88,6 +101,10 @@ public class Contact {
 	public static String[] texte = { "Nom:", "Prenom:", "Adresse:", "Telephone:", "E-mail:", "Reseau Sociaux:",
 			"Profession:" };
 
+	/**
+	 * @param list
+	 * @param nbTexte
+	 */
 	public void printArrayList(ArrayList<String> list, int nbTexte) {
 		int i = 1;
 		for (String elem : list) {

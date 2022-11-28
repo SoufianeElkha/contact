@@ -7,7 +7,9 @@ public class User {
 
 	public static ArrayList<Contact> arrayContact = new ArrayList<>();
 
-	// Texte generale
+	/**
+	 * Texte generale
+	 */
 	static String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession",
 			"signe zodiaque", "lien parente", "fonction", "sortie" };
 
@@ -40,6 +42,9 @@ public class User {
 	}
 
 // AJOUTER CONTACT
+	/**
+	 * @return Contact
+	 */
 	public static Contact ajouterContact() {
 		// Initialisation variables insert contact
 
@@ -102,6 +107,10 @@ public class User {
 	}
 
 // RECHERCHE
+	/**
+	 * @param typeRecherche
+	 * @param stringRecherche
+	 */
 	public void rechercheContact(String typeRecherche, String stringRecherche) {
 
 		ArrayList<Integer> index = new ArrayList<>();
@@ -216,6 +225,10 @@ public class User {
 
 // MODIFICATION CONTACT
 // @ return nouveau contact modifié
+	/**
+	 * @param nom
+	 * @return Contact modfifie
+	 */
 	public Contact modificationContact(String nom) {
 
 		ArrayList<String> listePrenom = new ArrayList<>();
@@ -334,7 +347,11 @@ public class User {
 
 	}
 
-// CLEAN CONTACT
+	/**
+	 * CLEAN CONTACT
+	 * 
+	 * @param nom
+	 */
 	public void supprimeContact(String nom) {
 
 		// RECHERCHE CONTACT SI EXISTE
@@ -353,7 +370,11 @@ public class User {
 		}
 	}
 
-// CLEAN ALL CONTACT
+	/**
+	 * CLEAN ALL CONTACT
+	 * 
+	 * @param nom
+	 */
 	public void supprimeAllContact(String nom) {
 
 		arrayContact.removeAll(arrayContact);
@@ -361,14 +382,21 @@ public class User {
 
 	}
 
-// PREMIER CARACTERE MAJUSCULE
+	/**
+	 * PREMIER CARACTERE MAJUSCULE
+	 * 
+	 * @param string
+	 * @return string avec premier lettre en majuscule
+	 */
 	public static String premierCharMajuscule(String string) {
 
 		string = string.substring(0, 1).toUpperCase() + string.substring(1);
 		return string;
 	}
 
-// ORDRE GESTIONNAIRE
+	/**
+	 * ORDRE GESTIONNAIRE
+	 */
 	public static void ordre() {
 		Contact sort;
 		for (int i = 0; i < arrayContact.size() - 1; i++) {
@@ -385,7 +413,9 @@ public class User {
 		}
 	}
 
-// AFFICHAGE
+	/**
+	 * AFFICHAGE
+	 */
 	public void printContact() {
 
 		System.out.println("\nAffichage contacts");
@@ -393,9 +423,12 @@ public class User {
 			System.out.println(c);
 	}
 
-// RECHERCHE NOM SI EXISTE
-// @ param: String nom a cherche
-// @ return true si trove
+	/**
+	 * RECHERCHE NOM SI EXISTE
+	 * 
+	 * @param nomExiste nom a cherche
+	 * @return true or false
+	 */
 	public static boolean existe(String nomExiste) {
 		for (Contact c : arrayContact) {
 			if (c.getNom().equals(nomExiste)) {
@@ -405,13 +438,23 @@ public class User {
 		return false;
 	}
 
-// CONTROLE SI EST UNE NOMBRE
+	/**
+	 * CONTROLE SI EST UNE NOMBRE
+	 * 
+	 * @param nb
+	 * @return
+	 */
 	public static boolean estNb(String nb) {
 		boolean controle = (nb != null && nb.matches("(\\+)?[0-9]+$"));
 		return controle;
 	}
 
-// CONTROLE SI EST UNE CARACTERE ALPHABETIQUE
+	/**
+	 * CONTROLE SI EST UNE CARACTERE ALPHABETIQUE
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public static boolean estChar(String s) {
 		if (s == null) {
 			return false;
@@ -425,7 +468,14 @@ public class User {
 		return true;
 	}
 
-//SET & MODIFICATION
+	/**
+	 * SET & MODIFICATION
+	 * 
+	 * @param listeType
+	 * @param up
+	 * @param texteNb
+	 * @return liste
+	 */
 	public static ArrayList<String> setTypeContact(ArrayList<String> listeType, String up, int texteNb) {
 
 		Scanner scannerUpdatdNb = new Scanner(System.in);
