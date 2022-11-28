@@ -51,7 +51,7 @@ public class User {
 		return false;
 	}
 
-	// MODIFICATION
+// SET & MODIFICATION
 	public static ArrayList<String> setTypeContact(ArrayList<String> listeType, String up, int texteNb) {
 
 		Scanner scannerUpdatdNb = new Scanner(System.in);
@@ -93,7 +93,6 @@ public class User {
 			System.out.println("ERREUR: Inserez des character\n");
 			return ajouterContact();
 		}
-
 		// CONTROLE
 		if (existe(nom)) {
 			System.out.println("Le nom existe");
@@ -101,7 +100,7 @@ public class User {
 		}
 		// PRENOM
 		System.out.println("Inserez votre " + texte[1] + ":");
-		setTypeContact(listePrenom, "prenom", 1);
+		setTypeContact(listePrenom, texte[1], 1);
 
 		// ADRESSE
 		Scanner scannerAdresse = new Scanner(System.in);
@@ -110,7 +109,7 @@ public class User {
 
 		// TELEPHONE
 		System.out.println("Inserez votre numero de " + texte[3] + ":");
-		setTypeContact(listeTelephone, "telephone", 3);
+		setTypeContact(listeTelephone, texte[3], 3);
 
 		// E-MAIL
 		System.out.println("Inserez votre " + texte[4] + ":");
@@ -397,7 +396,7 @@ public class User {
 	}
 
 // CONTROLE SI EST UNE CARACTERE ALPHABETIQUE
-// @ Rreturn True or FALSE
+// @ return true si est une char/string
 	public static boolean estChar(String s) {
 		if (s == null) {
 			return false;
