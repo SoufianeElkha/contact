@@ -150,6 +150,7 @@ public class User {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
+
 			break;
 
 		case "adresse":
@@ -191,10 +192,36 @@ public class User {
 				}
 			}
 			break;
-
 		case "profession":
 			for (Contact c : arrayContact) {
 				if (c.getProfession().startsWith(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "signe zodiacal":
+			for (Contact c : arrayContact) {
+				Amis a = (Amis) c;
+				if (a.getSingeZodiacal().startsWith(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+		case "lien parental":
+
+			for (Contact c : arrayContact) {
+				Famille f = (Famille) c;
+				if (f.getLienParent().startsWith(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "fonction":
+			for (Contact c : arrayContact) {
+				Professionnel p = (Professionnel) c;
+				if (p.getFonction().startsWith(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}

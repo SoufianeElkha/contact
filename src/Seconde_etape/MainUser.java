@@ -119,10 +119,10 @@ public class MainUser {
 
 						System.out.println("Recherche d'un contact");
 						System.out.println(
-								"\nVoulez-vous faire une recherche par?: \n Nom \n Prenom \n Adresse \n Telephone \n E-mail \n Reseau Sociaux \n Profession:");
+								"\nVoulez-vous faire une recherche par?: \n Nom \n Prenom \n Adresse \n Telephone \n E-mail \n Reseau Sociaux \n Profession \n Signe zodiacal \n lien Parental \n Fonction");
 						String typeRecherche = scannerRecherche.nextLine();
 
-						System.out.println("Quel contact voulez-vous recherche ? ");
+						System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
 						String nomFind = scannerRechercheType.nextLine();
 						u.rechercheContact(typeRecherche, nomFind);
 					}
