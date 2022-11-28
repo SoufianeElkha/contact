@@ -1,5 +1,4 @@
 1 Première étape : les bases du gestionnaire de contacts
-
 2 Seconde étape : 
 Rappresentation de Menu:
 

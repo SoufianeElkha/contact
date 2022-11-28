@@ -7,8 +7,6 @@ public class User {
 
 	public static ArrayList<Contact> arrayContact = new ArrayList<>();
 
-	String a = "ciao";
-
 	// Texte generale
 	String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession",
 			"signe zodiaque", "lien parenté", "fonction" };
