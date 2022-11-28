@@ -41,8 +41,9 @@ public class User {
 		arrayContact.add(professionnel);
 	}
 
-// AJOUTER CONTACT
 	/**
+	 * AJOUTER CONTACT
+	 * 
 	 * @return Contact
 	 */
 	public static Contact ajouterContact() {
@@ -106,8 +107,9 @@ public class User {
 		return c;
 	}
 
-// RECHERCHE
 	/**
+	 * RECHERCHE
+	 * 
 	 * @param typeRecherche
 	 * @param stringRecherche
 	 */
@@ -223,9 +225,9 @@ public class User {
 		}
 	}
 
-// MODIFICATION CONTACT
-// @ return nouveau contact modifié
 	/**
+	 * MODIFICATION CONTACT
+	 * 
 	 * @param nom
 	 * @return Contact modfifie
 	 */
@@ -453,7 +455,7 @@ public class User {
 	 * CONTROLE SI EST UNE CARACTERE ALPHABETIQUE
 	 * 
 	 * @param s
-	 * @return
+	 * @return true or false
 	 */
 	public static boolean estChar(String s) {
 		if (s == null) {

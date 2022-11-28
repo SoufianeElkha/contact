@@ -22,7 +22,7 @@ public class Famille extends Contact {
 	}
 
 	/**
-	 * @return
+	 * @return get Lien Parent
 	 */
 	public String getLienParent() {
 		return lienParent;
@@ -36,7 +36,7 @@ public class Famille extends Contact {
 	}
 
 	/**
-	 * print
+	 * print Famille
 	 */
 	@Override
 	public String toString() {
