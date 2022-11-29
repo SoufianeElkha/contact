@@ -215,15 +215,16 @@ public class User {
 			System.out.println("ERROR: erreur choix");
 
 		}
-
-		for (int j = 0; j <= index.size() - 1; j++) {
-			System.out.println();
-			System.out.println(arrayContact.get(index.get(j)));
-			System.out.println();
-		}
 		if (index.isEmpty()) {
 			System.out.println("ERROR: Contact non trouvé ");
+		} else {
+			for (int j = 0; j <= index.size() - 1; j++) {
+				System.out.println();
+				System.out.println(arrayContact.get(index.get(j)));
+				System.out.println();
+			}
 		}
+
 	}
 
 	/**
@@ -255,7 +256,7 @@ public class User {
 			}
 		}
 
-		// Vérification recherche Nom
+		// VERIFICATION RECHERCHE NOM
 		if (index == -1) {
 			System.out.println("ERROR: Nom " + nom + " non trouvé\n");
 
@@ -453,11 +454,11 @@ public class User {
 
 		System.out.println("Combien de " + texte[texteNb] + " ? ");
 		String stringNbType = scannerUpdatdNb.nextLine();
-		if (!isNumeric(stringNbType)) {
+		if (!isNumeric(stringNbType.trim())) {
 			System.out.println("ERREUR: Inserez des nombre\n");
 			setTypeContact(listeType, up, texteNb);
 		}
-		int nbType = Integer.parseInt(stringNbType);
+		int nbType = Integer.parseInt(stringNbType.trim());
 
 		for (int i = 0; i < nbType; i++) {
 			Scanner scannerUpdatdMod = new Scanner(System.in);
