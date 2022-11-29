@@ -1,4 +1,4 @@
-package Seconde_etape;
+package Troisieme_etape;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -62,7 +62,7 @@ public class User {
 		nom = premierCharMajuscule(nom);
 
 		// CONTROLE SI STRING
-		if (isNumeric(nom)) {
+		if (estChar(nom) == false) {
 			System.out.println("ERREUR: Inserez des character\n");
 			return ajouterContact();
 		}
@@ -178,7 +178,7 @@ public class User {
 
 		case "profession":
 			for (Contact c : arrayContact) {
-				if (c.getProfession().equalsIgnoreCase(stringRecherche)) {
+				if (c.getProfession().startsWith(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -187,7 +187,7 @@ public class User {
 		case "signe zodiacal":
 			for (Contact c : arrayContact) {
 				Amis a = (Amis) c;
-				if (a.getSigneZodiacal().equalsIgnoreCase(stringRecherche)) {
+				if (a.getSigneZodiacal().startsWith(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -195,7 +195,7 @@ public class User {
 		case "lien parental":
 			for (Contact c : arrayContact) {
 				Famille f = (Famille) c;
-				if (f.getLienParent().equalsIgnoreCase(stringRecherche)) {
+				if (f.getLienParent().contains(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -204,11 +204,10 @@ public class User {
 		case "fonction":
 			for (Contact c : arrayContact) {
 				Professionnel p = (Professionnel) c;
-				if (p.getFonction().equalsIgnoreCase(stringRecherche)) {
+				if (p.getFonction().contains(premierCharMajuscule(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
-
 			break;
 
 		default:
@@ -230,7 +229,7 @@ public class User {
 	 * MODIFICATION CONTACT
 	 * 
 	 * @param nom
-	 * @return Contact modifie
+	 * @return Contact modfifie
 	 */
 	public Contact modificationContact(String nom) {
 
@@ -244,11 +243,13 @@ public class User {
 
 		// GET INDICE CONTACT A MODIFIER
 		int index = -1;
+		int trouve = -1;
 		Contact contactUpdate = null;
 
 		for (Contact c : arrayContact) {
 			if (c.getNom().equalsIgnoreCase(nom.trim())) {
 				index = arrayContact.indexOf(c);
+				trouve = 0;
 				contactUpdate = arrayContact.get(index);
 				System.out.println("Affichage du contact à modifier\n" + contactUpdate);
 				break;
@@ -256,8 +257,8 @@ public class User {
 		}
 
 		// Vérification recherche Nom
-		if (index == -1) {
-			System.out.println("ERROR: Nom " + nom + " non trouvé\n");
+		if (trouve == -1) {
+			System.out.println("ERROR: Nom non trouvé\n");
 
 		} else {
 
@@ -440,6 +441,36 @@ public class User {
 	}
 
 	/**
+	 * CONTROLE SI EST UNE NOMBRE
+	 * 
+	 * @param nb
+	 * @return true si est une nombre
+	 */
+	public static boolean estNb(String nb) {
+		boolean controle = (nb != null && nb.matches("(\\+)?[0-9]+$"));
+		return controle;
+	}
+
+	/**
+	 * CONTROLE SI EST UNE CARACTERE ALPHABETIQUE
+	 * 
+	 * @param s
+	 * @return true or false
+	 */
+	public static boolean estChar(String s) {
+		if (s == null) {
+			return false;
+		}
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z')) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * SET & MODIFICATION
 	 * 
 	 * @param listeType
@@ -452,30 +483,18 @@ public class User {
 		Scanner scannerUpdatdNb = new Scanner(System.in);
 
 		System.out.println("Combien de " + texte[texteNb] + " ? ");
-		String stringNbType = scannerUpdatdNb.nextLine();
-		if (!isNumeric(stringNbType)) {
-			System.out.println("ERREUR: Inserez des nombre\n");
-			setTypeContact(listeType, up, texteNb);
-		}
-		int nbType = Integer.parseInt(stringNbType);
+		int nbType = scannerUpdatdNb.nextInt();
 
 		for (int i = 0; i < nbType; i++) {
 			Scanner scannerUpdatdMod = new Scanner(System.in);
 			System.out.println(texte[texteNb] + ": " + (i + 1));
 			String type = scannerUpdatdMod.nextLine();
 
-			if (up.equalsIgnoreCase("telephone"))
-				while (!isNumeric(type)) {
-					System.out.println("ERREUR: Inserez des nombre\n");
-					System.out.println(texte[texteNb] + " : " + (i + 1));
-					type = scannerUpdatdMod.nextLine();
-				}
-
 			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")
 					|| up.equalsIgnoreCase("signe zodiaque") || up.equalsIgnoreCase("lien parente")
 					|| up.equalsIgnoreCase("fonction")) {
 				type = premierCharMajuscule(type);
-				while (isNumeric(type)) {
+				while (estChar(type) == false) {
 					System.out.println("ERREUR: Inserez des character\n");
 					System.out.println(texte[texteNb] + " : " + (i + 1));
 					type = scannerUpdatdMod.nextLine();
@@ -486,18 +505,4 @@ public class User {
 		}
 		return listeType;
 	}
-
-	/**
-	 * @param s
-	 * @return true si est une nombre
-	 */
-	public static boolean isNumeric(String s) {
-		try {
-			Double.parseDouble(s);
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
-	}
-
 }

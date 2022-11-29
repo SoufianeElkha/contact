@@ -1,4 +1,4 @@
-package Seconde_etape;
+package Troisieme_etape;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class PetitMenu {
 	public static void menu(int action, User u) {
 
 		switch (action) {
-		// INSERTION D'UN NOUVEAU CONTACT
+		// Insertion d’un nouveau contact
 		case 1:
 
 			Scanner scannerMenu = new Scanner(System.in);
@@ -19,56 +19,52 @@ public class PetitMenu {
 					"Quel type de contact voulez-vous ajouter ? \n\t- [S] Standard \n\t- [A] Amis \n\t- [F] Famille \n\t- [P] Professionnel");
 
 			String typeContact = scannerMenu.nextLine();
+			// TYPE STANDARD
+			if (typeContact.equalsIgnoreCase("standard") || typeContact.equalsIgnoreCase("s")) {
+				Contact c = User.ajouterContact();
+				u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
+						c.getReseauxSociaux(), c.getProfession());
+			}
+			// TYPE AMIS
+			else if (typeContact.equalsIgnoreCase("amis") || typeContact.equalsIgnoreCase("a")) {
+				Contact c = User.ajouterContact();
+				// SIGNE ZODIAC
+				System.out.println("Inserez votre signe zodiaque : ");
+				String signeZodiac = scannerMenu.nextLine();
 
-			if (!User.isNumeric(typeContact)) {
+				u.appendAmis(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
+						c.getReseauxSociaux(), c.getProfession(), signeZodiac.trim());
 
-				// TYPE STANDARD
-				if (typeContact.equalsIgnoreCase("standard") || typeContact.equalsIgnoreCase("s")) {
-					Contact c = User.ajouterContact();
-					u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
-							c.getReseauxSociaux(), c.getProfession());
-				}
-				// TYPE AMIS
-				else if (typeContact.equalsIgnoreCase("amis") || typeContact.equalsIgnoreCase("a")) {
-					Contact c = User.ajouterContact();
-					// SIGNE ZODIAC
-					System.out.println("Inserez votre signe zodiaque : ");
-					String signeZodiac = scannerMenu.nextLine();
+			}
+			// TYPE FAMILLE
+			else if (typeContact.equalsIgnoreCase("famille") || typeContact.equalsIgnoreCase("f")) {
+				Contact c = User.ajouterContact();
+				// LIEN PARENT
+				System.out.println("Inserez votre lien de parentée : ");
+				String lienParent = scannerMenu.nextLine();
 
-					u.appendAmis(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
-							c.getReseauxSociaux(), c.getProfession(), signeZodiac.trim());
+				u.appendFamille(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
+						c.getReseauxSociaux(), c.getProfession(), lienParent.trim());
 
-				}
-				// TYPE FAMILLE
-				else if (typeContact.equalsIgnoreCase("famille") || typeContact.equalsIgnoreCase("f")) {
-					Contact c = User.ajouterContact();
-					// LIEN PARENT
-					System.out.println("Inserez votre lien de parentée : ");
-					String lienParent = scannerMenu.nextLine();
+			}
+			// TYPE PROFESSIONNEL
+			else if (typeContact.equalsIgnoreCase("professionnel") || typeContact.equalsIgnoreCase("p")) {
+				Contact c = User.ajouterContact();
+				// FONCTION
+				System.out.println("Inserez votre fonction : ");
+				String fonction = scannerMenu.nextLine();
 
-					u.appendFamille(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
-							c.getReseauxSociaux(), c.getProfession(), lienParent.trim());
+				u.appendProfessionnel(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
+						c.getReseauxSociaux(), c.getProfession(), fonction.trim());
 
-				}
-				// TYPE PROFESSIONNEL
-				else if (typeContact.equalsIgnoreCase("professionnel") || typeContact.equalsIgnoreCase("p")) {
-					Contact c = User.ajouterContact();
-					// FONCTION
-					System.out.println("Inserez votre fonction : ");
-					String fonction = scannerMenu.nextLine();
-
-					u.appendProfessionnel(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
-							c.getReseauxSociaux(), c.getProfession(), fonction.trim());
-
-				}
-				// ERROR TYPE
-			} else {
+			}
+			// ERROR TYPE
+			else {
 				System.out.println("ERROR: Inserez le type correct!\n");
 			}
 
 			break;
-
-		// AFFICHAGE DES CONTACTS
+		// Affichage des contacts
 		case 2:
 			if (u.arrayContact.isEmpty()) {
 				System.out.println("ERROR: Gestionnaire Vide");
@@ -77,8 +73,7 @@ public class PetitMenu {
 			}
 
 			break;
-
-		// SUPPRESSION D'UN CONTACT
+		// Suppression d’un contact
 		case 3:
 			if (u.arrayContact.isEmpty()) {
 				System.out.println("ERROR: Gestionnaire Vide");
@@ -87,17 +82,10 @@ public class PetitMenu {
 				System.out.println("Quel nom de contact voulez-vous supprime ? ");
 
 				String nomSupprime = scannerSupprime.nextLine();
-				while (User.isNumeric(nomSupprime)) {
-					System.out.println("ERREUR: Inserez des character\n");
-					System.out.println("Quel nom de contact voulez-vous supprime ? ");
-					nomSupprime = scannerSupprime.nextLine();
-				}
-				u.supprimeContact(User.premierCharMajuscule(nomSupprime).trim());
-
+				u.supprimeContact(nomSupprime.trim());
 			}
 			break;
-
-		// MODIFICATION D'UN CONTACT
+		// Modification d’un contact
 		case 4:
 			if (u.arrayContact.isEmpty()) {
 				System.out.println("ERROR: Gestionnaire Vide");
@@ -105,16 +93,10 @@ public class PetitMenu {
 				Scanner scannerUpdateC = new Scanner(System.in);
 				System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
 				String nomUpdate = scannerUpdateC.nextLine();
-				while (User.isNumeric(nomUpdate)) {
-					System.out.println("ERREUR: Inserez des character\n");
-					System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
-					nomUpdate = scannerUpdateC.nextLine();
-				}
 				u.modificationContact(nomUpdate.trim());
 			}
 			break;
-
-		// RECHERCHE D'UN CONTACT
+		// Recherche d’un contact
 		case 5:
 			if (u.arrayContact.isEmpty()) {
 				System.out.println("ERROR: Gestionnaire Vide");
@@ -134,8 +116,7 @@ public class PetitMenu {
 			}
 
 			break;
-
-		// SUPPRESSION TOUTS LES CONTACTS
+		// Suppression touts les contacts
 		case 6:
 			if (u.arrayContact.isEmpty()) {
 				System.out.println("ERROR: Gestionnaire Vide");
@@ -149,11 +130,11 @@ public class PetitMenu {
 					u.supprimeAllContact(allSupprime);
 				} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
 					System.out.println("Suppression annulée");
+					// continue;
 				}
 			}
 			break;
-
-		// SORTIE GESTIONNAIRE
+		// Sortie Gestionnaire
 		case 7:
 			System.out.println("Sortie Gestionnaire");
 			System.exit(0);

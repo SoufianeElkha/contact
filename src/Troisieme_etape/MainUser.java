@@ -1,7 +1,10 @@
-/// @author Soufiane El kharmoudi
-package Seconde_etape;
+/// @author Soufiane EL KHARMOUDI
+package Troisieme_etape;
 
 import java.util.Scanner;
+
+import Seconde_etape.PetitMenu;
+import Seconde_etape.User;
 
 public class MainUser {
 
@@ -24,7 +27,8 @@ public class MainUser {
 			String actionString = scannerMain.nextLine();
 
 			// Controle si est une nombre
-			if (User.isNumeric(actionString)) {
+			boolean estNb = (actionString != null && actionString.matches("[0-9]+"));
+			if (estNb) {
 				// Conversion String to Integer
 				int action = Integer.parseInt(actionString);
 				// Menu switch
