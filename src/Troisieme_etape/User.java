@@ -532,7 +532,7 @@ public class User {
 	 * @brief LIRE FICHIER
 	 * @param listIn
 	 */
-	public static void readData(ArrayList<Contact> listIn) {
+	public void readData(ArrayList<Contact> listIn) {
 
 		boolean endOfFile = false;
 		Contact temp;

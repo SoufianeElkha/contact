@@ -72,7 +72,6 @@ public class PetitMenu {
 			} else {
 				System.out.println("ERROR: Inserez le type correct!\n");
 			}
-			User.writeDate(User.arrayContact);
 			break;
 
 		// AFFICHAGE DES CONTACTS
@@ -88,15 +87,20 @@ public class PetitMenu {
 		case 3:
 			if (!u.isEmpty()) {
 				Scanner scannerSupprime = new Scanner(System.in);
-				System.out.println("Quel nom de contact voulez-vous supprime ? ");
+				try {
 
-				String nomSupprime = scannerSupprime.nextLine();
-				while (User.isNumeric(nomSupprime)) {
-					System.out.println("ERREUR: Inserez des character\n");
 					System.out.println("Quel nom de contact voulez-vous supprime ? ");
-					nomSupprime = scannerSupprime.nextLine();
+
+					String nomSupprime = scannerSupprime.nextLine();
+					while (User.isNumeric(nomSupprime)) {
+						System.out.println("ERREUR: Inserez des character\n");
+						System.out.println("Quel nom de contact voulez-vous supprime ? ");
+						nomSupprime = scannerSupprime.nextLine();
+					}
+					u.supprimeContact(User.premierCharMajuscule(nomSupprime).trim());
+				} catch (Exception e) {
+					scannerSupprime.close();
 				}
-				u.supprimeContact(User.premierCharMajuscule(nomSupprime).trim());
 			}
 
 			break;
@@ -105,14 +109,19 @@ public class PetitMenu {
 		case 4:
 			if (!u.isEmpty()) {
 				Scanner scannerUpdateC = new Scanner(System.in);
-				System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
-				String nomUpdate = scannerUpdateC.nextLine();
-				while (User.isNumeric(nomUpdate)) {
-					System.out.println("ERREUR: Inserez des character\n");
+				try {
+
 					System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
-					nomUpdate = scannerUpdateC.nextLine();
+					String nomUpdate = scannerUpdateC.nextLine();
+					while (User.isNumeric(nomUpdate)) {
+						System.out.println("ERREUR: Inserez des character\n");
+						System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
+						nomUpdate = scannerUpdateC.nextLine();
+					}
+					u.modificationContact(nomUpdate.trim());
+				} catch (Exception e) {
+					scannerUpdateC.close();
 				}
-				u.modificationContact(nomUpdate.trim());
 			}
 
 			break;
@@ -123,17 +132,20 @@ public class PetitMenu {
 
 				Scanner scannerRecherche = new Scanner(System.in);
 				Scanner scannerRechercheType = new Scanner(System.in);
+				try {
 
-				System.out.println("Recherche d'un contact");
-				System.out.println("\nVoulez-vous faire une recherche par?:");
-				// \n\t- Nom \n\t-
-				// Prenom \n\t- Adresse \n\t- Telephone \n\t- E-mail \n\t- Reseau Sociaux \n\t-
-				// Profession \n\t- Signe Zodiacal \n\t- Lien Parental \n\t- Fonction");
-				u.printTexte(10);
-				String typeRecherche = scannerRechercheType.nextLine();
-				System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
-				String stringRecherche = scannerRecherche.nextLine();
-				u.rechercheContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
+					System.out.println("Recherche d'un contact");
+					System.out.println("\nVoulez-vous faire une recherche par?:");
+					u.printTexte(10);
+					System.out.println();
+					String typeRecherche = scannerRechercheType.next();
+					System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
+					String stringRecherche = scannerRecherche.next();
+					u.rechercheContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
+				} catch (Exception e) {
+					scannerRecherche.close();
+					scannerRechercheType.close();
+				}
 			}
 
 			break;
@@ -142,14 +154,19 @@ public class PetitMenu {
 		case 6:
 			if (!u.isEmpty()) {
 				Scanner scannerSupprime1 = new Scanner(System.in);
-				System.out.println("Voulez-vous supprime touts la liste ? [oui/non] ");
+				try {
 
-				String allSupprime = scannerSupprime1.nextLine();
+					System.out.println("Voulez-vous supprime touts la liste ? [oui/non] ");
 
-				if (allSupprime.equalsIgnoreCase("oui".trim()) || allSupprime.equalsIgnoreCase("o")) {
-					u.supprimeAllContact(allSupprime);
-				} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
-					System.out.println("Suppression annulée");
+					String allSupprime = scannerSupprime1.nextLine();
+
+					if (allSupprime.equalsIgnoreCase("oui".trim()) || allSupprime.equalsIgnoreCase("o")) {
+						u.supprimeAllContact(allSupprime);
+					} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
+						System.out.println("Suppression annulée");
+					}
+				} catch (Exception e) {
+					scannerSupprime1.close();
 				}
 			}
 
