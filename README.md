@@ -6,7 +6,7 @@
 
 ##### 3. Troisieme étape :   Listes, Exceptions et programmation fonctionnelle
 
-### MENU
+@ MENU
 
 ```java
 ----------------------------------------------
