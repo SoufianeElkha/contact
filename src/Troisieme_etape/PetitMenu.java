@@ -134,8 +134,7 @@ public class PetitMenu {
 				Scanner scannerRechercheType = new Scanner(System.in);
 				try {
 
-					System.out.println("Recherche d'un contact");
-					System.out.println("\nVoulez-vous faire une recherche par?:");
+					System.out.print("\nVoulez-vous faire une recherche par?:");
 					u.printTexte(10);
 					System.out.println();
 					String typeRecherche = scannerRechercheType.next();

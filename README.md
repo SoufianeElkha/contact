@@ -19,7 +19,6 @@ Que voulez-vous faire :
  [7] Sortie Gestionnaire
 
 ```
-
  [1] Insertion d’un nouveau contact:
 ```java
 Quel type de contact voulez-vous ajouter ? 
@@ -29,13 +28,17 @@ Quel type de contact voulez-vous ajouter ?
 	- [P] Professionnel 
 	- [X] Sortie
 ```
-
+ [3] Suppression d’un contact
+```java
+Quel nom de contact voulez-vous supprime ? 
+```
+ [4] Modification d’un contact 
+```java
+Quel contact voulez-vous modifier ? : Entrez le nom :
+```
  [5] Recherche d’un contact:
 ```java
-Recherche d'un contact
-
 Voulez-vous faire une recherche par?:
-
 	-Nom
 	-Prenom
 	-Adresse
