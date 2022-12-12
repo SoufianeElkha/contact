@@ -48,3 +48,9 @@ Voulez-vous faire une recherche par?:
 	-Fonction
 	-Sortie
 ```
+ [6] Suppression touts les contacts 
+ ```java
+Voulez-vous supprime touts la liste ? [oui/non] 
+```
+
+
