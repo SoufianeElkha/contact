@@ -19,7 +19,7 @@ Que voulez-vous faire :
  [5] Recherche d’un contact  
  [6] Suppression touts les contacts 
  [7] Sortie Gestionnaire
-
+----------------------------------------------
 ```
 ##### [1] Insertion d’un nouveau contact:
 ```java
