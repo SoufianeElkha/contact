@@ -4,16 +4,47 @@ Projet POO
 
 2. Seconde étape :   Héritage et polymorphisme
 
+3. Troisieme étape :   Listes, Exceptions et programmation fonctionnelle
+
 ```java
-    MENU: 1-2-3-4-5-6-7
+----------------------------------------------
+	 MENU: 1-2-3-4-5-6-7
 Que voulez-vous faire : 
+ [1] Insertion d’un nouveau contact 
+ [2] Affichage des contacts 
+ [3] Suppression d’un contact
+ [4] Modification d’un contact 
+ [5] Recherche d’un contact  
+ [6] Suppression touts les contacts 
+ [7] Sortie Gestionnaire
 
-[1]Insertion d'un nouveau contact
-[2]Affichage des contacts
-[3]Suppression d'un contact
-[4]Modification d'un contact
-[5]Recherche d'un contact 
-[6]Suppression touts les contacts 
-[7]Sortie Gestionnaire
+```
 
+ [1] Insertion d’un nouveau contact:
+```java
+Quel type de contact voulez-vous ajouter ? 
+	- [S] Standard 
+	- [A] Amis 
+	- [F] Famille 
+	- [P] Professionnel 
+	- [X] Sortie
+```
+
+ [5] Recherche d’un contact:
+```java
+Recherche d'un contact
+
+Voulez-vous faire une recherche par?:
+
+	-Nom
+	-Prenom
+	-Adresse
+	-Telephone
+	-Email
+	-Reseau sociaux
+	-Profession
+	-Signe zodiaque
+	-Lien parente
+	-Fonction
+	-Sortie
 ```
