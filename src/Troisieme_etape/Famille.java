@@ -40,7 +40,6 @@ public class Famille extends Contact {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + "\n LienParent: " + "\t" + lienParent
-				+ "\n----------------------------------------\n";
+		return super.toString() + "\n LienParent: " + "\t" + lienParent;
 	}
 }
