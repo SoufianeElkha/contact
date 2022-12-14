@@ -1,30 +1,11 @@
 package Troisieme_etape;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User {
 
 	public static ArrayList<Contact> arrayContact = new ArrayList<>();
-
-	// path database
-	private static String database = "data/database.txt";
-
-	// Texte generale
-	public static String[] texte = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux", "profession",
-			"signe zodiaque", "lien parente", "fonction", "sortie" };
-
-	public void printTexte(int nb) {
-		for (int i = 0; i <= nb; i++)
-			System.out.print("\n\t-" + premierCharMajuscule(texte[i]));
-	}
 
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
@@ -56,10 +37,11 @@ public class User {
 
 	/**
 	 * 
+	 * @param texteBiographiques
 	 * @brief AJOUTER CONTACT
 	 * @return Contact
 	 */
-	public static Contact ajouterContact() {
+	public static Contact newContact(String[] texteBiographiques) {
 		// Initialisation variables insert contact
 
 		Scanner scanner = new Scanner(System.in);
@@ -69,54 +51,54 @@ public class User {
 		ArrayList<String> listeRS = new ArrayList<>();
 
 		// NOM
-		System.out.println("Inserez votre " + texte[0] + ":");
+		System.out.println("Inserez votre " + texteBiographiques[0] + ":");
 		// String nom = scanner.nextLine();
 		// Premier caractère Majuscule
-		String nom = premierCharMajuscule(scanner.nextLine());
+		String nom = firstCharUpperCase(scanner.nextLine());
 
 		// CONTROLE SI STRING
 		if (isNumeric(nom)) {
 			System.out.println("ERREUR: Inserez des character\n");
-			return ajouterContact();
+			return newContact(texteBiographiques);
 		}
-		// CONTROLE SI NOM EXISTE
-		if (existe(nom)) {
-			System.out.println("ERROR: Le nom '" + nom + "' existe déjà dans la liste.");
-			return ajouterContact();
+		// CONTROLE SI NOM existContact
+		if (existContact(nom)) {
+			System.out.println("ERROR: Le nom '" + nom + "' existContact déjà dans la liste.");
+			return newContact(texteBiographiques);
 		}
 		// PRENOM
-		System.out.println("Inserez votre " + texte[1] + ":");
-		setTypeContact(listePrenom, texte[1], 1);
+		System.out.println("Inserez votre " + texteBiographiques[1] + ":");
+		setTypeContact(listePrenom, texteBiographiques[1], 1, texteBiographiques);
 
 		// ADRESSE
 		Scanner scannerAdresse = new Scanner(System.in);
-		System.out.println("Inserez votre " + texte[2] + ":");
+		System.out.println("Inserez votre " + texteBiographiques[2] + ":");
 		String adresse = scannerAdresse.nextLine();
 
 		// TELEPHONE
-		System.out.println("Inserez votre numero de " + texte[3] + ":");
-		setTypeContact(listeTelephone, texte[3], 3);
+		System.out.println("Inserez votre numero de " + texteBiographiques[3] + ":");
+		setTypeContact(listeTelephone, texteBiographiques[3], 3, texteBiographiques);
 
 		// E-MAIL
-		System.out.println("Inserez votre " + texte[4] + ":");
-		setTypeContact(listeMail, texte[4], 4);
+		System.out.println("Inserez votre " + texteBiographiques[4] + ":");
+		setTypeContact(listeMail, texteBiographiques[4], 4, texteBiographiques);
 
 		// RESEAUX SOCIAUX
-		System.out.println("Inserez votre " + texte[5] + ":");
-		setTypeContact(listeRS, texte[5], 5);
+		System.out.println("Inserez votre " + texteBiographiques[5] + ":");
+		setTypeContact(listeRS, texteBiographiques[5], 5, texteBiographiques);
 
 		// PROFESSION
 		Scanner scannerProfession = new Scanner(System.in);
-		System.out.println("Inserez votre " + texte[6] + ":");
+		System.out.println("Inserez votre " + texteBiographiques[6] + ":");
 		String profession = scannerProfession.nextLine();
 
 		// Premier caractère Majuscule
-		profession = premierCharMajuscule(profession);
+		profession = firstCharUpperCase(profession);
 
 		// NOUVELLE CONTACT
 		Contact c = new Contact(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,
 				profession.trim());
-		ordre();
+		orderContact();
 		return c;
 	}
 
@@ -125,7 +107,7 @@ public class User {
 	 * @param typeRecherche
 	 * @param stringRecherche
 	 */
-	public void rechercheContact(String typeRecherche, String stringRecherche) {
+	public void findContact(String typeRecherche, String stringRecherche) {
 
 		ArrayList<Integer> index = new ArrayList<>();
 
@@ -134,7 +116,7 @@ public class User {
 		case "nom":
 
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(premierCharMajuscule(stringRecherche))) {
+				if (c.getNom().startsWith(firstCharUpperCase(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -143,7 +125,7 @@ public class User {
 
 		case "prenom":
 			for (Contact c : arrayContact) {
-				if (c.getPrenom().contains(premierCharMajuscule(stringRecherche))) {
+				if (c.getPrenom().contains(firstCharUpperCase(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -245,9 +227,10 @@ public class User {
 	/**
 	 * @brief MODIFICATION CONTACT
 	 * @param nom
+	 * @param texteBiographiques
 	 * @return Contact modifie
 	 */
-	public Contact modificationContact(String nom) {
+	public Contact editContact(String nom, String[] texteBiographiques) {
 
 		ArrayList<String> listePrenom = new ArrayList<>();
 		ArrayList<String> listeEmail = new ArrayList<>();
@@ -291,69 +274,69 @@ public class User {
 			String up = scannerUpdatd.nextLine();
 
 			// MODIFICATION PRENOM
-			if (up.equalsIgnoreCase(texte[1])) {
-				contactUpdate.setPrenom(setTypeContact(listePrenom, up, 1));
+			if (up.equalsIgnoreCase(texteBiographiques[1])) {
+				contactUpdate.setPrenom(setTypeContact(listePrenom, up, 1, texteBiographiques));
 			}
 
 			// MODIFICATION ADRESSE
-			if (up.equalsIgnoreCase(texte[2])) {
-				System.out.println(texte[2] + " : ");
+			if (up.equalsIgnoreCase(texteBiographiques[2])) {
+				System.out.println(texteBiographiques[2] + " : ");
 				contactUpdate.setAdresse(scannerUpdatdMod.nextLine());
 			}
 
 			// MODIFICATION TELEPHONE
-			if (up.equalsIgnoreCase(texte[3])) {
-				contactUpdate.setTelephone(setTypeContact(listeTelephone, up, 3));
+			if (up.equalsIgnoreCase(texteBiographiques[3])) {
+				contactUpdate.setTelephone(setTypeContact(listeTelephone, up, 3, texteBiographiques));
 			}
 
 			// MODIFICATION EMAIL
-			if (up.equalsIgnoreCase("E-mail") || up.equalsIgnoreCase(texte[4])) {
-				contactUpdate.setEmail(setTypeContact(listeEmail, up, 4));
+			if (up.equalsIgnoreCase("E-mail") || up.equalsIgnoreCase(texteBiographiques[4])) {
+				contactUpdate.setEmail(setTypeContact(listeEmail, up, 4, texteBiographiques));
 			}
 
 			// MODIFICATION RESEAUX SOCIAUX
-			if (up.equalsIgnoreCase(texte[5])) {
-				contactUpdate.setReseauxSociaux(setTypeContact(listeRS, up, 5));
+			if (up.equalsIgnoreCase(texteBiographiques[5])) {
+				contactUpdate.setReseauxSociaux(setTypeContact(listeRS, up, 5, texteBiographiques));
 			}
 
 			// MODIFICATION PROFESSION
-			if (up.equalsIgnoreCase(texte[6])) {
-				System.out.println(texte[6] + " : ");
+			if (up.equalsIgnoreCase(texteBiographiques[6])) {
+				System.out.println(texteBiographiques[6] + " : ");
 				contactUpdate.setProfession(scannerUpdatdMod.nextLine());
 			}
 
 			// MODIFICATION SIGNE ZODIAC
 			if (contactUpdate instanceof Amis) {
-				if (up.equalsIgnoreCase(texte[7])) {
+				if (up.equalsIgnoreCase(texteBiographiques[7])) {
 					Amis a = (Amis) contactUpdate;
-					System.out.println(texte[7] + " : ");
+					System.out.println(texteBiographiques[7] + " : ");
 					a.setSingeZodiacal(scannerUpdatdMod.nextLine());
 				}
 			}
 
 			// MODIFICATION LIEN PARENTE
 			if (contactUpdate instanceof Famille) {
-				if (up.equalsIgnoreCase(texte[8])) {
+				if (up.equalsIgnoreCase(texteBiographiques[8])) {
 					Famille f = (Famille) contactUpdate;
-					System.out.println(texte[8] + " : ");
+					System.out.println(texteBiographiques[8] + " : ");
 					f.setLienParent(scannerUpdatdMod.nextLine());
 				}
 			}
 			// MODIFICATION FONCTION
 			if (contactUpdate instanceof Professionnel) {
-				if (up.equalsIgnoreCase(texte[9])) {
+				if (up.equalsIgnoreCase(texteBiographiques[9])) {
 					Professionnel p = (Professionnel) contactUpdate;
-					System.out.println(texte[9] + " : ");
+					System.out.println(texteBiographiques[9] + " : ");
 					p.setFonction(scannerUpdatdMod.nextLine());
 				}
 			}
 			// SORTIE
-			if (up.equalsIgnoreCase(texte[10]) || up.equalsIgnoreCase("x")) {
+			if (up.equalsIgnoreCase(texteBiographiques[10]) || up.equalsIgnoreCase("x")) {
 				System.out.println("\nSortie Modification");
 			}
 		}
-		// ORDRE GESTIONNALE
-		ordre();
+		// orderContact GESTIONNALE
+		orderContact();
 		return contactUpdate;
 
 	}
@@ -362,11 +345,11 @@ public class User {
 	 * @brief CLEAN CONTACT
 	 * @param nom
 	 */
-	public void supprimeContact(String nom) {
+	public void deleteContact(String nom) {
 
-		// RECHERCHE CONTACT SI EXISTE
-		if (existe(nom)) {
-			if (save()) {
+		// RECHERCHE CONTACT SI existContact
+		if (existContact(nom)) {
+			if (Database.save()) {
 				arrayContact.removeIf(a -> (a.getNom().equals(nom)));
 				System.out.println("\nContact " + nom + " supprimé");
 			}
@@ -380,10 +363,10 @@ public class User {
 	 * @brief CLEAN ALL CONTACT
 	 * @param nom
 	 */
-	public void supprimeAllContact(String nom) {
+	public void deleteAllContact(String nom) {
 
 		arrayContact.removeAll(arrayContact);
-		writeDate(arrayContact);
+		Database.writeDate(arrayContact);
 		System.out.println("\nGestionnaire vidé");
 
 	}
@@ -394,16 +377,16 @@ public class User {
 	 * @param string
 	 * @return string avec premier lettre en majuscule
 	 */
-	public static String premierCharMajuscule(String string) {
+	public static String firstCharUpperCase(String string) {
 
-		string = string.substring(0, 1).toUpperCase() + string.substring(1);
-		return string;
+		return (string.substring(0, 1).toUpperCase() + string.substring(1));
+
 	}
 
 	/**
-	 * @brief ORDRE GESTIONNAIRE
+	 * @brief orderContact GESTIONNAIRE
 	 */
-	private static void ordre() {
+	private static void orderContact() {
 
 		Contact sort;
 		for (int i = 0; i < arrayContact.size() - 1; i++) {
@@ -411,33 +394,33 @@ public class User {
 				// COMPARE ELEMENT
 				if (arrayContact.get(i).getNom().toUpperCase()
 						.compareTo(arrayContact.get(j).getNom().toUpperCase()) >= 0) {
-					// ORDRE
+					// orderContact
 					sort = arrayContact.get(i);
 					arrayContact.set(i, arrayContact.get(j));
 					arrayContact.set(j, sort);
 				}
 			}
 		}
-		writeDate(arrayContact);
+		Database.writeDate(arrayContact);
 	}
 
 	/**
 	 * @brief AFFICHAGE
 	 */
-	public void printContact() {
-		ordre();
+	public void displayContact() {
+		orderContact();
 		arrayContact.forEach(System.out::println);
 	}
 
 	/**
-	 * @brief RECHERCHE NOM SI EXISTE
-	 * @param nomExiste nom a cherche
+	 * @brief RECHERCHE NOM SI existContact
+	 * @param nom nom a cherche
 	 * @return true or false
 	 */
-	private static boolean existe(String nomExiste) {
+	private static boolean existContact(String nom) {
 
 		for (Contact c : arrayContact) {
-			if (c.getNom().equals(nomExiste)) {
+			if (c.getNom().equals(nom)) {
 				return true;
 			}
 		}
@@ -449,42 +432,44 @@ public class User {
 	 * @brief SET & MODIFICATION
 	 * @param listeType
 	 * @param up
-	 * @param texteNb
+	 * @param type
+	 * @param texteBiographiques
 	 * @return listeType
 	 */
-	private static ArrayList<String> setTypeContact(ArrayList<String> listeType, String up, int texteNb) {
+	private static ArrayList<String> setTypeContact(ArrayList<String> listeType, String up, int txtNb,
+			String[] texteBiographiques) {
 
 		Scanner scannerUpdatdNb = new Scanner(System.in);
 
-		System.out.println("Combien de " + texte[texteNb] + " ? ");
+		System.out.println("Combien de " + texteBiographiques[txtNb] + " ? ");
 		String stringNbType = scannerUpdatdNb.nextLine();
 		if (!isNumeric(stringNbType.trim())) {
 			System.out.println("ERREUR: Inserez des nombre\n");
-			setTypeContact(listeType, up, texteNb);
+			setTypeContact(listeType, up, txtNb, texteBiographiques);
 		}
 		int nbType = Integer.parseInt(stringNbType.trim());
 
 		for (int i = 0; i < nbType; i++) {
 			Scanner scannerUpdatdMod = new Scanner(System.in);
-			System.out.println(texte[texteNb] + ": " + (i + 1));
+			System.out.println(texteBiographiques[txtNb] + ": " + (i + 1));
 			String type = scannerUpdatdMod.nextLine();
 
 			if (up.equalsIgnoreCase("telephone"))
 				while (!isNumeric(type)) {
 					System.out.println("ERREUR: Inserez des nombre\n");
-					System.out.println(texte[texteNb] + " : " + (i + 1));
+					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
 					type = scannerUpdatdMod.nextLine();
 				}
 
 			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")
 					|| up.equalsIgnoreCase("signe zodiaque") || up.equalsIgnoreCase("lien parente")
 					|| up.equalsIgnoreCase("fonction")) {
-				type = premierCharMajuscule(type);
+				type = firstCharUpperCase(type);
 				while (isNumeric(type)) {
 					System.out.println("ERREUR: Inserez des character\n");
-					System.out.println(texte[texteNb] + " : " + (i + 1));
+					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
 					type = scannerUpdatdMod.nextLine();
-					type = premierCharMajuscule(type);
+					type = firstCharUpperCase(type);
 				}
 			}
 
@@ -492,7 +477,7 @@ public class User {
 				String espressione = "^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*.[a-z]{2,4}$";
 				while (!type.matches(espressione)) {
 					System.out.println("ERREUR: Inserez correct e-mail! Format: (xxxxx.xxxxx@xxxxx.xxx)2");
-					System.out.println(texte[texteNb] + " : " + (i + 1));
+					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
 					type = scannerUpdatdMod.nextLine();
 				}
 			}
@@ -524,81 +509,6 @@ public class User {
 		if (arrayContact.isEmpty()) {
 			System.out.println("ERROR: Gestionnaire Vide");
 			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * @brief LIRE FICHIER
-	 * @param listIn
-	 */
-	public void readData(ArrayList<Contact> listIn) {
-
-		boolean endOfFile = false;
-		Contact temp;
-
-		try {
-
-			FileInputStream ContactFile = new FileInputStream(database);
-			ObjectInputStream contactStream = new ObjectInputStream(ContactFile);
-			temp = (Contact) contactStream.readObject();
-
-			while (endOfFile != true) {
-				try {
-					listIn.add(temp);
-					temp = (Contact) contactStream.readObject();
-				} catch (EOFException e) {
-					endOfFile = true;
-				}
-			}
-			contactStream.close();
-		}
-
-		catch (FileNotFoundException e) {
-			System.out.println("Contact file was not found");
-		} catch (IOException e) {
-			System.out.println("Contact file could not be read");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Contact class was not found");
-		}
-	}
-
-	/**
-	 * @brief ECRIRE DANS UNE FICHIER
-	 * @param listOut
-	 */
-	public static void writeDate(ArrayList<Contact> listOut) {
-
-		try {
-			FileOutputStream EmployeesFile = new FileOutputStream(database);
-			ObjectOutputStream ContactStream = new ObjectOutputStream(EmployeesFile);
-			for (Contact c : listOut) {
-				ContactStream.writeObject(c);
-			}
-			ContactStream.close();
-		} catch (IOException e) {
-			// System.out.println("Error occurred while saving");
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * @brief
-	 * @return true si enregistrer
-	 */
-	public Boolean save() {
-
-		Scanner scannerSave = new Scanner(System.in);
-		System.out.println("Voulez-vous enregistrer dans database ? [oui/non] ");
-
-		String saveString = scannerSave.nextLine();
-
-		if (saveString.equalsIgnoreCase("oui".trim()) || saveString.equalsIgnoreCase("o")) {
-			writeDate(arrayContact);
-			return true;
-		} else if (saveString.equalsIgnoreCase("non".trim()) || saveString.equalsIgnoreCase("n")) {
-			System.out.println("Enregistrement annulée");
-			return false;
 		}
 		return false;
 	}
