@@ -4,6 +4,7 @@ import java.io.Serializable;
 // ALT MAJ S,R
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Contact implements Serializable {
 
 	private String nom;
@@ -36,7 +37,7 @@ public class Contact implements Serializable {
 		this.profession = profession;
 	}
 
-	// Getter
+	// GETTER
 	public String getNom() {
 		return nom;
 	}
@@ -90,20 +91,12 @@ public class Contact implements Serializable {
 		this.profession = profession;
 	}
 
-	public static String[] texte = { "Nom:", "Prenom:", "Adresse:", "Telephone:", "E-mail:", "Reseau Sociaux:",
-			"Profession:" };
-
-	/**
-	 * @param list
-	 * @param nbTexte
+	/*
+	 * public void printArrayList(ArrayList<String> list, int txtNb) { int i = 1;
+	 * for (String elem : list) { System.out
+	 * .println(Tools.firstCharUpperCase(Texte.texteBiographiques[txtNb]) + ":" +
+	 * " N°" + i + ": " + elem); i++; } }
 	 */
-	public void printArrayList(ArrayList<String> list, int nbTexte) {
-		int i = 1;
-		for (String elem : list) {
-			System.out.println(texte[nbTexte] + " N°" + i + ": " + elem);
-			i++;
-		}
-	}
 
 	@Override
 	public String toString() {

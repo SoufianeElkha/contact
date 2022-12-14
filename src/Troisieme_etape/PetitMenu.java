@@ -1,7 +1,6 @@
 package Troisieme_etape;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class PetitMenu {
 
@@ -10,19 +9,17 @@ public class PetitMenu {
 	 * @param u
 	 * @throws IOException
 	 */
-	public static void menu(int action, User u) throws IOException {
+	public static void menu(int action, User u) {
 
 		switch (action) {
 		// INSERTION D'UN NOUVEAU CONTACT
 		case 1:
-
-			Scanner scannerMenu = new Scanner(System.in);
 			System.out.println(
 					"Quel type de contact voulez-vous ajouter ? \n\t- [S] Standard \n\t- [A] Amis \n\t- [F] Famille \n\t- [P] Professionnel \n\t- [X] Sortie");
 
-			String typeContact = scannerMenu.nextLine();
+			String typeContact = Tools.scan();
 
-			if (!User.isNumeric(typeContact)) {
+			if (!Tools.isNumeric(typeContact)) {
 
 				// TYPE STANDARD
 				if (typeContact.equalsIgnoreCase("standard") || typeContact.equalsIgnoreCase("s")) {
@@ -35,7 +32,7 @@ public class PetitMenu {
 					Contact c = User.newContact(Texte.texteBiographiques);
 					// SIGNE ZODIAC
 					System.out.println("Inserez votre " + Texte.texteBiographiques[7]);
-					String signeZodiac = scannerMenu.nextLine();
+					String signeZodiac = Tools.scan();
 
 					u.appendAmis(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 							c.getReseauxSociaux(), c.getProfession(), signeZodiac.trim());
@@ -46,7 +43,7 @@ public class PetitMenu {
 					Contact c = User.newContact(Texte.texteBiographiques);
 					// LIEN PARENT
 					System.out.println("Inserez votre " + Texte.texteBiographiques[8]);
-					String lienParent = scannerMenu.nextLine();
+					String lienParent = Tools.scan();
 
 					u.appendFamille(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 							c.getReseauxSociaux(), c.getProfession(), lienParent.trim());
@@ -57,7 +54,7 @@ public class PetitMenu {
 					Contact c = User.newContact(Texte.texteBiographiques);
 					// FONCTION
 					System.out.println("Inserez votre " + Texte.texteBiographiques[9]);
-					String fonction = scannerMenu.nextLine();
+					String fonction = Tools.scan();
 
 					u.appendProfessionnel(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 							c.getReseauxSociaux(), c.getProfession(), fonction.trim());
@@ -76,96 +73,73 @@ public class PetitMenu {
 
 		// AFFICHAGE DES CONTACTS
 		case 2:
-			if (!u.isEmpty()) {
+			if (!Tools.isEmpty()) {
 				System.out.println("\nAffichage contacts");
-				u.displayContact();
+				Tools.displayContact();
 			}
 
 			break;
 
 		// SUPPRESSION D'UN CONTACT
 		case 3:
-			if (!u.isEmpty()) {
-				Scanner scannerSupprime = new Scanner(System.in);
-				try {
+			if (!Tools.isEmpty()) {
+				System.out.println("Quel nom de contact voulez-vous supprime ? ");
 
+				String nomSupprime = Tools.scan();
+				while (Tools.isNumeric(nomSupprime)) {
+					System.out.println("ERREUR: Inserez des character\n");
 					System.out.println("Quel nom de contact voulez-vous supprime ? ");
-
-					String nomSupprime = scannerSupprime.nextLine();
-					while (User.isNumeric(nomSupprime)) {
-						System.out.println("ERREUR: Inserez des character\n");
-						System.out.println("Quel nom de contact voulez-vous supprime ? ");
-						nomSupprime = scannerSupprime.nextLine();
-					}
-					u.deleteContact(User.firstCharUpperCase(nomSupprime).trim());
-				} catch (Exception e) {
-					scannerSupprime.close();
+					nomSupprime = Tools.scan();
 				}
+				u.deleteContact(Tools.firstCharUpperCase(nomSupprime).trim());
+
 			}
 
 			break;
 
 		// MODIFICATION D'UN CONTACT
 		case 4:
-			if (!u.isEmpty()) {
-				Scanner scannerUpdateC = new Scanner(System.in);
-				try {
+			if (!Tools.isEmpty()) {
 
+				System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
+				String nomUpdate = Tools.scan();
+				while (Tools.isNumeric(nomUpdate)) {
+					System.out.println("ERREUR: Inserez des character\n");
 					System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
-					String nomUpdate = scannerUpdateC.nextLine();
-					while (User.isNumeric(nomUpdate)) {
-						System.out.println("ERREUR: Inserez des character\n");
-						System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
-						nomUpdate = scannerUpdateC.nextLine();
-					}
-					u.editContact(nomUpdate.trim(), Texte.texteBiographiques);
-				} catch (Exception e) {
-					scannerUpdateC.close();
+					nomUpdate = Tools.scan();
 				}
+				u.editContact(nomUpdate.trim(), Texte.texteBiographiques);
 			}
 
 			break;
 
 		// RECHERCHE D'UN CONTACT
 		case 5:
-			if (!u.isEmpty()) {
+			if (!Tools.isEmpty()) {
 
-				Scanner scannerRecherche = new Scanner(System.in);
-				Scanner scannerRechercheType = new Scanner(System.in);
-				try {
-
-					System.out.print("\nVoulez-vous faire une recherche par?:");
-					Texte.displayTexteBio(10);
-					System.out.println();
-					String typeRecherche = scannerRechercheType.next();
-					System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
-					String stringRecherche = scannerRecherche.next();
-					u.findContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
-				} catch (Exception e) {
-					scannerRecherche.close();
-					scannerRechercheType.close();
-				}
+				System.out.print("\nVoulez-vous faire une recherche par?:");
+				Texte.displayTexteBio(10);
+				System.out.println();
+				String typeRecherche = Tools.scan();
+				System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
+				String stringRecherche = Tools.scan();
+				u.findContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
 			}
 
 			break;
 
 		// SUPPRESSION TOUTS LES CONTACTS
 		case 6:
-			if (!u.isEmpty()) {
-				Scanner scannerSupprime1 = new Scanner(System.in);
-				try {
+			if (!Tools.isEmpty()) {
 
-					System.out.println("Voulez-vous supprime touts la liste ? [oui/non] ");
+				System.out.println("Voulez-vous supprime touts la liste ? [oui/non] ");
 
-					String allSupprime = scannerSupprime1.nextLine();
+				String allSupprime = Tools.scan();
 
-					if (allSupprime.equalsIgnoreCase("oui".trim()) || allSupprime.equalsIgnoreCase("o")) {
-						u.deleteAllContact(allSupprime);
-					} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
-						System.out.println("Suppression annulée");
-					}
-				} catch (Exception e) {
-					scannerSupprime1.close();
+				if (allSupprime.equalsIgnoreCase("oui".trim()) || allSupprime.equalsIgnoreCase("o")) {
+					u.deleteAllContact(allSupprime);
+				} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
+					System.out.println("Suppression annulée");
 				}
 			}
 

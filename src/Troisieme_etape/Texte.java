@@ -29,7 +29,7 @@ public class Texte {
 
 	public static void displayTexteBio(int nb) {
 		for (int i = 0; i <= nb; i++)
-			System.out.print("\n\t-" + User.firstCharUpperCase(texteBiographiques[i]));
+			System.out.print("\n\t-" + Tools.firstCharUpperCase(texteBiographiques[i]));
 	}
 
 }

@@ -73,21 +73,29 @@ public class Database {
 	 * @brief
 	 * @return true si enregistrer
 	 */
+	@SuppressWarnings("resource")
 	public static Boolean save() {
 
 		Scanner scannerSave = new Scanner(System.in);
-		System.out.println("Voulez-vous enregistrer dans database ? [oui/non] ");
+		try {
 
-		String saveString = scannerSave.nextLine();
+			System.out.println("Voulez-vous enregistrer dans database ? [oui/non] ");
 
-		if (saveString.equalsIgnoreCase("oui".trim()) || saveString.equalsIgnoreCase("o")) {
-			writeDate(User.arrayContact);
-			return true;
-		} else if (saveString.equalsIgnoreCase("non".trim()) || saveString.equalsIgnoreCase("n")) {
-			System.out.println("Enregistrement annulée");
+			String saveString = scannerSave.nextLine();
+
+			if (saveString.equalsIgnoreCase("oui".trim()) || saveString.equalsIgnoreCase("o")) {
+				writeDate(User.arrayContact);
+				return true;
+			} else if (saveString.equalsIgnoreCase("non".trim()) || saveString.equalsIgnoreCase("n")) {
+				System.out.println("Enregistrement annulée");
+				return false;
+			}
+		} catch (Exception e) {
+			scannerSave.close();
 			return false;
 		}
 		return false;
+
 	}
 
 }

@@ -1,7 +1,6 @@
 package Troisieme_etape;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class User {
 
@@ -44,7 +43,6 @@ public class User {
 	public static Contact newContact(String[] texteBiographiques) {
 		// Initialisation variables insert contact
 
-		Scanner scanner = new Scanner(System.in);
 		ArrayList<String> listePrenom = new ArrayList<>();
 		ArrayList<String> listeTelephone = new ArrayList<>();
 		ArrayList<String> listeMail = new ArrayList<>();
@@ -52,17 +50,18 @@ public class User {
 
 		// NOM
 		System.out.println("Inserez votre " + texteBiographiques[0] + ":");
-		// String nom = scanner.nextLine();
+		// String nom = Tools.scanner.nextLine();
 		// Premier caractère Majuscule
-		String nom = firstCharUpperCase(scanner.nextLine());
+
+		String nom = Tools.firstCharUpperCase(Tools.scan());
 
 		// CONTROLE SI STRING
-		if (isNumeric(nom)) {
+		if (Tools.isNumeric(nom)) {
 			System.out.println("ERREUR: Inserez des character\n");
 			return newContact(texteBiographiques);
 		}
 		// CONTROLE SI NOM existContact
-		if (existContact(nom)) {
+		if (Tools.existContact(nom)) {
 			System.out.println("ERROR: Le nom '" + nom + "' existContact déjà dans la liste.");
 			return newContact(texteBiographiques);
 		}
@@ -71,9 +70,8 @@ public class User {
 		setTypeContact(listePrenom, texteBiographiques[1], 1, texteBiographiques);
 
 		// ADRESSE
-		Scanner scannerAdresse = new Scanner(System.in);
 		System.out.println("Inserez votre " + texteBiographiques[2] + ":");
-		String adresse = scannerAdresse.nextLine();
+		String adresse = Tools.scan();
 
 		// TELEPHONE
 		System.out.println("Inserez votre numero de " + texteBiographiques[3] + ":");
@@ -88,17 +86,16 @@ public class User {
 		setTypeContact(listeRS, texteBiographiques[5], 5, texteBiographiques);
 
 		// PROFESSION
-		Scanner scannerProfession = new Scanner(System.in);
 		System.out.println("Inserez votre " + texteBiographiques[6] + ":");
-		String profession = scannerProfession.nextLine();
+		String profession = Tools.scan();
 
 		// Premier caractère Majuscule
-		profession = firstCharUpperCase(profession);
+		profession = Tools.firstCharUpperCase(profession);
 
 		// NOUVELLE CONTACT
 		Contact c = new Contact(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,
 				profession.trim());
-		orderContact();
+		Tools.orderContact();
 		return c;
 	}
 
@@ -116,7 +113,7 @@ public class User {
 		case "nom":
 
 			for (Contact c : arrayContact) {
-				if (c.getNom().startsWith(firstCharUpperCase(stringRecherche))) {
+				if (c.getNom().startsWith(Tools.firstCharUpperCase(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -125,7 +122,7 @@ public class User {
 
 		case "prenom":
 			for (Contact c : arrayContact) {
-				if (c.getPrenom().contains(firstCharUpperCase(stringRecherche))) {
+				if (c.getPrenom().contains(Tools.firstCharUpperCase(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
 			}
@@ -237,9 +234,6 @@ public class User {
 		ArrayList<String> listeRS = new ArrayList<>();
 		ArrayList<String> listeTelephone = new ArrayList<>();
 
-		Scanner scannerUpdatdNb = new Scanner(System.in);
-		Scanner scannerUpdatdMod = new Scanner(System.in);
-
 		// GET INDICE CONTACT A MODIFIER
 		int index = -1;
 		Contact contactUpdate = null;
@@ -259,7 +253,6 @@ public class User {
 
 		} else {
 
-			Scanner scannerUpdatd = new Scanner(System.in);
 			System.out.print(
 					"\nQuel champ voulez-vous modifier ? \n\t- Prenom \n\t- Adresse \n\t- Téléphone \n\t- E-mail \n\t- Reseaux Sociaux \n\t- Profession");
 			if (contactUpdate instanceof Amis) {
@@ -271,7 +264,7 @@ public class User {
 			}
 			System.out.print("\n\t[X] Sortie");
 			System.out.println();
-			String up = scannerUpdatd.nextLine();
+			String up = Tools.scan();
 
 			// MODIFICATION PRENOM
 			if (up.equalsIgnoreCase(texteBiographiques[1])) {
@@ -281,7 +274,7 @@ public class User {
 			// MODIFICATION ADRESSE
 			if (up.equalsIgnoreCase(texteBiographiques[2])) {
 				System.out.println(texteBiographiques[2] + " : ");
-				contactUpdate.setAdresse(scannerUpdatdMod.nextLine());
+				contactUpdate.setAdresse(Tools.scan());
 			}
 
 			// MODIFICATION TELEPHONE
@@ -302,7 +295,7 @@ public class User {
 			// MODIFICATION PROFESSION
 			if (up.equalsIgnoreCase(texteBiographiques[6])) {
 				System.out.println(texteBiographiques[6] + " : ");
-				contactUpdate.setProfession(scannerUpdatdMod.nextLine());
+				contactUpdate.setProfession(Tools.scan());
 			}
 
 			// MODIFICATION SIGNE ZODIAC
@@ -310,7 +303,7 @@ public class User {
 				if (up.equalsIgnoreCase(texteBiographiques[7])) {
 					Amis a = (Amis) contactUpdate;
 					System.out.println(texteBiographiques[7] + " : ");
-					a.setSingeZodiacal(scannerUpdatdMod.nextLine());
+					a.setSingeZodiacal(Tools.scan());
 				}
 			}
 
@@ -319,7 +312,7 @@ public class User {
 				if (up.equalsIgnoreCase(texteBiographiques[8])) {
 					Famille f = (Famille) contactUpdate;
 					System.out.println(texteBiographiques[8] + " : ");
-					f.setLienParent(scannerUpdatdMod.nextLine());
+					f.setLienParent(Tools.scan());
 				}
 			}
 			// MODIFICATION FONCTION
@@ -327,7 +320,7 @@ public class User {
 				if (up.equalsIgnoreCase(texteBiographiques[9])) {
 					Professionnel p = (Professionnel) contactUpdate;
 					System.out.println(texteBiographiques[9] + " : ");
-					p.setFonction(scannerUpdatdMod.nextLine());
+					p.setFonction(Tools.scan());
 				}
 			}
 			// SORTIE
@@ -335,8 +328,8 @@ public class User {
 				System.out.println("\nSortie Modification");
 			}
 		}
-		// orderContact GESTIONNALE
-		orderContact();
+		// Tools.orderContact GESTIONNALE
+		Tools.orderContact();
 		return contactUpdate;
 
 	}
@@ -348,7 +341,7 @@ public class User {
 	public void deleteContact(String nom) {
 
 		// RECHERCHE CONTACT SI existContact
-		if (existContact(nom)) {
+		if (Tools.existContact(nom)) {
 			if (Database.save()) {
 				arrayContact.removeIf(a -> (a.getNom().equals(nom)));
 				System.out.println("\nContact " + nom + " supprimé");
@@ -372,63 +365,6 @@ public class User {
 	}
 
 	/**
-	 * 
-	 * @brief PREMIER CARACTERE MAJUSCULE
-	 * @param string
-	 * @return string avec premier lettre en majuscule
-	 */
-	public static String firstCharUpperCase(String string) {
-
-		return (string.substring(0, 1).toUpperCase() + string.substring(1));
-
-	}
-
-	/**
-	 * @brief orderContact GESTIONNAIRE
-	 */
-	private static void orderContact() {
-
-		Contact sort;
-		for (int i = 0; i < arrayContact.size() - 1; i++) {
-			for (int j = i + 1; j < arrayContact.size(); j++) {
-				// COMPARE ELEMENT
-				if (arrayContact.get(i).getNom().toUpperCase()
-						.compareTo(arrayContact.get(j).getNom().toUpperCase()) >= 0) {
-					// orderContact
-					sort = arrayContact.get(i);
-					arrayContact.set(i, arrayContact.get(j));
-					arrayContact.set(j, sort);
-				}
-			}
-		}
-		Database.writeDate(arrayContact);
-	}
-
-	/**
-	 * @brief AFFICHAGE
-	 */
-	public void displayContact() {
-		orderContact();
-		arrayContact.forEach(System.out::println);
-	}
-
-	/**
-	 * @brief RECHERCHE NOM SI existContact
-	 * @param nom nom a cherche
-	 * @return true or false
-	 */
-	private static boolean existContact(String nom) {
-
-		for (Contact c : arrayContact) {
-			if (c.getNom().equals(nom)) {
-				return true;
-			}
-		}
-		return false;
-
-	}
-
-	/**
 	 * @brief SET & MODIFICATION
 	 * @param listeType
 	 * @param up
@@ -439,37 +375,34 @@ public class User {
 	private static ArrayList<String> setTypeContact(ArrayList<String> listeType, String up, int txtNb,
 			String[] texteBiographiques) {
 
-		Scanner scannerUpdatdNb = new Scanner(System.in);
-
 		System.out.println("Combien de " + texteBiographiques[txtNb] + " ? ");
-		String stringNbType = scannerUpdatdNb.nextLine();
-		if (!isNumeric(stringNbType.trim())) {
+		String stringNbType = Tools.scan();
+		if (!Tools.isNumeric(stringNbType.trim())) {
 			System.out.println("ERREUR: Inserez des nombre\n");
 			setTypeContact(listeType, up, txtNb, texteBiographiques);
 		}
 		int nbType = Integer.parseInt(stringNbType.trim());
 
 		for (int i = 0; i < nbType; i++) {
-			Scanner scannerUpdatdMod = new Scanner(System.in);
 			System.out.println(texteBiographiques[txtNb] + ": " + (i + 1));
-			String type = scannerUpdatdMod.nextLine();
+			String type = Tools.scan();
 
 			if (up.equalsIgnoreCase("telephone"))
-				while (!isNumeric(type)) {
+				while (!Tools.isNumeric(type)) {
 					System.out.println("ERREUR: Inserez des nombre\n");
 					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
-					type = scannerUpdatdMod.nextLine();
+					type = Tools.scan();
 				}
 
 			if (up.equalsIgnoreCase("prenom") || up.equalsIgnoreCase("profession")
 					|| up.equalsIgnoreCase("signe zodiaque") || up.equalsIgnoreCase("lien parente")
 					|| up.equalsIgnoreCase("fonction")) {
-				type = firstCharUpperCase(type);
-				while (isNumeric(type)) {
+				if (!type.equals(null))
+					type = Tools.firstCharUpperCase(type);
+				while (Tools.isNumeric(type)) {
 					System.out.println("ERREUR: Inserez des character\n");
 					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
-					type = scannerUpdatdMod.nextLine();
-					type = firstCharUpperCase(type);
+					type = Tools.firstCharUpperCase(Tools.scan());
 				}
 			}
 
@@ -478,39 +411,13 @@ public class User {
 				while (!type.matches(espressione)) {
 					System.out.println("ERREUR: Inserez correct e-mail! Format: (xxxxx.xxxxx@xxxxx.xxx)2");
 					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
-					type = scannerUpdatdMod.nextLine();
+					type = Tools.scan();
 				}
 			}
 
 			listeType.add(type.trim());
 		}
 		return listeType;
-	}
-
-	/**
-	 * @brief VERIFICATION SI EST NOMBRE
-	 * @param s
-	 * @return true si est une nombre
-	 */
-	public static boolean isNumeric(String s) {
-		try {
-			Double.parseDouble(s);
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
-	}
-
-	/**
-	 * @brief VERIFICATION SI GESTIONNAIRE EST VIDE
-	 * @return true si gestionnaire est vide
-	 */
-	public boolean isEmpty() {
-		if (arrayContact.isEmpty()) {
-			System.out.println("ERROR: Gestionnaire Vide");
-			return true;
-		}
-		return false;
 	}
 
 }

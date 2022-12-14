@@ -2,6 +2,7 @@ package Troisieme_etape;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Famille extends Contact {
 	private String lienParent;
 
