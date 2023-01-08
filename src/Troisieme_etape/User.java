@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class User {
 
-	public static ArrayList<Contact> arrayContact = new ArrayList<>();
+	public static ArrayList<Standard> arrayContact = new ArrayList<>();
 
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
-		Contact contact = new Contact(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
+		Standard contact = new Standard(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
 		arrayContact.add(contact);
 	}
 
@@ -16,14 +16,14 @@ public class User {
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String signeZodiac) {
 
 		Contact amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, signeZodiac);
-		arrayContact.add(amis);
+		arrayContact.add((Standard) amis);
 	}
 
 	public void appendFamille(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String lienParent) {
 
 		Contact famille = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, lienParent);
-		arrayContact.add(famille);
+		arrayContact.add((Standard) famille);
 	}
 
 	public void appendProfessionnel(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
@@ -31,7 +31,7 @@ public class User {
 
 		Contact professionnel = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession,
 				fonction);
-		arrayContact.add(professionnel);
+		arrayContact.add((Standard) professionnel);
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class User {
 	 * @brief AJOUTER CONTACT
 	 * @return Contact
 	 */
-	public static Contact newContact(String[] texteBiographiques) {
+	public static Standard newContact(String[] texteBiographiques) {
 		// Initialisation variables insert contact
 
 		ArrayList<String> listePrenom = new ArrayList<>();
@@ -93,7 +93,7 @@ public class User {
 		profession = Tools.firstCharUpperCase(profession);
 
 		// NOUVELLE CONTACT
-		Contact c = new Contact(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,
+		Standard c = new Standard(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,
 				profession.trim());
 		Tools.orderContact();
 		return c;
@@ -112,7 +112,7 @@ public class User {
 
 		case "nom":
 
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				if (c.getNom().startsWith(Tools.firstCharUpperCase(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
@@ -121,7 +121,7 @@ public class User {
 			break;
 
 		case "prenom":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				if (c.getPrenom().contains(Tools.firstCharUpperCase(stringRecherche))) {
 					index.add(arrayContact.indexOf(c));
 				}
@@ -130,7 +130,7 @@ public class User {
 			break;
 
 		case "adresse":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				if (c.getAdresse().startsWith(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
@@ -138,7 +138,7 @@ public class User {
 			break;
 
 		case "telephone":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				if (c.getTelephone().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
@@ -146,7 +146,7 @@ public class User {
 			break;
 
 		case "reseau sociaux ":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				if (c.getReseauxSociaux().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
@@ -154,7 +154,7 @@ public class User {
 			break;
 
 		case "email":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				if (c.getEmail().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
@@ -162,7 +162,7 @@ public class User {
 			break;
 
 		case "e-mail":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				if (c.getEmail().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
@@ -170,7 +170,7 @@ public class User {
 			break;
 
 		case "profession":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				if (c.getProfession().equalsIgnoreCase(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
 				}
@@ -238,7 +238,7 @@ public class User {
 		int index = -1;
 		Contact contactUpdate = null;
 
-		for (Contact c : arrayContact) {
+		for (Standard c : arrayContact) {
 			if (c.getNom().equalsIgnoreCase(nom)) {
 				index = arrayContact.indexOf(c);
 				contactUpdate = arrayContact.get(index);

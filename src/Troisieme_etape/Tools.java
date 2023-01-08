@@ -22,7 +22,7 @@ public class Tools {
 	 */
 	static void orderContact() {
 
-		Contact sort;
+		Standard sort;
 		for (int i = 0; i < User.arrayContact.size() - 1; i++) {
 			for (int j = i + 1; j < User.arrayContact.size(); j++) {
 				// COMPARE ELEMENT
@@ -53,7 +53,7 @@ public class Tools {
 	 */
 	public static boolean existContact(String nom) {
 
-		for (Contact c : User.arrayContact) {
+		for (Standard c : User.arrayContact) {
 			if (c.getNom().equals(nom)) {
 				return true;
 			}

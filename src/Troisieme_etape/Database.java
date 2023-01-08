@@ -19,21 +19,21 @@ public class Database {
 	 * @brief LIRE FICHIER
 	 * @param listIn
 	 */
-	public static void readData(ArrayList<Contact> listIn) {
+	public static void readData(ArrayList<Standard> listIn) {
 
 		boolean endOfFile = false;
-		Contact temp;
+		Standard temp;
 
 		try {
 
 			FileInputStream ContactFile = new FileInputStream(database);
 			ObjectInputStream contactStream = new ObjectInputStream(ContactFile);
-			temp = (Contact) contactStream.readObject();
+			temp = (Standard) contactStream.readObject();
 
 			while (endOfFile != true) {
 				try {
 					listIn.add(temp);
-					temp = (Contact) contactStream.readObject();
+					temp = (Standard) contactStream.readObject();
 				} catch (EOFException e) {
 					endOfFile = true;
 				}
@@ -42,11 +42,11 @@ public class Database {
 		}
 
 		catch (FileNotFoundException e) {
-			System.out.println("Contact file was not found");
+			System.out.println("Class Database : Contact file was not found");
 		} catch (IOException e) {
-			System.out.println("Contact file could not be read");
+			System.out.println("Class Database : Contact file could not be read");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Contact class was not found");
+			System.out.println("Class Database : Contact class was not found");
 		}
 	}
 
@@ -54,12 +54,12 @@ public class Database {
 	 * @brief ECRIRE DANS UNE FICHIER
 	 * @param listOut
 	 */
-	public static void writeDate(ArrayList<Contact> listOut) {
+	public static void writeDate(ArrayList<Standard> listOut) {
 
 		try {
 			FileOutputStream EmployeesFile = new FileOutputStream(database);
 			ObjectOutputStream ContactStream = new ObjectOutputStream(EmployeesFile);
-			for (Contact c : listOut) {
+			for (Standard c : listOut) {
 				ContactStream.writeObject(c);
 			}
 			ContactStream.close();
@@ -70,6 +70,8 @@ public class Database {
 	}
 
 	/**
+	 * Y
+	 * 
 	 * @brief
 	 * @return true si enregistrer
 	 */
@@ -79,7 +81,7 @@ public class Database {
 		Scanner scannerSave = new Scanner(System.in);
 		try {
 
-			System.out.println("Voulez-vous enregistrer dans database ? [oui/non] ");
+			System.out.println("Voulez-vous enregistrer dans database ? [oui/non] [o/n] ");
 
 			String saveString = scannerSave.nextLine();
 
