@@ -15,8 +15,8 @@ public class User {
 	public void appendAmis(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String signeZodiac) {
 
-		Contact amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, signeZodiac);
-		arrayContact.add((Standard) amis);
+		Amis amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, signeZodiac);
+		arrayContact.add(amis);
 	}
 
 	public void appendFamille(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
@@ -50,8 +50,6 @@ public class User {
 
 		// NOM
 		System.out.println("Inserez votre " + texteBiographiques[0] + ":");
-		// String nom = Tools.scanner.nextLine();
-		// Premier caractère Majuscule
 
 		String nom = Tools.firstCharUpperCase(Tools.scan());
 
@@ -60,7 +58,7 @@ public class User {
 			System.out.println("ERREUR: Inserez des character\n");
 			return newContact(texteBiographiques);
 		}
-		// CONTROLE SI NOM existContact
+		// CONTROLE SI NOM EXISTE
 		if (Tools.existContact(nom)) {
 			System.out.println("ERROR: Le nom '" + nom + "' existContact déjà dans la liste.");
 			return newContact(texteBiographiques);
@@ -145,7 +143,7 @@ public class User {
 			}
 			break;
 
-		case "reseau sociaux ":
+		case "reseau sociaux":
 			for (Standard c : arrayContact) {
 				if (c.getReseauxSociaux().contains(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
@@ -214,9 +212,7 @@ public class User {
 		} else {
 
 			for (int j = 0; j <= index.size() - 1; j++) {
-				System.out.println();
 				System.out.println(arrayContact.get(index.get(j)));
-				System.out.println();
 			}
 		}
 	}
@@ -328,7 +324,7 @@ public class User {
 				System.out.println("\nSortie Modification");
 			}
 		}
-		// Tools.orderContact GESTIONNALE
+		// GESTIONNALE
 		Tools.orderContact();
 		return contactUpdate;
 
@@ -407,8 +403,8 @@ public class User {
 			}
 
 			if (up.equalsIgnoreCase("email") || up.equalsIgnoreCase("e-mail")) {
-				String espressione = "^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*.[a-z]{2,4}$";
-				while (!type.matches(espressione)) {
+				String typeEmail = "^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*.[a-z]{2,4}$";
+				while (!type.matches(typeEmail)) {
 					System.out.println("ERREUR: Inserez correct e-mail! Format: (xxxxx.xxxxx@xxxxx.xxx)2");
 					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
 					type = Tools.scan();

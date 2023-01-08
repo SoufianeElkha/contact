@@ -23,7 +23,7 @@ public class PetitMenu {
 
 				// TYPE STANDARD
 				if (typeContact.equalsIgnoreCase("standard") || typeContact.equalsIgnoreCase("s")) {
-					Contact c = User.newContact(Texte.texteBiographiques);
+					Standard c = User.newContact(Texte.texteBiographiques);
 					u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 							c.getReseauxSociaux(), c.getProfession());
 				}
@@ -67,7 +67,7 @@ public class PetitMenu {
 				}
 				// ERROR TYPE
 			} else {
-				System.out.println("ERROR: Inserez le type correct!\n");
+				System.out.println("ERREUR: Inserez le type correct!\n");
 			}
 			break;
 
@@ -132,7 +132,7 @@ public class PetitMenu {
 		case 6:
 			if (!Tools.isEmpty()) {
 
-				System.out.println("Voulez-vous supprime touts la liste ? [oui/non] ");
+				System.out.println("Voulez-vous supprime touts la liste ? [oui/non] [o/n] ");
 
 				String allSupprime = Tools.scan();
 

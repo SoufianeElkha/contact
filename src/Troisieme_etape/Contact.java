@@ -1,7 +1,6 @@
 package Troisieme_etape;
 
 import java.io.Serializable;
-// ALT MAJ S,R
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
@@ -90,13 +89,6 @@ public class Contact implements Serializable {
 	public void setProfession(String profession) {
 		this.profession = profession;
 	}
-
-	/*
-	 * public void printArrayList(ArrayList<String> list, int txtNb) { int i = 1;
-	 * for (String elem : list) { System.out
-	 * .println(Tools.firstCharUpperCase(Texte.texteBiographiques[txtNb]) + ":" +
-	 * " N°" + i + ": " + elem); i++; } }
-	 */
 
 	@Override
 	public String toString() {

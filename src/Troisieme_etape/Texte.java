@@ -18,7 +18,7 @@ public class Texte {
 	}
 
 	// Texte generale
-	public static enum texteBio {
+	public static enum texteEnum {
 		NOM, PRENOM, ADRESSE, TELEPHONE, EMAIL, RESEAU_SOCIAUX, PROFESSION, SIGNE_ZODIAQUE, LIEN_PARENTE, FONCTION,
 		SORTIE
 	};

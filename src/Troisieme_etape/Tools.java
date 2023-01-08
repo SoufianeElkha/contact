@@ -53,10 +53,12 @@ public class Tools {
 	 */
 	public static boolean existContact(String nom) {
 
-		for (Standard c : User.arrayContact) {
-			if (c.getNom().equals(nom)) {
-				return true;
-			}
+		try {
+			for (Standard c : User.arrayContact)
+				if (c.getNom().equals(nom))
+					return true;
+		} catch (Exception e) {
+			return false;
 		}
 		return false;
 
@@ -81,11 +83,17 @@ public class Tools {
 	 * @return true si gestionnaire est vide
 	 */
 	public static boolean isEmpty() {
-		if (User.arrayContact.isEmpty()) {
-			System.out.println("ERROR: Gestionnaire Vide");
-			return true;
+		try {
+			if (User.arrayContact.isEmpty()) {
+				System.out.println("ERROR: Gestionnaire Vide");
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
 		}
+
 		return false;
+
 	}
 
 	public static String scan() {
