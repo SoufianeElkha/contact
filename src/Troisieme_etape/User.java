@@ -15,23 +15,23 @@ public class User {
 	public void appendAmis(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String signeZodiac) {
 
-		Amis amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, signeZodiac);
+		Standard amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, signeZodiac);
 		arrayContact.add(amis);
 	}
 
 	public void appendFamille(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String lienParent) {
 
-		Contact famille = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, lienParent);
-		arrayContact.add((Standard) famille);
+		Standard famille = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, lienParent);
+		arrayContact.add(famille);
 	}
 
 	public void appendProfessionnel(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String fonction) {
 
-		Contact professionnel = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession,
+		Standard professionnel = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession,
 				fonction);
-		arrayContact.add((Standard) professionnel);
+		arrayContact.add(professionnel);
 	}
 
 	/**
@@ -41,8 +41,8 @@ public class User {
 	 * @return Contact
 	 */
 	public static Standard newContact(String[] texteBiographiques) {
-		// Initialisation variables insert contact
 
+		// Initialisation variables insert contact
 		ArrayList<String> listePrenom = new ArrayList<>();
 		ArrayList<String> listeTelephone = new ArrayList<>();
 		ArrayList<String> listeMail = new ArrayList<>();
@@ -50,7 +50,6 @@ public class User {
 
 		// NOM
 		System.out.println("Inserez votre " + texteBiographiques[0] + ":");
-
 		String nom = Tools.firstCharUpperCase(Tools.scan());
 
 		// CONTROLE SI STRING
@@ -85,10 +84,7 @@ public class User {
 
 		// PROFESSION
 		System.out.println("Inserez votre " + texteBiographiques[6] + ":");
-		String profession = Tools.scan();
-
-		// Premier caractère Majuscule
-		profession = Tools.firstCharUpperCase(profession);
+		String profession = Tools.firstCharUpperCase(Tools.scan());
 
 		// NOUVELLE CONTACT
 		Standard c = new Standard(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,

@@ -3,7 +3,7 @@ package Troisieme_etape;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class Amis extends Contact {
+public class Amis extends Standard {
 	private String signeZodiacal;
 
 	/**

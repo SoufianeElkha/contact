@@ -3,7 +3,7 @@ package Troisieme_etape;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class Professionnel extends Contact {
+public class Professionnel extends Standard {
 
 	private String fonction;
 
