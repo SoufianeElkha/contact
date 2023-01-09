@@ -25,7 +25,6 @@ public class Database {
 		Standard temp;
 
 		try {
-
 			FileInputStream ContactFile = new FileInputStream(database);
 			ObjectInputStream contactStream = new ObjectInputStream(ContactFile);
 			temp = (Standard) contactStream.readObject();

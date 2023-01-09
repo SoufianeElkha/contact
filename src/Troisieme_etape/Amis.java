@@ -22,17 +22,17 @@ public class Amis extends Standard {
 		this.signeZodiacal = singeZodiacal;
 	}
 
+	// GETTER
 	public String getSigneZodiacal() {
 		return signeZodiacal;
 	}
 
+	// SETTER
 	public void setSingeZodiacal(String singeZodiacal) {
 		this.signeZodiacal = singeZodiacal;
 	}
 
-	/**
-	 * print
-	 */
+	// Print
 	@Override
 	public String toString() {
 		return super.toString() + "\n Signe zodiacal: " + signeZodiacal;

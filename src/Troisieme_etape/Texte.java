@@ -2,10 +2,6 @@ package Troisieme_etape;
 
 public class Texte {
 
-	public enum optionEnum {
-		NEW, PRINT, DELETE, EDIT, FIND, DELETE_ALL, EXIT
-	}
-
 	// TEXTE MENU
 	public static void displayMenu() {
 		System.out.println("----------------------------------------------");
@@ -17,10 +13,11 @@ public class Texte {
 
 	}
 
-	// Texte generale
+	// TEXTE GENERALE
 	public static String[] texteBiographiques = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux",
 			"profession", "signe zodiaque", "lien parente", "fonction", "sortie" };
 
+	// PRINT TEXTE BIOGRAPHIQUES
 	public static void displayTexteBio(int nb) {
 		for (int i = 0; i <= nb; i++)
 			System.out.print("\n\t-" + Tools.firstCharUpperCase(texteBiographiques[i]));

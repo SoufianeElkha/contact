@@ -14,8 +14,6 @@ public abstract class Contact implements Serializable {
 	private ArrayList<String> reseauxSociaux;
 	private String profession;
 
-	// public Contact() {}
-
 	/**
 	 * @param nom
 	 * @param prenoms
@@ -90,6 +88,7 @@ public abstract class Contact implements Serializable {
 		this.profession = profession;
 	}
 
+	// PRINT
 	@Override
 	public String toString() {
 

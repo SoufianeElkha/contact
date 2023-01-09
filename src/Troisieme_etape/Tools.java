@@ -8,7 +8,7 @@ public class Tools {
 	 * 
 	 * @brief PREMIER CARACTERE MAJUSCULE
 	 * @param string
-	 * @return string avec premier lettre en majuscule
+	 * @return string avec premier lettre de la string en majuscule
 	 */
 	public static String firstCharUpperCase(String string) {
 		if (string.equals(null))
@@ -48,7 +48,7 @@ public class Tools {
 
 	/**
 	 * @brief RECHERCHE NOM SI existContact
-	 * @param nom nom a cherche
+	 * @param nom : nom a cherche
 	 * @return true or false
 	 */
 	public static boolean existContact(String nom) {
@@ -96,6 +96,11 @@ public class Tools {
 
 	}
 
+	/*
+	 * @brief Scanner Generaux
+	 * 
+	 * @return input
+	 */
 	public static String scan() {
 		String input = null;
 		Scanner scanner = new Scanner(System.in);

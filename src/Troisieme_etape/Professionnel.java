@@ -23,17 +23,17 @@ public class Professionnel extends Standard {
 		this.fonction = fonction;
 	}
 
+	// GETTER
 	public String getFonction() {
 		return fonction;
 	}
 
+	// SETTER
 	public void setFonction(String fonction) {
 		this.fonction = fonction;
 	}
 
-	/**
-	 * print
-	 */
+	// PRINT
 	@Override
 	public String toString() {
 		return super.toString() + "\n Fonction: " + "\t" + fonction;
