@@ -2,7 +2,7 @@ package Troisieme_etape;
 
 public class Texte {
 
-	public enum Option {
+	public enum optionEnum {
 		NEW, PRINT, DELETE, EDIT, FIND, DELETE_ALL, EXIT
 	}
 
@@ -16,12 +16,6 @@ public class Texte {
 		System.out.println("----------------------------------------------");
 
 	}
-
-	// Texte generale
-	public static enum texteEnum {
-		NOM, PRENOM, ADRESSE, TELEPHONE, EMAIL, RESEAU_SOCIAUX, PROFESSION, SIGNE_ZODIAQUE, LIEN_PARENTE, FONCTION,
-		SORTIE
-	};
 
 	// Texte generale
 	public static String[] texteBiographiques = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux",

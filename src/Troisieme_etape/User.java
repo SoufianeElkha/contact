@@ -172,7 +172,7 @@ public class User {
 			break;
 
 		case "signe zodiacal":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				Amis a = (Amis) c;
 				if (a.getSigneZodiacal().equalsIgnoreCase(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
@@ -180,7 +180,7 @@ public class User {
 			}
 			break;
 		case "lien parental":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				Famille f = (Famille) c;
 				if (f.getLienParent().equalsIgnoreCase(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
@@ -189,7 +189,7 @@ public class User {
 			break;
 
 		case "fonction":
-			for (Contact c : arrayContact) {
+			for (Standard c : arrayContact) {
 				Professionnel p = (Professionnel) c;
 				if (p.getFonction().equalsIgnoreCase(stringRecherche)) {
 					index.add(arrayContact.indexOf(c));
@@ -219,7 +219,7 @@ public class User {
 	 * @param texteBiographiques
 	 * @return Contact modifie
 	 */
-	public Contact editContact(String nom, String[] texteBiographiques) {
+	public Standard editContact(String nom, String[] texteBiographiques) {
 
 		ArrayList<String> listePrenom = new ArrayList<>();
 		ArrayList<String> listeEmail = new ArrayList<>();
@@ -228,7 +228,7 @@ public class User {
 
 		// GET INDICE CONTACT A MODIFIER
 		int index = -1;
-		Contact contactUpdate = null;
+		Standard contactUpdate = null;
 
 		for (Standard c : arrayContact) {
 			if (c.getNom().equalsIgnoreCase(nom)) {
