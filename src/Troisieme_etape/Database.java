@@ -69,9 +69,7 @@ public class Database {
 	}
 
 	/**
-	 * Y
-	 * 
-	 * @brief
+	 * @brief Save data
 	 * @return true si enregistrer
 	 */
 	@SuppressWarnings("resource")
