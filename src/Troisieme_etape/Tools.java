@@ -1,5 +1,6 @@
 package Troisieme_etape;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Tools {
@@ -85,15 +86,13 @@ public class Tools {
 	public static boolean isEmpty() {
 		try {
 			if (User.arrayContact.isEmpty()) {
-				System.out.println("ERROR: Gestionnaire Vide");
+				System.err.println("ERROR: Gestionnaire Vide");
 				return true;
 			}
 		} catch (Exception e) {
 			return false;
 		}
-
 		return false;
-
 	}
 
 	/*
@@ -106,7 +105,7 @@ public class Tools {
 		Scanner scanner = new Scanner(System.in);
 		try {
 			input = scanner.nextLine();
-		} catch (Exception e) {
+		} catch (InputMismatchException e) {
 			e.printStackTrace();
 			scanner.close();
 			scan();

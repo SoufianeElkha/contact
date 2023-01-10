@@ -369,11 +369,16 @@ public class User {
 
 		System.out.println("Combien de " + texteBiographiques[txtNb] + " ? ");
 		String stringNbType = Tools.scan();
+
 		if (!Tools.isNumeric(stringNbType.trim())) {
-			System.out.println("ERREUR: Inserez des nombre\n");
+			System.err.println("ERREUR: Inserez des nombre\n");
 			setTypeContact(listeType, up, txtNb, texteBiographiques);
 		}
-		int nbType = Integer.parseInt(stringNbType.trim());
+		int nbType = 0;
+		try {
+			nbType = Integer.parseInt(stringNbType.trim());
+		} catch (Exception e) {
+		}
 
 		for (int i = 0; i < nbType; i++) {
 			System.out.println(texteBiographiques[txtNb] + ": " + (i + 1));
@@ -381,7 +386,7 @@ public class User {
 
 			if (up.equalsIgnoreCase("telephone"))
 				while (!Tools.isNumeric(type)) {
-					System.out.println("ERREUR: Inserez des nombre\n");
+					System.err.println("ERREUR: Inserez des nombre\n");
 					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
 					type = Tools.scan();
 				}
@@ -392,7 +397,7 @@ public class User {
 				if (!type.equals(null))
 					type = Tools.firstCharUpperCase(type);
 				while (Tools.isNumeric(type)) {
-					System.out.println("ERREUR: Inserez des character\n");
+					System.err.println("ERREUR: Inserez des character\n");
 					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
 					type = Tools.firstCharUpperCase(Tools.scan());
 				}
@@ -401,7 +406,7 @@ public class User {
 			if (up.equalsIgnoreCase("email") || up.equalsIgnoreCase("e-mail")) {
 				String typeEmail = "^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*.[a-z]{2,4}$";
 				while (!type.matches(typeEmail)) {
-					System.out.println("ERREUR: Inserez correct e-mail! Format: (xxxxx.xxxxx@xxxxx.xxx)2");
+					System.err.println("ERREUR: Inserez correct e-mail! Format: (xxxxx.xxxxx@xxxxx.xxx)");
 					System.out.println(texteBiographiques[txtNb] + " : " + (i + 1));
 					type = Tools.scan();
 				}

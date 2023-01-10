@@ -67,7 +67,7 @@ public class PetitMenu {
 				}
 				// ERROR TYPE
 			} else {
-				System.out.println("ERREUR: Inserez le type correct!\n");
+				System.err.println("ERREUR: Inserez le type correct!\n");
 			}
 			break;
 
@@ -87,7 +87,7 @@ public class PetitMenu {
 
 				String nomSupprime = Tools.scan();
 				while (Tools.isNumeric(nomSupprime)) {
-					System.out.println("ERREUR: Inserez des character\n");
+					System.err.println("ERREUR: Inserez des character\n");
 					System.out.println("Quel nom de contact voulez-vous supprime ? ");
 					nomSupprime = Tools.scan();
 				}
@@ -104,7 +104,7 @@ public class PetitMenu {
 				System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
 				String nomUpdate = Tools.scan();
 				while (Tools.isNumeric(nomUpdate)) {
-					System.out.println("ERREUR: Inserez des character\n");
+					System.err.println("ERREUR: Inserez des character\n");
 					System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
 					nomUpdate = Tools.scan();
 				}
@@ -148,7 +148,7 @@ public class PetitMenu {
 		// SORTIE GESTIONNAIRE
 		case 7:
 			Database.save();
-			System.out.println("Sortie Gestionnaire");
+			System.err.println("Sortie Gestionnaire");
 			System.exit(0);
 
 		default:
