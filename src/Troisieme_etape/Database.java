@@ -41,11 +41,11 @@ public class Database {
 		}
 
 		catch (FileNotFoundException e) {
-			System.out.println("Class Database : Contact file was not found");
+			System.err.println("Class Database : Contact file was not found");
 		} catch (IOException e) {
-			System.out.println("Class Database : Contact file could not be read");
+			System.err.println("Class Database : Contact file could not be read");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Class Database : Contact class was not found");
+			System.err.println("Class Database : Contact class was not found");
 		}
 	}
 
@@ -56,8 +56,8 @@ public class Database {
 	public static void writeDate(ArrayList<Standard> listOut) {
 
 		try {
-			FileOutputStream EmployeesFile = new FileOutputStream(database);
-			ObjectOutputStream ContactStream = new ObjectOutputStream(EmployeesFile);
+			FileOutputStream ContactFile = new FileOutputStream(database);
+			ObjectOutputStream ContactStream = new ObjectOutputStream(ContactFile);
 			for (Standard c : listOut) {
 				ContactStream.writeObject(c);
 			}

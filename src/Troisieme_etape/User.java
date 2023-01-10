@@ -179,6 +179,7 @@ public class User {
 				}
 			}
 			break;
+
 		case "lien parental":
 			for (Standard c : arrayContact) {
 				Famille f = (Famille) c;
@@ -204,9 +205,8 @@ public class User {
 		}
 		// SI INDEX EST VIDE
 		if (index.isEmpty()) {
-			System.out.println("ERROR: Contact non trouvé ");
+			System.err.println("ERROR: Contact non trouvé ");
 		} else {
-
 			for (int j = 0; j <= index.size() - 1; j++) {
 				System.out.println(arrayContact.get(index.get(j)));
 			}

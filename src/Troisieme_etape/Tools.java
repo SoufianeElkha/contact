@@ -58,7 +58,7 @@ public class Tools {
 			for (Standard c : User.arrayContact)
 				if (c.getNom().equals(nom))
 					return true;
-		} catch (Exception e) {
+		} catch (MatchException e) {
 			return false;
 		}
 		return false;

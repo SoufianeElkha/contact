@@ -115,15 +115,18 @@ public class PetitMenu {
 
 		// RECHERCHE D'UN CONTACT
 		case 5:
-			if (!Tools.isEmpty()) {
-
-				System.out.print("\nVoulez-vous faire une recherche par?:");
-				Texte.displayTexteBio(10);
-				System.out.println();
-				String typeRecherche = Tools.scan();
-				System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
-				String stringRecherche = Tools.scan();
-				u.findContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
+			try {
+				if (!Tools.isEmpty()) {
+					System.out.print("\nVoulez-vous faire une recherche par?:");
+					Texte.displayTexteBio(10);
+					System.out.println();
+					String typeRecherche = Tools.scan();
+					System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
+					String stringRecherche = Tools.scan();
+					u.findContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
+				}
+			} catch (MatchException e) {
+				System.err.println("ERROR: Contact non trouvé ");
 			}
 
 			break;
@@ -132,7 +135,7 @@ public class PetitMenu {
 		case 6:
 			if (!Tools.isEmpty()) {
 
-				System.out.println("Voulez-vous supprime touts la liste ? [oui/non] [o/n] ");
+				System.out.println("Voulez-vous supprime touts la liste ? [Oui/Non]");
 
 				String allSupprime = Tools.scan();
 
@@ -140,7 +143,8 @@ public class PetitMenu {
 					u.deleteAllContact(allSupprime);
 				} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
 					System.out.println("Suppression annulée");
-				}
+				} else
+					System.err.println("Commande annulée");
 			}
 
 			break;
