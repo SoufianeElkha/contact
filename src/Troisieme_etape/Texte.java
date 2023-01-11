@@ -13,9 +13,16 @@ public class Texte {
 
 	}
 
+	// TEXTE GENERALE RECHERCHE ENUM
+	public enum stringEnum {
+		NOM, PRENOM, ADRESSE, TELEPHONE, EMAIL, RESEAUX_SOCIAUX, PROFESSION, SIGNE_ZODIAQUE, LIEN_PARENTE, FONCTION,
+		SORTIE
+
+	}
+
 	// TEXTE GENERALE
-	public static String[] texteBiographiques = { "nom", "prenom", "adresse", "telephone", "email", "reseau sociaux",
-			"profession", "signe zodiaque", "lien parente", "fonction", "sortie" };
+	public static String[] texteBiographiques = { "nom", "prenom", "adresse", "telephone", "email", "reseau_sociaux",
+			"profession", "signe_zodiaque", "lien_parente", "fonction", "sortie" };
 
 	// PRINT TEXTE BIOGRAPHIQUES
 	public static void displayTexteBio(int nb) {
