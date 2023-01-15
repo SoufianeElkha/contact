@@ -12,7 +12,7 @@ public class Tools {
 	 * @return string avec premier lettre de la string en majuscule
 	 */
 	public static String firstCharUpperCase(String string) {
-		if (string.equals(null))
+		if (!string.equals(null))
 			string = string.substring(0, 1).toUpperCase() + string.substring(1);
 		return string;
 
