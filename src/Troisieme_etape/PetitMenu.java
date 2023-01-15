@@ -23,13 +23,13 @@ public class PetitMenu {
 
 				// TYPE STANDARD
 				if (typeContact.equalsIgnoreCase("standard") || typeContact.equalsIgnoreCase("s")) {
-					Standard c = User.newContact(Texte.texteBiographiques);
+					Contact c = User.newContact(Texte.texteBiographiques);
 					u.appendContact(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(),
 							c.getReseauxSociaux(), c.getProfession());
 				}
 				// TYPE AMIS
 				else if (typeContact.equalsIgnoreCase("amis") || typeContact.equalsIgnoreCase("a")) {
-					Standard c = User.newContact(Texte.texteBiographiques);
+					Contact c = User.newContact(Texte.texteBiographiques);
 					// SIGNE ZODIAC
 					System.out.println("Inserez votre " + Texte.texteBiographiques[7]);
 					String signeZodiac = Tools.scan();
@@ -40,7 +40,7 @@ public class PetitMenu {
 				}
 				// TYPE FAMILLE
 				else if (typeContact.equalsIgnoreCase("famille") || typeContact.equalsIgnoreCase("f")) {
-					Standard c = User.newContact(Texte.texteBiographiques);
+					Contact c = User.newContact(Texte.texteBiographiques);
 					// LIEN PARENT
 					System.out.println("Inserez votre " + Texte.texteBiographiques[8]);
 					String lienParent = Tools.scan();
@@ -51,7 +51,7 @@ public class PetitMenu {
 				}
 				// TYPE PROFESSIONNEL
 				else if (typeContact.equalsIgnoreCase("professionnel") || typeContact.equalsIgnoreCase("p")) {
-					Standard c = User.newContact(Texte.texteBiographiques);
+					Contact c = User.newContact(Texte.texteBiographiques);
 					// FONCTION
 					System.out.println("Inserez votre " + Texte.texteBiographiques[9]);
 					String fonction = Tools.scan();
@@ -120,13 +120,17 @@ public class PetitMenu {
 					System.out.print("\nVoulez-vous faire une recherche par?:");
 					Texte.displayTexteBio(10);
 					System.out.println();
-					Texte.stringEnum typeRecherche = Texte.stringEnum.valueOf(Tools.scan().trim().toUpperCase());
-					System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
-					String stringRecherche = Tools.scan();
-					u.findContact(typeRecherche, stringRecherche.trim().toLowerCase());
+					String typeRecherche = Tools.scan();
+					if (!typeRecherche.equalsIgnoreCase("sortie")) {
+						System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
+						String stringRecherche = Tools.scan();
+						u.findContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
+					} else {
+						System.out.println("Sortie");
+					}
 				}
-			} catch (MatchException e) {
-				System.err.println("ERROR: Recherche Contact");
+			} catch (Exception e) {
+				System.err.println("ERROR: Contact non trouvé ");
 			}
 
 			break;
@@ -135,12 +139,12 @@ public class PetitMenu {
 		case 6:
 			if (!Tools.isEmpty()) {
 
-				System.out.println("Voulez-vous supprime touts la liste ? [Oui/Non]");
+				System.out.println("Voulez-vous supprime touts la liste ? [Oui/Non] [o/n]");
 
 				String allSupprime = Tools.scan();
 
 				if (allSupprime.equalsIgnoreCase("oui".trim()) || allSupprime.equalsIgnoreCase("o")) {
-					u.deleteAllContact(allSupprime);
+					u.deleteAllContact();
 				} else if (allSupprime.equalsIgnoreCase("non".trim()) || allSupprime.equalsIgnoreCase("n")) {
 					System.out.println("Suppression annulée");
 				} else

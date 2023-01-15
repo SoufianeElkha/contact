@@ -2,43 +2,45 @@ package Troisieme_etape;
 
 import java.util.ArrayList;
 
-import Troisieme_etape.Texte.stringEnum;
-
 public class User {
 
-	public static ArrayList<Standard> arrayContact = new ArrayList<>();
+	public static ArrayList<Contact> arrayContact = new ArrayList<>();
 
 	public void appendContact(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession) {
-		Standard contact = new Standard(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
+		Contact contact = new Standard(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession);
 		arrayContact.add(contact);
 	}
 
 	public void appendAmis(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String signeZodiac) {
-		Standard amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, signeZodiac);
+
+		Contact amis = new Amis(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, signeZodiac);
 		arrayContact.add(amis);
 	}
 
 	public void appendFamille(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String lienParent) {
-		Standard famille = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, lienParent);
+
+		Contact famille = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession, lienParent);
 		arrayContact.add(famille);
 	}
 
 	public void appendProfessionnel(String nom, ArrayList<String> prenoms, String adresse, ArrayList<String> telephone,
 			ArrayList<String> email, ArrayList<String> reseauxSociaux, String profession, String fonction) {
-		Standard professionnel = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession,
+
+		Contact professionnel = new Famille(nom, prenoms, adresse, telephone, email, reseauxSociaux, profession,
 				fonction);
 		arrayContact.add(professionnel);
 	}
 
 	/**
+	 * 
 	 * @param texteBiographiques
 	 * @brief AJOUTER CONTACT
 	 * @return Contact
 	 */
-	public static Standard newContact(String[] texteBiographiques) {
+	public static Contact newContact(String[] texteBiographiques) {
 
 		// Initialisation variables insert contact
 		ArrayList<String> listePrenom = new ArrayList<>();
@@ -48,9 +50,7 @@ public class User {
 
 		// NOM
 		System.out.println("Inserez votre " + texteBiographiques[0] + ":");
-		String nom = Tools.scan();
-		nom = Tools.firstCharUpperCase(nom);
-		System.out.println("Ecco il Nome:" + nom);
+		String nom = Tools.firstCharUpperCase(Tools.scan());
 
 		// CONTROLE SI STRING
 		if (Tools.isNumeric(nom)) {
@@ -62,7 +62,6 @@ public class User {
 			System.out.println("ERROR: Le nom '" + nom + "' existContact déjà dans la liste.");
 			return newContact(texteBiographiques);
 		}
-
 		// PRENOM
 		System.out.println("Inserez votre " + texteBiographiques[1] + ":");
 		setTypeContact(listePrenom, texteBiographiques[1], 1, texteBiographiques);
@@ -90,10 +89,7 @@ public class User {
 		// NOUVELLE CONTACT
 		Standard c = new Standard(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,
 				profession.trim());
-
 		Tools.orderContact();
-
-		System.out.println("Nouveau contact ajouté \n" + c);
 		return c;
 	}
 
@@ -102,91 +98,117 @@ public class User {
 	 * @param typeRecherche
 	 * @param stringRecherche
 	 */
-	public void findContact(stringEnum typeRecherche, String stringRecherche) {
+	public void findContact(String typeRecherche, String stringRecherche) {
 
 		ArrayList<Integer> index = new ArrayList<>();
-		try {
-			switch (typeRecherche) {
 
-			case NOM:
-				for (Standard c : arrayContact)
-					if (c.getNom().toLowerCase().startsWith(stringRecherche))
-						index.add(arrayContact.indexOf(c));
-				break;
+		switch (typeRecherche) {
 
-			case PRENOM:
-				for (Standard c : arrayContact)
-					if (c.getPrenom().contains(Tools.firstCharUpperCase(stringRecherche)))
-						index.add(arrayContact.indexOf(c));
-				break;
+		case "nom":
 
-			case ADRESSE:
-				for (Standard c : arrayContact)
-					if (c.getAdresse().toLowerCase().startsWith(stringRecherche))
-						index.add(arrayContact.indexOf(c));
-				break;
-
-			case TELEPHONE:
-				for (Standard c : arrayContact)
-					if (c.getTelephone().contains(stringRecherche))
-						index.add(arrayContact.indexOf(c));
-				break;
-
-			case RESEAUX_SOCIAUX:
-				for (Standard c : arrayContact)
-					if (c.getReseauxSociaux().contains(stringRecherche))
-						index.add(arrayContact.indexOf(c));
-				break;
-
-			case EMAIL:
-				for (Standard c : arrayContact)
-					if (c.getEmail().contains(stringRecherche))
-						index.add(arrayContact.indexOf(c));
-				break;
-
-			case PROFESSION:
-				for (Standard c : arrayContact)
-					if (c.getProfession().toLowerCase().startsWith(stringRecherche))
-						index.add(arrayContact.indexOf(c));
-				break;
-
-			case SIGNE_ZODIAQUE:
-				for (Standard c : arrayContact) {
-					Amis a = (Amis) c;
-					if (a.getSigneZodiacal().toLowerCase().startsWith(stringRecherche))
-						index.add(arrayContact.indexOf(c));
+			for (Contact c : arrayContact) {
+				if (c.getNom().startsWith(Tools.firstCharUpperCase(stringRecherche))) {
+					index.add(arrayContact.indexOf(c));
 				}
-				break;
-
-			case LIEN_PARENTE:
-				for (Standard c : arrayContact) {
-					Famille f = (Famille) c;
-					if (f.getLienParent().toLowerCase().startsWith(stringRecherche))
-						index.add(arrayContact.indexOf(c));
-				}
-				break;
-
-			case FONCTION:
-				for (Standard c : arrayContact) {
-					Professionnel p = (Professionnel) c;
-					if (p.getFonction().toLowerCase().startsWith(stringRecherche))
-						index.add(arrayContact.indexOf(c));
-				}
-
-				break;
-
-			default:
-				System.out.println("ERROR: erreur choix");
 			}
-			// SI INDEX EST VIDE
-			if (index.isEmpty())
-				System.err.println("ERROR: Contact non trouvé ");
-			else
-				for (int j = 0; j <= index.size() - 1; j++)
-					System.out.println(arrayContact.get(index.get(j)));
 
-		} catch (Exception e) {
-			System.err.println("ERROR: Recherche Contact");
+			break;
+
+		case "prenom":
+			for (Contact c : arrayContact) {
+				if (c.getPrenom().contains(Tools.firstCharUpperCase(stringRecherche))) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+
+			break;
+
+		case "adresse":
+			for (Contact c : arrayContact) {
+				if (c.getAdresse().startsWith(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "telephone":
+			for (Contact c : arrayContact) {
+				if (c.getTelephone().contains(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "reseau sociaux":
+			for (Contact c : arrayContact) {
+				if (c.getReseauxSociaux().contains(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "email":
+			for (Contact c : arrayContact) {
+				if (c.getEmail().contains(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "e-mail":
+			for (Contact c : arrayContact) {
+				if (c.getEmail().contains(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "profession":
+			for (Contact c : arrayContact) {
+				if (c.getProfession().equalsIgnoreCase(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "signe zodiacal":
+			for (Contact c : arrayContact) {
+				Amis a = (Amis) c;
+				if (a.getSigneZodiacal().equalsIgnoreCase(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "lien parental":
+			for (Contact c : arrayContact) {
+				Famille f = (Famille) c;
+				if (f.getLienParent().equalsIgnoreCase(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		case "fonction":
+			for (Contact c : arrayContact) {
+				Professionnel p = (Professionnel) c;
+				if (p.getFonction().equalsIgnoreCase(stringRecherche)) {
+					index.add(arrayContact.indexOf(c));
+				}
+			}
+			break;
+
+		default:
+			System.out.println("ERROR: erreur choix");
+
+		}
+		// SI INDEX EST VIDE
+		if (index.isEmpty()) {
+			System.err.println("ERROR: Contact non trouvé ");
+		} else {
+			for (int j = 0; j <= index.size() - 1; j++) {
+				System.out.println(arrayContact.get(index.get(j)));
+			}
 		}
 	}
 
@@ -196,7 +218,7 @@ public class User {
 	 * @param texteBiographiques
 	 * @return Contact modifie
 	 */
-	public Standard editContact(String nom, String[] texteBiographiques) {
+	public Contact editContact(String nom, String[] texteBiographiques) {
 
 		ArrayList<String> listePrenom = new ArrayList<>();
 		ArrayList<String> listeEmail = new ArrayList<>();
@@ -205,9 +227,9 @@ public class User {
 
 		// GET INDICE CONTACT A MODIFIER
 		int index = -1;
-		Standard contactUpdate = null;
+		Contact contactUpdate = null;
 
-		for (Standard c : arrayContact) {
+		for (Contact c : arrayContact) {
 			if (c.getNom().equalsIgnoreCase(nom)) {
 				index = arrayContact.indexOf(c);
 				contactUpdate = arrayContact.get(index);
@@ -216,7 +238,7 @@ public class User {
 			}
 		}
 
-		// VERIFICATION RECHERCHE NOM POUR MODIFICATION
+		// VERIFICATION RECHERCHE NOM
 		if (index == -1) {
 			System.out.println("ERROR: Nom '" + nom + "' non trouvé\n");
 
@@ -236,8 +258,9 @@ public class User {
 			String up = Tools.scan();
 
 			// MODIFICATION PRENOM
-			if (up.equalsIgnoreCase(texteBiographiques[1]))
+			if (up.equalsIgnoreCase(texteBiographiques[1])) {
 				contactUpdate.setPrenom(setTypeContact(listePrenom, up, 1, texteBiographiques));
+			}
 
 			// MODIFICATION ADRESSE
 			if (up.equalsIgnoreCase(texteBiographiques[2])) {
@@ -246,16 +269,19 @@ public class User {
 			}
 
 			// MODIFICATION TELEPHONE
-			if (up.equalsIgnoreCase(texteBiographiques[3]))
+			if (up.equalsIgnoreCase(texteBiographiques[3])) {
 				contactUpdate.setTelephone(setTypeContact(listeTelephone, up, 3, texteBiographiques));
+			}
 
 			// MODIFICATION EMAIL
-			if (up.equalsIgnoreCase("E-mail") || up.equalsIgnoreCase(texteBiographiques[4]))
+			if (up.equalsIgnoreCase("E-mail") || up.equalsIgnoreCase(texteBiographiques[4])) {
 				contactUpdate.setEmail(setTypeContact(listeEmail, up, 4, texteBiographiques));
+			}
 
 			// MODIFICATION RESEAUX SOCIAUX
-			if (up.equalsIgnoreCase(texteBiographiques[5]))
+			if (up.equalsIgnoreCase(texteBiographiques[5])) {
 				contactUpdate.setReseauxSociaux(setTypeContact(listeRS, up, 5, texteBiographiques));
+			}
 
 			// MODIFICATION PROFESSION
 			if (up.equalsIgnoreCase(texteBiographiques[6])) {
@@ -264,33 +290,34 @@ public class User {
 			}
 
 			// MODIFICATION SIGNE ZODIAC
-			if (contactUpdate instanceof Amis)
+			if (contactUpdate instanceof Amis) {
 				if (up.equalsIgnoreCase(texteBiographiques[7])) {
 					Amis a = (Amis) contactUpdate;
 					System.out.println(texteBiographiques[7] + " : ");
 					a.setSingeZodiacal(Tools.scan());
 				}
+			}
 
 			// MODIFICATION LIEN PARENTE
-			if (contactUpdate instanceof Famille)
+			if (contactUpdate instanceof Famille) {
 				if (up.equalsIgnoreCase(texteBiographiques[8])) {
 					Famille f = (Famille) contactUpdate;
 					System.out.println(texteBiographiques[8] + " : ");
 					f.setLienParent(Tools.scan());
 				}
-
+			}
 			// MODIFICATION FONCTION
-			if (contactUpdate instanceof Professionnel)
+			if (contactUpdate instanceof Professionnel) {
 				if (up.equalsIgnoreCase(texteBiographiques[9])) {
 					Professionnel p = (Professionnel) contactUpdate;
 					System.out.println(texteBiographiques[9] + " : ");
 					p.setFonction(Tools.scan());
 				}
-
+			}
 			// SORTIE
-			if (up.equalsIgnoreCase(texteBiographiques[10]) || up.equalsIgnoreCase("x"))
+			if (up.equalsIgnoreCase(texteBiographiques[10]) || up.equalsIgnoreCase("x")) {
 				System.out.println("\nSortie Modification");
-
+			}
 		}
 		// GESTIONNALE
 		Tools.orderContact();
@@ -320,7 +347,7 @@ public class User {
 	 * @brief CLEAN ALL CONTACT
 	 * @param nom
 	 */
-	public void deleteAllContact(String nom) {
+	public void deleteAllContact() {
 
 		arrayContact.removeAll(arrayContact);
 		Database.writeDate(arrayContact);

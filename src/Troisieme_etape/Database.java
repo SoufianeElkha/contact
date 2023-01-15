@@ -19,7 +19,7 @@ public class Database {
 	 * @brief LIRE FICHIER
 	 * @param listIn
 	 */
-	public static void readData(ArrayList<Standard> listIn) {
+	public static void readData(ArrayList<Contact> listIn) {
 
 		boolean endOfFile = false;
 		Standard temp;
@@ -53,12 +53,12 @@ public class Database {
 	 * @brief ECRIRE DANS UNE FICHIER
 	 * @param listOut
 	 */
-	public static void writeDate(ArrayList<Standard> listOut) {
+	public static void writeDate(ArrayList<Contact> listOut) {
 
 		try {
 			FileOutputStream ContactFile = new FileOutputStream(database);
 			ObjectOutputStream ContactStream = new ObjectOutputStream(ContactFile);
-			for (Standard c : listOut) {
+			for (Contact c : listOut) {
 				ContactStream.writeObject(c);
 			}
 			ContactStream.close();

@@ -11,10 +11,10 @@ public class Tools {
 	 * @param string
 	 * @return string avec premier lettre de la string en majuscule
 	 */
-	public static String firstCharUpperCase(String s) {
-		if (!s.equals(null))
-			return s.substring(0, 1).toUpperCase() + s.substring(1);
-		return s;
+	public static String firstCharUpperCase(String string) {
+		if (string.equals(null))
+			string = string.substring(0, 1).toUpperCase() + string.substring(1);
+		return string;
 
 	}
 
@@ -23,7 +23,7 @@ public class Tools {
 	 */
 	static void orderContact() {
 
-		Standard sort;
+		Contact sort;
 		for (int i = 0; i < User.arrayContact.size() - 1; i++) {
 			for (int j = i + 1; j < User.arrayContact.size(); j++) {
 				// COMPARE ELEMENT
@@ -55,10 +55,14 @@ public class Tools {
 	public static boolean existContact(String nom) {
 
 		try {
-			return User.arrayContact.stream().anyMatch(c -> c.getNom().toUpperCase().equals(nom.toUpperCase()));
-		} catch (MatchException e) {
+			for (Contact c : User.arrayContact)
+				if (c.getNom().equals(nom))
+					return true;
+		} catch (Exception e) {
 			return false;
 		}
+		return false;
+
 	}
 
 	/**

@@ -23,7 +23,7 @@ public class Main {
 				PetitMenu.menu(action, u);
 
 			} else
-				System.out.println("ERROR: Inserez une nombre entre 1 & 7");
+				System.out.println("Inserez une nombre entre 1 & 7");
 		}
 	}
 }
