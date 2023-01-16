@@ -52,7 +52,7 @@ public class User {
 
 		// NOM
 		System.out.println("Inserez votre " + texteBiographiques[0] + ":");
-		String nom = Tools.scan();
+		String nom = Tools.scan().toLowerCase();
 		nom = Tools.firstCharUpperCase(nom);
 
 		// CONTROLE SI STRING

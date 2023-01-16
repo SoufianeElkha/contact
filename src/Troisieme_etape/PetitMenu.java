@@ -15,7 +15,7 @@ public class PetitMenu {
 
 		switch (action) {
 // INSERTION D'UN NOUVEAU CONTACT
-		case 1:
+		case Texte.INSERT_CONTACT:
 			System.out.println(
 					"Quel type de contact voulez-vous ajouter ? \n\t- [S] Standard \n\t- [A] Amis \n\t- [F] Famille \n\t- [P] Professionnel \n\t- [X] Sortie");
 
@@ -74,16 +74,16 @@ public class PetitMenu {
 			break;
 
 // AFFICHAGE DES CONTACTS
-		case 2:
+		case Texte.DISPLAY_CONTACTS:
 			if (!Tools.isEmpty()) {
-				System.out.println("Affichage contacts");
+				System.out.print("Affichage contacts:");
 				Tools.displayContact();
 			}
 
 			break;
 
 // SUPPRESSION D'UN CONTACT
-		case 3:
+		case Texte.DELETE_CONTACT:
 			if (!Tools.isEmpty()) {
 				System.out.println("Quel nom de contact voulez-vous supprime ? ");
 
@@ -99,7 +99,7 @@ public class PetitMenu {
 			break;
 
 // MODIFICATION D'UN CONTACT
-		case 4:
+		case Texte.MODIFY_CONTACT:
 			if (!Tools.isEmpty()) {
 
 				System.out.println("Quel contact voulez-vous modifier ? : Entrez le nom :");
@@ -115,7 +115,7 @@ public class PetitMenu {
 			break;
 
 // RECHERCHE D'UN CONTACT
-		case 5:
+		case Texte.SEARCH_CONTACT:
 			try {
 				if (!Tools.isEmpty()) {
 					System.out.print("\nVoulez-vous faire une recherche par?:");
@@ -137,7 +137,7 @@ public class PetitMenu {
 			break;
 
 // SUPPRESSION TOUTS LES CONTACTS
-		case 6:
+		case Texte.DELETE_ALL_CONTACTS:
 			if (!Tools.isEmpty()) {
 
 				System.out.println("Voulez-vous supprime touts la liste ? [Oui/Non] [o/n]");
@@ -155,7 +155,7 @@ public class PetitMenu {
 			break;
 
 // SORTIE GESTIONNAIRE
-		case 7:
+		case Texte.EXIT:
 			Database.save();
 			System.err.println("Sortie Gestionnaire");
 			System.exit(0);
