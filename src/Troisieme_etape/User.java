@@ -93,7 +93,6 @@ public class User {
 		Standard c = new Standard(nom.trim(), listePrenom, adresse.trim(), listeTelephone, listeMail, listeRS,
 				profession.trim());
 		Tools.orderContact();
-		System.out.println("Nouveau contact ajouté \n" + c);
 
 		return c;
 	}

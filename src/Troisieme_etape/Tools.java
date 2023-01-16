@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Tools {
 
 	/**
-	 * 
 	 * @brief PREMIER CARACTERE MAJUSCULE
 	 * @param string
 	 * @return string avec premier lettre de la string en majuscule
@@ -15,7 +14,6 @@ public class Tools {
 		if (!s.equals(null))
 			s = s.substring(0, 1).toUpperCase() + s.substring(1);
 		return s;
-
 	}
 
 	/**
@@ -94,7 +92,7 @@ public class Tools {
 	/*
 	 * @brief Scanner Generaux
 	 * 
-	 * @return input
+	 * @return String input
 	 */
 	public static String scan() {
 		String input = null;

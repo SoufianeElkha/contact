@@ -77,15 +77,14 @@ public class Database {
 
 		Scanner scannerSave = new Scanner(System.in);
 		try {
-
-			System.out.println("Voulez-vous enregistrer dans database ? [oui/non] [o/n] ");
+			System.out.println("Voulez-vous enregistrer dans database ? [Oui/Non] [o/n] ");
 
 			String saveString = scannerSave.nextLine();
-
-			if (saveString.equalsIgnoreCase("oui".trim()) || saveString.equalsIgnoreCase("o")) {
+			if (saveString.trim().equalsIgnoreCase("oui") || saveString.trim().equalsIgnoreCase("o")) {
 				writeDate(User.arrayContact);
+				System.out.println("Données sauvegardées");
 				return true;
-			} else if (saveString.equalsIgnoreCase("non".trim()) || saveString.equalsIgnoreCase("n")) {
+			} else if (saveString.trim().equalsIgnoreCase("non".trim()) || saveString.trim().equalsIgnoreCase("n")) {
 				System.out.println("Enregistrement annulée");
 				return false;
 			}

@@ -4,7 +4,7 @@
 
 #### 2. Seconde étape :   Héritage et polymorphisme
 
-#### 3. Troisieme étape :   Listes, Exceptions et programmation fonctionnelle
+#### 3. Troisieme étape :   Listes, Exceptions
 
 ##### MENU
 
@@ -46,16 +46,22 @@ Voulez-vous faire une recherche par?:
 	-Adresse
 	-Telephone
 	-Email
-	-Reseau sociaux
+	-Reseau_sociaux
 	-Profession
-	-Signe zodiaque
-	-Lien parente
+	-Signe_zodiaque
+	-Lien_parente
 	-Fonction
 	-Sortie
 ```
 ##### [6] Suppression touts les contacts 
  ```java
-Voulez-vous supprime touts la liste ? [oui/non] 
+Voulez-vous supprime touts la liste ? [Oui/Non] [o/n]
+```
+##### [7] Sortie Gestionnaire
+ ```java
+Voulez-vous enregistrer dans database ? [Oui/non] [o/n] 
+o
+Sortie Gestionnaire
 ```
 
 

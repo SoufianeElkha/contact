@@ -14,7 +14,7 @@ public class PetitMenu {
 	public static void menu(int action, User u) {
 
 		switch (action) {
-		// INSERTION D'UN NOUVEAU CONTACT
+// INSERTION D'UN NOUVEAU CONTACT
 		case 1:
 			System.out.println(
 					"Quel type de contact voulez-vous ajouter ? \n\t- [S] Standard \n\t- [A] Amis \n\t- [F] Famille \n\t- [P] Professionnel \n\t- [X] Sortie");
@@ -73,33 +73,32 @@ public class PetitMenu {
 			}
 			break;
 
-		// AFFICHAGE DES CONTACTS
+// AFFICHAGE DES CONTACTS
 		case 2:
 			if (!Tools.isEmpty()) {
-				System.out.println("\nAffichage contacts");
+				System.out.println("Affichage contacts");
 				Tools.displayContact();
 			}
 
 			break;
 
-		// SUPPRESSION D'UN CONTACT
+// SUPPRESSION D'UN CONTACT
 		case 3:
 			if (!Tools.isEmpty()) {
 				System.out.println("Quel nom de contact voulez-vous supprime ? ");
 
-				String nomSupprime = Tools.scan();
-				while (Tools.isNumeric(nomSupprime)) {
+				String nomDelete = Tools.scan();
+				while (Tools.isNumeric(nomDelete)) {
 					System.err.println("ERREUR: Inserez des character\n");
 					System.out.println("Quel nom de contact voulez-vous supprime ? ");
-					nomSupprime = Tools.scan();
+					nomDelete = Tools.scan();
 				}
-				u.deleteContact(Tools.firstCharUpperCase(nomSupprime).trim());
-
+				u.deleteContact(Tools.firstCharUpperCase(nomDelete).trim());
 			}
 
 			break;
 
-		// MODIFICATION D'UN CONTACT
+// MODIFICATION D'UN CONTACT
 		case 4:
 			if (!Tools.isEmpty()) {
 
@@ -115,7 +114,7 @@ public class PetitMenu {
 
 			break;
 
-		// RECHERCHE D'UN CONTACT
+// RECHERCHE D'UN CONTACT
 		case 5:
 			try {
 				if (!Tools.isEmpty()) {
@@ -137,7 +136,7 @@ public class PetitMenu {
 
 			break;
 
-		// SUPPRESSION TOUTS LES CONTACTS
+// SUPPRESSION TOUTS LES CONTACTS
 		case 6:
 			if (!Tools.isEmpty()) {
 
@@ -155,7 +154,7 @@ public class PetitMenu {
 
 			break;
 
-		// SORTIE GESTIONNAIRE
+// SORTIE GESTIONNAIRE
 		case 7:
 			Database.save();
 			System.err.println("Sortie Gestionnaire");
