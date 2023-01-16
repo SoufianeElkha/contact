@@ -2,6 +2,8 @@ package Troisieme_etape;
 
 import java.io.IOException;
 
+import Troisieme_etape.Texte.stringEnum;
+
 public class PetitMenu {
 
 	/**
@@ -120,13 +122,13 @@ public class PetitMenu {
 					System.out.print("\nVoulez-vous faire une recherche par?:");
 					Texte.displayTexteBio(10);
 					System.out.println();
-					String typeRecherche = Tools.scan();
-					if (!typeRecherche.equalsIgnoreCase("sortie")) {
+					Texte.stringEnum typeRecherche = Texte.stringEnum.valueOf(Tools.scan().trim().toUpperCase());
+					if (typeRecherche != stringEnum.SORTIE) {
 						System.out.println("Quel " + typeRecherche + " voulez-vous recherche ? ");
 						String stringRecherche = Tools.scan();
-						u.findContact(typeRecherche.trim().toLowerCase(), stringRecherche.trim());
+						u.findContact(typeRecherche, stringRecherche.trim().toLowerCase());
 					} else {
-						System.out.println("Sortie");
+						System.out.println("Annulation recherche contact");
 					}
 				}
 			} catch (Exception e) {
